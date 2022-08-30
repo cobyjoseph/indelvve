@@ -28,8 +28,6 @@
 			<LoginOverlay />
 		{/if}
 
-		test change
-
 		<Topic />
 		<TopicHeader />
 

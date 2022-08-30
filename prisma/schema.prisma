@@ -9,3 +9,115 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  username     String
+  first_name   String
+  last_name    String
+  date_created DateTime @default(now())
+
+  // Relations
+  topics_created       Topic[]
+  posts_authored       Post[]
+  collections_authored Collection[]
+  comments_authored    Comments[]
+
+  posts_upvoted       user_post[]
+  collections_upvoted user_collection[]
+}
+
+model Post {
+  id             Int      @id @default(autoincrement())
+  date_created   DateTime @default(now())
+  // TODO - Figure out how to include rich text
+  content        String
+  upvoted_number Int
+
+  // Relations
+  post_author User @relation(fields: [user_id_FK], references: [id])
+  user_id_FK  Int
+
+  upvoted_by user_post[]
+
+  comments Comments[]
+
+  parent_collection Collection @relation(fields: [collection_id_FK], references: [id])
+  collection_id_FK  Int
+}
+
+// Intermediate table
+model user_post {
+  //Relations
+  user       User @relation(fields: [user_id_FK], references: [id])
+  user_id_FK Int
+  post       Post @relation(fields: [post_id_FK], references: [id])
+  post_id_FK Int
+
+  @@id([user_id_FK, post_id_FK])
+}
+
+model Collection {
+  id             Int      @id @default(autoincrement())
+  date_created   DateTime @default(now())
+  // TODO data type for rich text 
+  content        String
+  upvoted_number Int
+
+  // Relations
+  collection_author User @relation(fields: [user_id_FK], references: [id])
+  user_id_FK        Int
+
+  upvoted_by user_collection[]
+
+  child_posts Post[]
+
+  topic_tags collection_topic[]
+}
+
+// Intermediate table 
+model user_collection {
+  // Relations
+  user             User       @relation(fields: [user_id_FK], references: [id])
+  user_id_FK       Int
+  collection       Collection @relation(fields: [collection_id_FK], references: [id])
+  collection_id_FK Int
+
+  @@id([user_id_FK, collection_id_FK])
+}
+
+model Topic {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  // Relations
+  topic_author User @relation(fields: [user_id_FK], references: [id])
+  user_id_FK   Int
+
+  child_collections collection_topic[]
+}
+
+// Intermediate table
+model collection_topic {
+  // Relations
+  collection       Collection @relation(fields: [collection_id_FK], references: [id])
+  collection_id_FK Int
+  topic            Topic      @relation(fields: [topic_id_FK], references: [id])
+  topic_id_FK      Int
+
+  @@id([collection_id_FK, topic_id_FK])
+}
+
+model Comments {
+  id           Int      @id @default(autoincrement())
+  date_created DateTime @default(now())
+  content      String
+
+  // Relations
+  comment_author User @relation(fields: [user_id_FK], references: [id])
+  user_id_FK     Int
+
+  parent_post Post @relation(fields: [post_id_FK], references: [id])
+  post_id_FK  Int
+}
