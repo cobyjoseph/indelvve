@@ -1,10 +1,12 @@
+<!-- TODO eventually:
+- prerender data on the server side -->
 <script lang="ts">
 	import Navbar from '$lib/Navbar.svelte';
 	import SearchBar from '$lib/SearchBar.svelte';
 	import TopicHeader from '$lib/TopicHeader.svelte';
 	import Collection from '$lib/Collection.svelte';
 	import { postsStore } from '../lib/stores/postsStore';
-	import { each } from 'svelte/internal';
+	import { append, each, onMount } from 'svelte/internal';
 	import Topic from '$lib/Topic.svelte';
 
 	import { isOverlayOpen } from '../lib/stores/LoginStore';
@@ -13,14 +15,40 @@
 
 	let testPost;
 	let showSignup = false;
+
+	let enteredPost = '';
+	export let data;
+
+	// export const load: Load = async ({ fetch }) => {
+	// 	const res = await fetch('/todos.json');
+
+	// 	if (res.ok) {
+	// 		const todos = await res.json();
+
+	// 		return {
+	// 			props: { todos }
+	// 		};
+	// 	}
+
+	// 	const { message } = await res.json();
+
+	// 	return {
+	// 		error: new Error(message)
+	// 	};
+	// };
 </script>
 
-<img src="../static/redox_01" alt="" />
+<!-- <form action="/api" method="post">
+	<input type="text" name="createPost" bind:value={enteredPost} />
+	<button type="submit">Submit</button>
+</form> -->
+
+{data.post.id}
 
 <div class="flex flex-grow justify-center ">
 	<Navbar />
 
-	<main class=" relative mx-4 mb-6 grid h-full grid-cols-1 md:w-3/4 md:max-w-[620px] ">
+	<div class=" relative mx-4 mb-6 grid h-full grid-cols-1 md:w-3/4 md:max-w-[620px] ">
 		<SearchBar />
 
 		<!-- <CreatePost /> -->
@@ -33,5 +61,5 @@
 
 		<Collection {$postsStore} />
 		<Collection {$postsStore} />
-	</main>
+	</div>
 </div>
