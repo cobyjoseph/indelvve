@@ -1,6 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { getHeapCodeStatistics } from 'v8';
 import { prisma } from '../utils/prisma';
+import type { PageServerLoad } from './$types';
 
 // export const data = async () => {
 // 	const data = await prisma.post.findFirst({
@@ -13,11 +14,11 @@ import { prisma } from '../utils/prisma';
 // 	};
 // };
 
-export const load = async () => {
-	const data = await prisma.post.findFirst({
+export const load: PageServerLoad = async () => {
+	const post = await prisma.post.findFirst({
 		where: {
-			id: 1
+			upvoted_number: 40
 		}
 	});
-	return { data };
+	return { post };
 };

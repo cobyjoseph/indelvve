@@ -8,16 +8,18 @@
 	import { postsStore } from '../lib/stores/postsStore';
 	import { append, each, onMount } from 'svelte/internal';
 	import Topic from '$lib/Topic.svelte';
-
 	import { isOverlayOpen } from '../lib/stores/LoginStore';
 	import LoginOverlay from '$lib/LoginOverlay.svelte';
 	import CreatePost from '$lib/CreatePost.svelte';
+	import type { PageServerData } from './$types';
 
 	let testPost;
 	let showSignup = false;
 
 	let enteredPost = '';
-	export let data;
+	export let data: PageServerData;
+	import type { PostType } from '../types/types';
+	export let postArr: PostType[] = [];
 
 	// export const load: Load = async ({ fetch }) => {
 	// 	const res = await fetch('/todos.json');
@@ -43,7 +45,13 @@
 	<button type="submit">Submit</button>
 </form> -->
 
-{data.post.id}
+{#each postArr as p (p.id)}
+	<li>
+		{p.data.post.upvoted_number}
+	</li>
+{/each}
+
+{data.post.upvoted_number}
 
 <div class="flex flex-grow justify-center ">
 	<Navbar />
