@@ -92,8 +92,8 @@ model Topic {
   name String
 
   // Relations
-  topic_author User @relation(fields: [user_id_FK], references: [id])
-  user_id_FK   Int
+  topic_author User? @relation(fields: [user_id_FK], references: [id])
+  user_id_FK   Int?
 
   child_collections collection_topic[]
 }
@@ -120,4 +120,9 @@ model Comments {
 
   parent_post Post @relation(fields: [post_id_FK], references: [id])
   post_id_FK  Int
+}
+
+model Topic_Sandbox {
+  id          Int    @id @default(autoincrement())
+  topic_title String
 }

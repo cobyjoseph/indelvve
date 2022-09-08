@@ -12,14 +12,16 @@
 	import LoginOverlay from '$lib/LoginOverlay.svelte';
 	import CreatePost from '$lib/CreatePost.svelte';
 	import type { PageServerData } from './$types';
+	import type { PostType } from '../types/types';
+	import type { PageData } from './$types';
 
 	let testPost;
 	let showSignup = false;
 
 	let enteredPost = '';
-	export let data: PageServerData;
-	import type { PostType } from '../types/types';
-	export let postArr: PostType[] = [];
+	export let data: PageData;
+	// $: ({ post } = data);
+	let postArr = [];
 
 	// export const load: Load = async ({ fetch }) => {
 	// 	const res = await fetch('/todos.json');
@@ -40,18 +42,19 @@
 	// };
 </script>
 
-<!-- <form action="/api" method="post">
+<form method="POST">
 	<input type="text" name="createPost" bind:value={enteredPost} />
 	<button type="submit">Submit</button>
-</form> -->
+</form>
 
-{#each postArr as p (p.id)}
-	<li>
-		{p.data.post.upvoted_number}
-	</li>
-{/each}
-
-{data.post.upvoted_number}
+<div class=" min-h-[50px] bg-red-400 p-2">
+	{#each data.post as p (p.id)}
+		<div class="h-8 bg-green-300 m-3">
+			{p.upvoted_number}
+			{p.content}
+		</div>
+	{/each}
+</div>
 
 <div class="flex flex-grow justify-center ">
 	<Navbar />

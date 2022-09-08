@@ -1,7 +1,8 @@
 import type { RequestHandler } from '@sveltejs/kit';
+import type { PostType } from 'src/types/types';
 import { getHeapCodeStatistics } from 'v8';
 import { prisma } from '../utils/prisma';
-import type { PageServerLoad } from './$types';
+import type { Action, PageServerLoad } from './$types';
 
 // export const data = async () => {
 // 	const data = await prisma.post.findFirst({
@@ -15,10 +16,10 @@ import type { PageServerLoad } from './$types';
 // };
 
 export const load: PageServerLoad = async () => {
-	const post = await prisma.post.findFirst({
-		where: {
-			upvoted_number: 40
-		}
-	});
+	const post = await prisma.post.findMany({});
 	return { post };
+};
+
+export const actions: Action = {
+	default: async function funcToAccessAction() {}
 };

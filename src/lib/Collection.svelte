@@ -96,9 +96,9 @@
 						<span slot="topPost">
 							<div class="pt-2">
 								<PostHeaderDark
-									upvotes=130
+									upvotes="130"
 									authorName="Nicolas Bloom"
-									timeSince=34
+									timeSince="34"
 									dOrMin="d"
 								/>
 
@@ -114,9 +114,9 @@
 						<span slot="bottomPost">
 							<div class="py-2">
 								<PostHeaderDark
-									upvotes=130
+									upvotes="130"
 									authorName="Nicolas Bloom"
-									timeSince=34
+									timeSince="34"
 									dOrMin="d"
 								/>
 								<div class="px-6">
