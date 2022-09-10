@@ -82,12 +82,12 @@
 						easing: sineIn
 					}}
 					out:fly={{
-						duration: 400,
+						duration: 600,
 						x: direction === 'right' ? -100 : 100,
 						easing: sineOut
 					}}
 					animate:flip={{
-						delay: 200,
+						delay: 0,
 						easing: quintOut
 					}}
 					class="mt-3 mb-4 "

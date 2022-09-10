@@ -14,14 +14,13 @@
 	import type { PageServerData } from './$types';
 	import type { PostType } from '../types/types';
 	import type { PageData } from './$types';
+	import { enhance } from '$app/forms';
 
 	let testPost;
 	let showSignup = false;
 
-	let enteredPost = '';
+	export let inputValue = '';
 	export let data: PageData;
-	// $: ({ post } = data);
-	let postArr = [];
 
 	// export const load: Load = async ({ fetch }) => {
 	// 	const res = await fetch('/todos.json');
@@ -42,8 +41,8 @@
 	// };
 </script>
 
-<form method="POST">
-	<input type="text" name="createPost" bind:value={enteredPost} />
+<form method="POST" action="?/actionNameOne" use:enhance>
+	<input type="text" name="formName" bind:value={inputValue} />
 	<button type="submit">Submit</button>
 </form>
 
