@@ -15,6 +15,10 @@
 	import type { PostType } from '../types/types';
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
+	import { defineCustomElements } from '@papyrs/stylo/dist/loader';
+	import '@papyrs/stylo';
+
+	defineCustomElements();
 
 	let testPost;
 	let showSignup = false;
@@ -22,27 +26,20 @@
 	export let inputValue = '';
 	export let data: PageData;
 
-	// export const load: Load = async ({ fetch }) => {
-	// 	const res = await fetch('/todos.json');
+	// Your editable element
+	const article = document.querySelector('article[contenteditable="true"]');
 
-	// 	if (res.ok) {
-	// 		const todos = await res.json();
+	// Stylo
+	const stylo = document.querySelector('stylo-editor');
 
-	// 		return {
-	// 			props: { todos }
-	// 		};
-	// 	}
-
-	// 	const { message } = await res.json();
-
-	// 	return {
-	// 		error: new Error(message)
-	// 	};
-	// };
+	// Set the `containerRef` property
+	stylo.containerRef = article;
 </script>
 
-<form method="POST" action="?/actionNameOne" use:enhance>
-	<input type="text" name="formName" bind:value={inputValue} />
+<form class="bg-blue-400" method="POST" action="?/actionNameOne" use:enhance>
+	<stylo-editor>
+		<input class="bg-slate-400" type="text" name="formName" bind:value={inputValue} />
+	</stylo-editor>
 	<button type="submit">Submit</button>
 </form>
 

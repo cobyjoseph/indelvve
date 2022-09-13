@@ -14,14 +14,15 @@
 		sineInOut
 	} from 'svelte/easing';
 	import { sineIn, sineOut } from 'svelte/easing';
-
 	import PostHeaderDark from '$lib/PostHeaderDark.svelte';
 	import SortButtonLight from '$lib/SortButtonLight.svelte';
-
 	import { postsStore } from './stores/postsStore';
 	import AddCollectionBtnLight from '$lib/AddCollectionBtnLight.svelte';
 	import PostInputField from '$lib/PostInputField.svelte';
+	import { defineCustomElements } from '@papyrs/stylo/dist/loader';
+	import '@papyrs/stylo';
 
+	defineCustomElements();
 	$: direction = 'right';
 	$: currentCard = 0;
 
