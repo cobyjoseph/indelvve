@@ -19,10 +19,7 @@
 	import { postsStore } from './stores/postsStore';
 	import AddCollectionBtnLight from '$lib/AddCollectionBtnLight.svelte';
 	import PostInputField from '$lib/PostInputField.svelte';
-	import { defineCustomElements } from '@papyrs/stylo/dist/loader';
-	import '@papyrs/stylo';
 
-	defineCustomElements();
 	$: direction = 'right';
 	$: currentCard = 0;
 

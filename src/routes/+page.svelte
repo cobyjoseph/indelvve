@@ -15,11 +15,7 @@
 	import type { PostType } from '../types/types';
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
-	import { defineCustomElements } from '@papyrs/stylo/dist/loader';
-	import '@papyrs/stylo';
-	import { createEmptyElement } from '@papyrs/stylo';
 
-	defineCustomElements();
 
 	let testPost;
 	let showSignup = false;
@@ -33,10 +29,8 @@
 	<button type="submit">Submit</button>
 </form>
 
-<div class="m-2">
-	<stylo-editor />
-	<article contenteditable="true" />
-</div>
+
+
 
 <div class=" min-h-[50px] bg-red-400 p-2">
 	{#each data.post as p (p.id)}
