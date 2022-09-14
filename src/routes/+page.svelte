@@ -17,6 +17,7 @@
 	import { enhance } from '$app/forms';
 	import { defineCustomElements } from '@papyrs/stylo/dist/loader';
 	import '@papyrs/stylo';
+	import { createEmptyElement } from '@papyrs/stylo';
 
 	defineCustomElements();
 
@@ -25,23 +26,17 @@
 
 	export let inputValue = '';
 	export let data: PageData;
-
-	// Your editable element
-	const article = document.querySelector('article[contenteditable="true"]');
-
-	// Stylo
-	const stylo = document.querySelector('stylo-editor');
-
-	// Set the `containerRef` property
-	stylo.containerRef = article;
 </script>
 
 <form class="bg-blue-400" method="POST" action="?/actionNameOne" use:enhance>
-	<stylo-editor>
-		<input class="bg-slate-400" type="text" name="formName" bind:value={inputValue} />
-	</stylo-editor>
+	<input class="bg-slate-400 m-3" type="text" name="formName" bind:value={inputValue} />
 	<button type="submit">Submit</button>
 </form>
+
+<div class="m-2">
+	<stylo-editor />
+	<article contenteditable="true" />
+</div>
 
 <div class=" min-h-[50px] bg-red-400 p-2">
 	{#each data.post as p (p.id)}
