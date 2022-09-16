@@ -54,13 +54,13 @@
 
 <div class="relative">
 	<div class="boxShadow mt-4 mb-2   bg-boxBackground">
-		<div class="px-5 pt-3">
+		<div class="px-6 pt-3">
 			<CollectionHeader />
 		</div>
 
-		<div class="mx-1 overflow-hidden rounded-sm px-3  pt-2 pb-[0.5px] md:mx-3">
+		<div class=" overflow-hidden rounded-sm px-3  pt-2 pb-[0.5px] md:mx-3">
 			<!-- Sort and add content group -->
-			<div class="flex gap-3">
+			<div class="flex gap-3 ml-0.5">
 				<SortButtonLight />
 				<button on:click={togglePostInput}>
 					<AddCollectionBtnLight addText="content" />

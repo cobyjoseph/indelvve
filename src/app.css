@@ -5,10 +5,11 @@
 @tailwind utilities;
 
 body {
+	background-color: #e9f1f7;
 	/* background-image: linear-gradient(75deg, #a8a8ad, #adada8); */
 	/* background-color: #FAEEE8; */
 	/* background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/white_wall_hash.png'); */
-	background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/subtle_grunge.png');
+	/* background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/subtle_grunge.png'); */
 	/* background-image: url("redox_01.png"); */
 	/* background-image: url("extra_clean_paper.png"); */
 	/* background-image: url("lightpaperfibers.png"); */

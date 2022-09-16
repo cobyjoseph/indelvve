@@ -13,7 +13,7 @@ module.exports = {
 				mainLessDark: '#384275',
 				boxBackground: '#D4E6FD',
 
-				body: '#ffffff',
+				body: '#e9f1f7',
 				lighterBody: '#f0f5fa',
 				lightestBody: '#ffffff',
 				grayHeader: '#5F6571',

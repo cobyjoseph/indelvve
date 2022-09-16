@@ -18,11 +18,11 @@
 			class="mt-4 flex w-full justify-center bg-white  font-medium text-black outline outline-1 outline-black"
 		>
 			<div class="text-md flex py-1">
-				<button
+				<!-- <button
 					on:click={() => {
-						isOverlayOpen.set(true);
+						isOverlayOpen.set(t rue);
 					}}>Sign up</button
-				>
+				> -->
 
 				<!-- <img
 					class="rounded-sm object-scale-down "

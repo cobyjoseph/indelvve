@@ -1,27 +1,39 @@
-import type { RequestHandler } from '@sveltejs/kit';
-import { request } from 'http';
-import type { PostType } from 'src/types/types';
-import { getHeapCodeStatistics } from 'v8';
+import { json } from 'stream/consumers';
 import { prisma } from '../utils/prisma';
 import type { Actions, PageServerLoad } from './$types';
-
 
 // LOAD DATA ----------------------------------------------------------
 export const load: PageServerLoad = async () => {
 	const post = await prisma.post.findMany({});
+
 	return { post };
 };
+
 //---------------------------------------------------------------------
 
 //CREATE NEW POST -----------------------------------------------------
+// export const actions: Actions = {
+// 	actionNameOne: async ({ request }) => {
+// 		const form = await request.formData();
+// 		const inputValue = form.get('formName');
+
+// 		await prisma.post.create({
+// 			data: {
+// 				content: inputValue,
+// 				upvoted_number: 34
+// 			}
+// 		});
+// 	}
+// };
+
 export const actions: Actions = {
-	actionNameOne: async ({ request }) => {
+	actionNameTwo: async ({ request }) => {
 		const form = await request.formData();
-		const inputValue = form.get('formName');
+		const inputVar = form.get('inputField');
 
 		await prisma.post.create({
 			data: {
-				content: inputValue,
+				newContent: inputVar,
 				upvoted_number: 34
 			}
 		});
