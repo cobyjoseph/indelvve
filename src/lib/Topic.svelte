@@ -8,7 +8,7 @@
 </div> -->
 
 <div class=" relative mt-3  ">
-	<div class="peer relative text-2xl font-semibold text-black  z-20 max-w-fit py-[3px]  ">
+	<div class="peer relative text-2xl font-semibold text-white  z-20 max-w-fit py-[3px]  ">
 		Urban transport
 	</div>
 

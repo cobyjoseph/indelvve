@@ -7,12 +7,12 @@
 </script>
 
 <div class="mx-5   ">
-	<container class=" mb-1 flex text-[16px] text-faint items-center ">
+	<container class=" mb-1 flex text-[16px] text-white items-center ">
 		<!-- light and number -->
 		<div class="gap-0.3 mr-5 flex ">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				class="h-[23px] w-[23px] fill-transparent stroke-faint stroke-1 hover:fill-faint"
+				class="h-[23px] w-[23px] fill-transparent stroke-white stroke-1 hover:fill-faint"
 				viewBox="0 0 24 24"
 			>
 				<path
@@ -29,7 +29,7 @@
 		<div class="mr-5 flex gap-0.5 items-center">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				class="h-[19px] w-[19px] place-self-center stroke-faint stroke-1"
+				class="h-[19px] w-[19px] place-self-center stroke-white stroke-1"
 				fill="none"
 				viewBox="0 0 24 24"
 			>
@@ -52,7 +52,7 @@
 		<div class="min-w relative ml-auto flex gap-1 items-center">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				class="h-[27px] w-[27px] place-self-center stroke-faint stroke-1"
+				class="h-[27px] w-[27px] place-self-center stroke-white stroke-1"
 				fill="none"
 				viewBox="0 0 24 24"
 			>

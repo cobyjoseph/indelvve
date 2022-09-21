@@ -12,8 +12,6 @@
 />
 
 <!-- ChapSentence component here -->
-<p class=" text-[17px] font-normal leading-[25px] text-black">
-	How many people are working remotely? In some countries, less than 3% of workers were mostly
-	remote in 2020. In the US, a little less than half of workers have been at least partially remote
-	throughout 2021.
+<p class=" text-[20px] font-semibold mb-2 leading-[25px] text-white">
+	Latest trends in global EV market .
 </p>

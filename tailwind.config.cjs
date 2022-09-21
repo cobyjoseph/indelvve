@@ -5,13 +5,13 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: '#0096f4',
-				secondary: '#1f77f2',
+				secondary: '#5772A8',
 				third: '#EDB280',
 				middle: '#e38c42',
 				accent: '#E8F0F6',
 				mainDark: '#363e69',
 				mainLessDark: '#384275',
-				boxBackground: '#D4E6FD',
+				boxBackground: '#ffffff',
 
 				body: '#e9f1f7',
 				lighterBody: '#f0f5fa',

@@ -5,7 +5,22 @@
 @tailwind utilities;
 
 body {
-	background-color: #e9f1f7;
+	/* background-color: #1a1f3a; */
+
+	background-image: linear-gradient(
+		136deg,
+		#101946 2%,
+		#141c48 12%,
+		#171f4a 22%,
+		#1b224b 32%,
+		#1f264d 42%,
+		#262c4f 62%,
+		#22294e 68.33%,
+		#1f264d 74.67%,
+		#1b224b 81%,
+		#171f4a 87.33%,
+		#101946 100%
+	);
 	/* background-image: linear-gradient(75deg, #a8a8ad, #adada8); */
 	/* background-color: #FAEEE8; */
 	/* background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/white_wall_hash.png'); */

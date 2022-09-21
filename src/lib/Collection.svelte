@@ -53,7 +53,7 @@
 </script>
 
 <div class="relative">
-	<div class="boxShadow mt-4 mb-2   bg-boxBackground">
+	<div class="mt-4 rounded-sm  bg-boxBackground bg-opacity-[0.07] ">
 		<div class="px-6 pt-3">
 			<CollectionHeader />
 		</div>
@@ -100,17 +100,17 @@
 									dOrMin="d"
 								/>
 
-								<div class="px-6 text-mainText ">
+								<div class="px-6 text-white ">
 									{post.text}
 								</div>
-								<div class="mt-2 pb-2">
+								<div class="mt-2 ">
 									<img src={post.src} alt="" />
 								</div>
 							</div>
 						</span>
 
 						<span slot="bottomPost">
-							<div class="py-2">
+							<div class="py-1">
 								<PostHeaderDark
 									upvotes="130"
 									authorName="Nicolas Bloom"
@@ -130,12 +130,12 @@
 			{/each}
 
 			<!-- Button group and nav dots group-->
-			<div class="mb-3 flex transform justify-between ">
+			<div class="mb-3 mt-5 flex transform justify-between ">
 				<!-- Button left  -->
 				<button on:click={prevCard}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-[26px] w-[26px] justify-center stroke-black stroke-[3px]"
+						class="h-[26px] w-[26px] justify-center stroke-white stroke-[3px]"
 						fill="none"
 						viewBox="0 0 24 24"
 					>
@@ -158,7 +158,7 @@
 				<button on:click={nextCard}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-[26px] w-[26px] justify-center stroke-black stroke-[3px]"
+						class="h-[26px] w-[26px] justify-center stroke-white stroke-[3px]"
 						fill="none"
 						viewBox="0 0 24 24"
 					>
@@ -175,6 +175,6 @@ prev count: {lastCard}
 {direction} -->
 <style>
 	.boxShadow {
-		box-shadow: -8px 8px 0 0 #8ebaf8;
+		box-shadow: -8px 8px 0 0 #33385a;
 	}
 </style>

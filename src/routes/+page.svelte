@@ -6,37 +6,29 @@
 	import TopicHeader from '$lib/TopicHeader.svelte';
 	import Collection from '$lib/Collection.svelte';
 	import { postsStore } from '../lib/stores/postsStore';
-	import { append, each, onMount } from 'svelte/internal';
+	import { onMount } from 'svelte/internal';
 	import Topic from '$lib/Topic.svelte';
-	// import { isOverlayOpen } from '../lib/stores/LoginStore';
-	import LoginOverlay from '$lib/LoginOverlay.svelte';
-	import CreatePost from '$lib/CreatePost.svelte';
-	import type { PageServerData } from './$types';
-	import type { PostType } from '../types/types';
+
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
+
 	// import EditorJS from '@editorjs/editorjs';
 
-	import { defineCustomElements } from '@papyrs/stylo/dist/loader';
-	import '@papyrs/stylo';
+	// defineCustomElements();
+	// let referenceVar;
+	// let styloElement;
+	// styloElement = referenceVar;
 
-	defineCustomElements();
-	let referenceVar;
-	let styloElement;
-	styloElement = referenceVar;
-
-	export let inputValue = '';
 	export let data: PageData;
 
 	console.log(data);
 
 	let editor;
-	export let input;
 
 	export let toolbarOptions = [
 		[{ header: 1 }, { header: 2 }, 'blockquote', 'link', 'image', 'video'],
 		['bold', 'italic', 'underline', 'strike'],
-		[{ list: 'ordered' }, { list: 'ordered' }],
+		[{ list: 'bullet' }, { list: 'ordered' }],
 		[{ align: [] }],
 		['clean']
 	];
@@ -53,6 +45,22 @@
 		});
 	});
 
+	let form;
+	let content;
+	function collectFormInput() {
+		content = JSON.stringify(editor.innerHTML);
+		console.log(content);
+		// editorJSON = JSON.stringify(editor.innerHTML());
+		// console.log(JSON.stringify(editor.innerHTML));
+		// console.log(editor);
+	}
+
+	// let justHTMLContent = document.getElementById('justHTML');
+	// editor.on('text-change', function () {
+	// 	let justHTML = editor.root.innerHTML;
+	// 	justHTMLContent = justHTML;
+	// });
+
 	// import { createEditor } from 'svelte-editorjs';
 	// /* Uncomment and things break */
 	// import Header from '@editorjs/header';
@@ -65,7 +73,10 @@
 	// 	}
 	// }
 </script>
+<div class="bg-white">
 
+	{content}
+</div>
 <!-- <div class="editor" use:editor />
 <button on:click={() => $editor.clear()}>Clear contents</button>
 <button on:click={() => $editor.save()}>Save contents</button> -->
@@ -82,16 +93,23 @@
 
 <!-- --------------------------------------- ------------------------>
 
-<form class="bg-purple-200" method="POST" action="?/actionNameTwo" id="identifier" use:enhance>
-	<div class="quillArea">
-		<textarea
-			class="editor-wrapper bg-teal-400 m-3"
-			style="display:none"
-			name="inputField"
-			id="hiddenA"
-		/>
-		<div id="x" bind:this={editor} />
-	</div>
+<form
+	class="bg-purple-200"
+	method="POST"
+	action="?/actionNameTwo"
+	bind:this={form}
+	use:enhance
+	on:submit={collectFormInput}
+>
+	<textarea
+		class=" bg-teal-400 m-3"
+		style="display:none"
+		name="inputField"
+		id="editor"
+		bind:value={content}
+	/>
+	<div id="editor" bind:this={editor} />
+
 	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
 </form>
 
