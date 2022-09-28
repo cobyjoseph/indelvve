@@ -21,8 +21,6 @@
 
 	export let data: PageData;
 
-	console.log(data);
-
 	let editor;
 
 	export let toolbarOptions = [
@@ -33,6 +31,8 @@
 		['clean']
 	];
 
+	let content;
+	let quill;
 	onMount(async () => {
 		const { default: Quill } = await import('quill');
 
@@ -46,14 +46,22 @@
 	});
 
 	let form;
-	let content;
+	let justHtmlContent;
+	let justHtml;
+
 	function collectFormInput() {
-		content = JSON.stringify(editor.innerHTML);
-		console.log(content);
-		// editorJSON = JSON.stringify(editor.innerHTML());
-		// console.log(JSON.stringify(editor.innerHTML));
-		// console.log(editor);
+		if (quill) {
+			// content = JSON.stringify(editor.innerHTML);
+			let content = quill.getContents();
+			let justHtml = editor.innerHTML;
+			console.log(quill);
+
+			// console.log(content);
+			// console.log(justHtml);
+		}
 	}
+
+	// let parsedContent = JSON.parse(content);
 
 	// let justHTMLContent = document.getElementById('justHTML');
 	// editor.on('text-change', function () {
@@ -73,10 +81,16 @@
 	// 	}
 	// }
 </script>
-<div class="bg-white">
 
+<div class="bg-white">
 	{content}
+	{justHtmlContent}
 </div>
+
+<div bind:this={justHtml} />
+<div bind:this={justHtmlContent} />
+<div bind:this={content} />
+
 <!-- <div class="editor" use:editor />
 <button on:click={() => $editor.clear()}>Clear contents</button>
 <button on:click={() => $editor.save()}>Save contents</button> -->
