@@ -33,7 +33,7 @@ export const actions: Actions = {
 
 		await prisma.post.create({
 			data: {
-				newContent: inputVar,
+				content: inputVar,
 				upvoted_number: 34
 			}
 		});

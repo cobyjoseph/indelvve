@@ -31,8 +31,21 @@
 		['clean']
 	];
 
+	function collectFormInput() {
+		{
+			content = JSON.stringify(editor.innerHTML);
+			// quill.root.innerHTML = innerText;
+			// console.log(innerText);
+			// FOR SOME REASON I CAN'T ACCESS THE QUILL OBJECT AND ITS PROPERTIES HERE, BUT I CAN WITHIN ON ONMOUNT.
+			// let content = quill.getContents();
+			// let justHtml = editor.innerHTML;
+			// console.log(content);
+
+			// console.log(justHtml);
+		}
+	}
+
 	let content;
-	let quill;
 	onMount(async () => {
 		const { default: Quill } = await import('quill');
 
@@ -43,23 +56,19 @@
 			theme: 'snow',
 			placeholder: 'Post here...'
 		});
+		// quill.root.innerHTML = innerText;
+		// console.log(innerText);
+
+		quill.on('text-change', function () {
+			// let contents = JSON.parse(JSON.stringify(quill.getContents()));
+			let content = quill.getContents();
+			console.log(content);
+		});
 	});
 
 	let form;
 	let justHtmlContent;
 	let justHtml;
-
-	function collectFormInput() {
-		if (quill) {
-			// content = JSON.stringify(editor.innerHTML);
-			let content = quill.getContents();
-			let justHtml = editor.innerHTML;
-			console.log(quill);
-
-			// console.log(content);
-			// console.log(justHtml);
-		}
-	}
 
 	// let parsedContent = JSON.parse(content);
 
@@ -80,11 +89,18 @@
 	// 		console.log('Saved data:', $data);
 	// 	}
 	// }
+
+	//NEXT STEPS
+	// CHECK HOW THE SVELTE QUILL BINDINGS WORK
+	// 1, GET LIVE BIDNING TO WORK
+	//2 THEN FIGURE OU HOW TO BIND IT TO ON SUBMIT RATHER THAN ON TEXT CHANGE
 </script>
 
 <div class="bg-white">
-	{content}
+	<!-- {content}
 	{justHtmlContent}
+	<div>inner text: {innerText}</div> -->
+	{content}
 </div>
 
 <div bind:this={justHtml} />
@@ -127,9 +143,13 @@
 	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
 </form>
 
-<!-- THIS HAS ALWAYS JUST BEEN SENDING THE DATA FROM THE INPUT FIELD. NEVER FROM THE DIV EDITOR FIELD. THAT'S WHY I WOULD SUBMIT DATA AND THE NEWCONTENT FIELD WOULD BE "", BECAUSE THE INPUT FIELD WAS BLANK SO THERE WAS NO DATA. Making the id the same doesn't change that or seem to do anything at all.  
+<!-- ^THIS ABOVE HAS ALWAYS JUST BEEN SENDING THE DATA FROM THE INPUT FIELD. NEVER FROM THE DIV EDITOR FIELD. 
+	THAT'S WHY I WOULD SUBMIT DATA AND THE NEWCONTENT FIELD WOULD BE "", 
+	BECAUSE THE INPUT FIELD WAS BLANK SO THERE WAS NO DATA. 
+	Making the id the same doesn't change that or seem to do anything at all.  
 
-Doesn't seem to be any need to bind the input field to anything, that doesn't connect it to the data being uploaded. That is done through the name field which is picked up on the back end.  
+Doesn't seem to be any need to bind the input field to anything, that doesn't connect it to the data being uploaded. 
+That is done through the name field which is picked up on the back end.  
 -->
 
 <!-- display the data--------------------------------------------- -->
@@ -142,6 +162,7 @@ Doesn't seem to be any need to bind the input field to anything, that doesn't co
 		</div>
 	{/each}
 </div>
+
 <!-- ------------------------------------------------------------- -->
 
 <div class="flex flex-grow justify-center ">
