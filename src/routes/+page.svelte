@@ -46,6 +46,7 @@
 	}
 
 	let content;
+	let htmlContent;
 	onMount(async () => {
 		const { default: Quill } = await import('quill');
 
@@ -62,13 +63,15 @@
 		quill.on('text-change', function () {
 			// let contents = JSON.parse(JSON.stringify(quill.getContents()));
 			let content = quill.getContents();
+			let htmlContent = quill.root.innerHTML;
 			console.log(content);
+			console.log(htmlContent);
 		});
 	});
 
-	let form;
-	let justHtmlContent;
-	let justHtml;
+	// let form;
+	// let justHtmlContent;
+	// let justHtml;
 
 	// let parsedContent = JSON.parse(content);
 
@@ -101,6 +104,7 @@
 	{justHtmlContent}
 	<div>inner text: {innerText}</div> -->
 	{content}
+	{htmlContent}
 </div>
 
 <div bind:this={justHtml} />
@@ -131,14 +135,8 @@
 	use:enhance
 	on:submit={collectFormInput}
 >
-	<textarea
-		class=" bg-teal-400 m-3"
-		style="display:none"
-		name="inputField"
-		id="editor"
-		bind:value={content}
-	/>
-	<div id="editor" bind:this={editor} />
+	<textarea class=" bg-teal-400 m-3" style="display:none" name="inputField" />
+	<div bind:this={editor} />
 
 	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
 </form>

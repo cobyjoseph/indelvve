@@ -11,12 +11,14 @@ datasource db {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
-  username     String
-  first_name   String
-  last_name    String
-  date_created DateTime @default(now())
+  id            String   @id @default(uuid())
+  email         String   @unique
+  username      String   @unique
+  passwordHash  String  
+  userAuthToken String   @unique
+  first_name    String
+  last_name     String
+  date_created  DateTime @default(now())
 
   // Relations
   topics_created       Topic[]
@@ -26,6 +28,8 @@ model User {
 
   posts_upvoted       user_post[]
   collections_upvoted user_collection[]
+
+  role Role @default(USER)
 }
 
 model Post {
@@ -38,7 +42,7 @@ model Post {
 
   // Relations
   post_author User? @relation(fields: [user_id_FK], references: [id])
-  user_id_FK  Int?
+  user_id_FK  String?
 
   upvoted_by user_post[]
 
@@ -52,7 +56,7 @@ model Post {
 model user_post {
   //Relations
   user       User @relation(fields: [user_id_FK], references: [id])
-  user_id_FK Int
+  user_id_FK String
   post       Post @relation(fields: [post_id_FK], references: [id])
   post_id_FK Int
 
@@ -68,7 +72,7 @@ model Collection {
 
   // Relations
   collection_author User @relation(fields: [user_id_FK], references: [id])
-  user_id_FK        Int
+  user_id_FK        String
 
   upvoted_by user_collection[]
 
@@ -81,7 +85,7 @@ model Collection {
 model user_collection {
   // Relations
   user             User       @relation(fields: [user_id_FK], references: [id])
-  user_id_FK       Int
+  user_id_FK       String
   collection       Collection @relation(fields: [collection_id_FK], references: [id])
   collection_id_FK Int
 
@@ -94,7 +98,7 @@ model Topic {
 
   // Relations
   topic_author User? @relation(fields: [user_id_FK], references: [id])
-  user_id_FK   Int?
+  user_id_FK   String?
 
   child_collections collection_topic[]
 }
@@ -117,7 +121,7 @@ model Comments {
 
   // Relations
   comment_author User @relation(fields: [user_id_FK], references: [id])
-  user_id_FK     Int
+  user_id_FK     String
 
   parent_post Post @relation(fields: [post_id_FK], references: [id])
   post_id_FK  Int
@@ -126,4 +130,9 @@ model Comments {
 model Topic_Sandbox {
   id          Int    @id @default(autoincrement())
   topic_title String
+}
+
+enum Role {
+  USER
+  ADMIN
 }
