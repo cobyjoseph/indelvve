@@ -107,8 +107,6 @@
 	{htmlContent}
 </div>
 
-<div bind:this={justHtml} />
-<div bind:this={justHtmlContent} />
 <div bind:this={content} />
 
 <!-- <div class="editor" use:editor />
@@ -131,7 +129,6 @@
 	class="bg-purple-200"
 	method="POST"
 	action="?/actionNameTwo"
-	bind:this={form}
 	use:enhance
 	on:submit={collectFormInput}
 >
