@@ -174,7 +174,7 @@
 prev count: {lastCard}
 {direction} -->
 <style>
-	.boxShadow {
+	/* .boxShadow {
 		box-shadow: -8px 8px 0 0 #33385a;
-	}
+	} */
 </style>
