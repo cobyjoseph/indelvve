@@ -2,15 +2,17 @@ import { invalid, redirect } from '@sveltejs/kit';
 import type { Action, Actions, PageServerLoad } from './$types';
 import bcrypt from 'bcrypt';
 
-import { prisma } from '../../utils/prisma';
+import { prisma } from '../../../utils/prisma';
 
 enum Role {
 	ADMIN = 'ADMIN',
 	USER = 'USER'
 }
 
-export const load: PageServerLoad = async () => {
-	//todo
+export const load: PageServerLoad = async ({ locals }) => {
+	if (locals.user) {
+		throw redirect(302, '/');
+	}
 };
 
 // this is the register function called below. Request is built in. Since typescript is working I can use cntrl + space and request is one of the options
@@ -39,7 +41,7 @@ const register: Action = async ({ request }) => {
 			username,
 			passwordHash: await bcrypt.hash(password, 10),
 			userAuthToken: crypto.randomUUID(),
-			role: { connect: { name: Role.USER } },
+			role: Role.USER,
 			email: email,
 			first_name: first_name,
 			last_name: last_name

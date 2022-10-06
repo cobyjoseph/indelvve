@@ -158,7 +158,7 @@ That is done through the name field which is picked up on the back end.
 	{/each}
 </div>
 
-<!-- ------------------------------------------------------------- -->
+<!-- ---------------EVERYTHING ABOVE IS JUST EXPERIMENTING WITH PASSING DATA------------------------------------- -->
 
 <div class="flex flex-grow justify-center ">
 	<Navbar />

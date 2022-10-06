@@ -23,7 +23,7 @@
 	$: direction = 'right';
 	$: currentCard = 0;
 
-	let collectionHeight: number;
+	// let collectionHeight: number;
 
 	let showInputContent: boolean = false;
 
