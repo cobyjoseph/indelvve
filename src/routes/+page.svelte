@@ -21,9 +21,11 @@
 	// styloElement = referenceVar;
 
 	export let data: PageData;
+	console.log(data.post);
 
 	let editor;
 	let quillDelta;
+	let deltaData;
 
 	$: quillDeltaDerived = JSON.stringify(quillDelta);
 
@@ -49,10 +51,18 @@
 		// console.log(innerText);
 
 		quill.on('text-change', function () {
-			// let contents = JSON.parse(JSON.stringify(quill.getContents()));
 			quillDelta = quill.getContents();
 			console.log(quillDelta);
 		});
+		deltaData = data.post[1].newContent;
+		// {
+		// 	ops: [
+		// 		{ insert: 'test delta ' },
+		// 		{ attributes: { bold: true }, insert: 'data' },
+		// 		{ insert: '\n' }
+		// 	]
+		// };
+		quill.setContents(JSON.parse(deltaData));
 	});
 
 	// function collectFormInput() {
@@ -74,26 +84,21 @@
 	<textarea
 		class=" bg-teal-400 m-3"
 		style="display:none"
-		id="editor"
 		name="inputField"
 		bind:value={quillDeltaDerived}
 	/>
-	<div bind:this={editor} id="editor" />
+	<div bind:this={editor} />
 
 	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
 </form>
 
-<div class=" min-h-[50px] bg-red-400 p-2">
+<div class=" min-h-[100px] bg-red-400 p-2 editor-wrapper">
 	{#each data.post as p (p.id)}
 		<div class="h-8 bg-green-300 m-3">
-			{p.upvoted_number}
-			{p.content}
 			{p.newContent}
 		</div>
 	{/each}
 </div>
-
-<QuillEditor />
 
 <div class="flex flex-grow justify-center ">
 	<Navbar />

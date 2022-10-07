@@ -22,8 +22,8 @@
 			modules: {
 				toolbar: toolbarOptions
 			},
-			theme: 'snow',
-			placeholder: 'Post here...'
+			// theme: 'snow',
+			placeholder: 'placeholder to be replaced by rendered data'
 		});
 		// quill.root.innerHTML = innerText;
 		// console.log(innerText);
@@ -33,15 +33,12 @@
 			quillDeltaReadOnly = quillReadOnly.getContents();
 			console.log(quillDeltaReadOnly);
 		});
-		
 	});
 </script>
 
 <form class="bg-purple-200" method="POST" action="?/actionNameTwo" use:enhance>
 	<textarea class=" bg-teal-400 m-3" style="display:none" name="inputField" />
 	<div bind:this={editor} />
-
-	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
 </form>
 
 <!-- Old stuff from soneone elses code  -->
