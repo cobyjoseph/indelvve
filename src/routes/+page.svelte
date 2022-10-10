@@ -48,8 +48,6 @@
 			theme: 'snow',
 			placeholder: 'Post here...'
 		});
-		// quill.root.innerHTML = innerText;
-		// console.log(innerText);
 
 		quill.on('text-change', function () {
 			quillDelta = quill.getContents();
