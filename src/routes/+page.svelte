@@ -12,6 +12,7 @@
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
 	import QuillEditor from '../lib/QuillEditor.svelte';
+	import QuillOutput from '$lib/QuillOutput.svelte';
 
 	// import EditorJS from '@editorjs/editorjs';
 
@@ -55,13 +56,16 @@
 			console.log(quillDelta);
 		});
 		deltaData = data.post[1].newContent;
+		// JSON.stringify(
+		// THIS DATA BELOW DOESN'T WORK WITH THE CURRENT SET UP. NOT SURE WHY, SINCE IT SEEMS TO ALSO BE DELTA DATA, WHICH IS THE SAME AS WHAT DATA.POST[1].NEWCONTENT IS, AND THAT WORKS
+		// FOUND THE ANSWER, IT DOES WORK IF YOU JSON.STRINGIFY THE DELTA OBJECT. BUT FOR SOME REASON I DON'T HAVE TO JSON.STRINGIFY THE DATA.POST[1].NEWCONTENTS
 		// {
 		// 	ops: [
 		// 		{ insert: 'test delta ' },
 		// 		{ attributes: { bold: true }, insert: 'data' },
 		// 		{ insert: '\n' }
 		// 	]
-		// };
+		// });
 		quill.setContents(JSON.parse(deltaData));
 	});
 
@@ -79,6 +83,9 @@
 <div class="bg-white">
 	Quill Delta derived stringified: {quillDeltaDerived}
 </div>
+
+<QuillEditor />
+<QuillOutput OutputArray={data.post} />
 
 <form class="bg-purple-200 " method="POST" action="?/actionNameTwo" use:enhance>
 	<textarea
@@ -99,6 +106,8 @@
 		</div>
 	{/each}
 </div>
+
+<!-- <QuillEditor  /> -->
 
 <div class="flex flex-grow justify-center ">
 	<Navbar />

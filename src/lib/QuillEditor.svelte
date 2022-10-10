@@ -1,45 +1,43 @@
 <script lang="ts">
 	import { onMount } from 'svelte/internal';
 	import { enhance } from '$app/forms';
+	import QuillOutput from './QuillOutput.svelte';
 
+	export let deltaDataOutput;
 	let editor;
-	let quillDeltaReadOnly;
+	let quill;
 
-	$: quillDeltaDerived = JSON.stringify(quillDeltaReadOnly);
+	$: quillDeltaDerived = JSON.stringify(quill);
 
-	export let toolbarOptions = [
-		[{ header: 1 }, { header: 2 }, 'blockquote', 'link', 'image', 'video'],
-		['bold', 'italic', 'underline', 'strike'],
-		[{ list: 'bullet' }, { list: 'ordered' }],
-		[{ align: [] }],
-		['clean']
-	];
+	// export let toolbarOptions = [
+	// 	[{ header: 1 }, { header: 2 }, 'blockquote', 'link', 'image', 'video'],
+	// 	['bold', 'italic', 'underline', 'strike'],
+	// 	[{ list: 'bullet' }, { list: 'ordered' }],
+	// 	[{ align: [] }],
+	// 	['clean']
+	// ];
 
 	onMount(async () => {
 		const { default: Quill } = await import('quill');
 
-		let quillReadOnly = new Quill(editor, {
+		let quill = new Quill(editor, {
 			modules: {
-				toolbar: toolbarOptions
-			},
+				// toolbar: toolbarOptions
+			}
 			// theme: 'snow',
-			placeholder: 'placeholder to be replaced by rendered data'
 		});
-		// quill.root.innerHTML = innerText;
-		// console.log(innerText);
-
-		quillReadOnly.on('text-change', function () {
-			// let contents = JSON.parse(JSON.stringify(quill.getContents()));
-			quillDeltaReadOnly = quillReadOnly.getContents();
-			console.log(quillDeltaReadOnly);
-		});
+		// deltaDataOutput = JSON.stringify({
+		// 	ops: [
+		// 		{ insert: 'test delta ' },
+		// 		{ attributes: { bold: true }, insert: 'data' },
+		// 		{ insert: '\n' }
+		// 	],
+		// });
+		quill.setContents(JSON.parse(deltaDataOutput));
 	});
 </script>
 
-<form class="bg-purple-200" method="POST" action="?/actionNameTwo" use:enhance>
-	<textarea class=" bg-teal-400 m-3" style="display:none" name="inputField" />
-	<div bind:this={editor} />
-</form>
+<div bind:this={editor} class="bg-slate-400" />
 
 <!-- Old stuff from soneone elses code  -->
 <!-- in script tags -->

@@ -2,17 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 export const prisma = new PrismaClient();
 
-export async function createPost(request: Request) {
-	const form = await request.formData();
-	const post = String(form.get('post'));
 
-	await prisma.post.create({
-		data: {
-			content: createPost,
-			upvoted_number: 34
-		}
-	});
-}
 
 // // this is all formData properties, getting form data is generall html method. I can look up formData generally to understand this better.
 // export async function createPost(request: Request) {

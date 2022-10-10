@@ -19,7 +19,7 @@
 		>
 			<div class="text-md flex py-1">
 				<!-- <button
-					on:click={() => {
+					on:click={() => { 
 						isOverlayOpen.set(t rue);
 					}}>Sign up</button
 				> -->
