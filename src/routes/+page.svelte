@@ -1,5 +1,3 @@
-<!-- TODO eventually:
-- prerender data on the server side -->
 <script lang="ts">
 	import Navbar from '$lib/Navbar.svelte';
 	import SearchBar from '$lib/SearchBar.svelte';
@@ -11,18 +9,16 @@
 
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
-	import QuillEditor from '../lib/QuillEditor.svelte';
-	import QuillOutput from '$lib/QuillOutput.svelte';
-
-	// import EditorJS from '@editorjs/editorjs';
-
-	// defineCustomElements();
-	// let referenceVar;
-	// let styloElement;
-	// styloElement = referenceVar;
+	import QuillEditor from '../utils/Quill/QuillEditor.svelte';
+	import QuillOutput from '../utils/Quill/QuillOutput.svelte';
 
 	export let data: PageData;
 	console.log(data.post);
+
+	let postCount = data.post?.length;
+	//THIS ISN'T WORKING BELOW BECAUSE THERE IS NOT JUST ONE ID FOR THE POST DATA FIELD. IT WORKED FOR LENGHT BECAUSE THERE IS ONE LENGHT. BUT FOR THE ID TO WORK I THINK I NEED TO LOOP THROUGH THEM ALL. NOT SURE EXACTLY.
+	// dont think I need this though
+	// let id = data.post.id;
 
 	let editor;
 	let quillDelta;
@@ -53,37 +49,13 @@
 			quillDelta = quill.getContents();
 			console.log(quillDelta);
 		});
-		deltaData = data.post[1].newContent;
-		// JSON.stringify(
-		// THIS DATA BELOW DOESN'T WORK WITH THE CURRENT SET UP. NOT SURE WHY, SINCE IT SEEMS TO ALSO BE DELTA DATA, WHICH IS THE SAME AS WHAT DATA.POST[1].NEWCONTENT IS, AND THAT WORKS
-		// FOUND THE ANSWER, IT DOES WORK IF YOU JSON.STRINGIFY THE DELTA OBJECT. BUT FOR SOME REASON I DON'T HAVE TO JSON.STRINGIFY THE DATA.POST[1].NEWCONTENTS
-		// {
-		// 	ops: [
-		// 		{ insert: 'test delta ' },
-		// 		{ attributes: { bold: true }, insert: 'data' },
-		// 		{ insert: '\n' }
-		// 	]
-		// });
+
 		quill.setContents(JSON.parse(deltaData));
 	});
-
-	// function collectFormInput() {
-	// 	quillDelta = JSON.stringify(editor.innerHTML);
-	// }
 </script>
 
-<div class="bg-white">
-	Quill Delta stringify: {JSON.stringify(quillDelta)}
-</div>
-<div class="bg-white">
-	Quill Delta not stringified: {quillDelta}
-</div>
-<div class="bg-white">
-	Quill Delta derived stringified: {quillDeltaDerived}
-</div>
-
-<QuillEditor />
-<QuillOutput OutputArray={data.post} />
+<!-- <QuillEditor /> -->
+<!-- <QuillOutput OutputArray={data.post} /> -->
 
 <form class="bg-purple-200 " method="POST" action="?/actionNameTwo" use:enhance>
 	<textarea
@@ -97,14 +69,6 @@
 	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
 </form>
 
-<div class=" min-h-[100px] bg-red-400 p-2 editor-wrapper">
-	{#each data.post as p (p.id)}
-		<div class="h-8 bg-green-300 m-3">
-			{p.newContent}
-		</div>
-	{/each}
-</div>
-
 <!-- <QuillEditor  /> -->
 
 <div class="flex flex-grow justify-center ">
@@ -116,8 +80,8 @@
 		<Topic />
 		<TopicHeader />
 
-		<Collection {$postsStore} />
-		<Collection {$postsStore} />
+		<Collection OutputArray={data.post} {postCount} />
+		<Collection OutputArray={data.post} {postCount} />
 	</div>
 </div>
 

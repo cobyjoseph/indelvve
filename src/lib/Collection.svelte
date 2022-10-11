@@ -19,8 +19,14 @@
 	import { postsStore } from './stores/postsStore';
 	import AddCollectionBtnLight from '$lib/AddCollectionBtnLight.svelte';
 	import PostInputField from '$lib/PostInputField.svelte';
+	import QuillOutput from '../utils/Quill/QuillOutput.svelte';
+	import QuillEditor from '../utils/Quill/QuillEditor.svelte';
+	// import { prisma } from '../utils/prisma;
 
-	$: direction = 'right';
+	export let OutputArray;
+
+	export let postCount: Number;
+
 	$: currentCard = 0;
 
 	// let collectionHeight: number;
@@ -34,16 +40,14 @@
 	});
 
 	function nextCard() {
-		direction = 'right';
-		currentCard = (currentCard + 1) % posts.length;
+		currentCard = (currentCard + 1) % postCount;
 	}
 
 	function prevCard() {
-		direction = 'left';
 		if (currentCard != 0) {
-			currentCard = (currentCard - 1) % posts.length;
+			currentCard = (currentCard - 1) % postCount;
 		} else {
-			currentCard = posts.length - 1;
+			currentCard = postCount - 1;
 		}
 	}
 
@@ -51,6 +55,23 @@
 		showInputContent = !showInputContent;
 	}
 </script>
+
+{#each [OutputArray[currentCard]] as OA (OA.id)}
+	<Card>
+		<span slot="topPost">
+			<div class="pt-2">
+				<PostHeaderDark upvotes="130" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
+				<QuillEditor deltaDataOutput={OA.newContent} />
+			</div></span
+		>
+		<span slot="bottomPost">
+			<div class="pt-2 bg-green-300">
+				<PostHeaderDark upvotes="130" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
+				<QuillEditor deltaDataOutput={OA.newContent} />
+			</div></span
+		>
+	</Card>
+{/each}
 
 <div class="relative">
 	<div class="mt-4 rounded-sm  bg-boxBackground bg-opacity-[0.07] ">
@@ -71,7 +92,7 @@
 				<div transition:slide={{ duration: 300, easing: quintInOut }}><PostInputField /></div>
 			{/if}
 
-			{#each [posts[currentCard]] as post (post.id)}
+			<!-- {#each [posts[currentCard]] as post (post.id)}
 				<div
 					in:fly={{
 						delay: 0,
@@ -127,7 +148,7 @@
 						</span>
 					</Card>
 				</div>
-			{/each}
+			{/each} -->
 
 			<!-- Button group and nav dots group-->
 			<div class="mb-3 mt-5 flex transform justify-between ">
@@ -145,8 +166,8 @@
 
 				<!-- Nav dots group -->
 				<div class="mx-12 flex h-[26px] items-center justify-center gap-1.5 ">
-					{#each posts as post (post.id)}
-						{#if currentCard + 1 === post.id}
+					{#each OutputArray as OA (OA.id)}
+						{#if currentCard + 1 === OA.id}
 							<div class="h-[15px] w-[15px]  rounded-sm bg-secondary" />
 						{:else}
 							<div class="h-[15px] w-[15px] rounded-sm bg-white" />
