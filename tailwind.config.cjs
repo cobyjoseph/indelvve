@@ -27,7 +27,8 @@ module.exports = {
 				mainGray: '#676778'
 			},
 			fontFamily: {
-				fugaz: 'Fugaz One'
+				Gantari: ['Gantari', 'sans'],
+				fugaz: ['Fugaz One']
 			}
 		}
 	},

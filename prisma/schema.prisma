@@ -36,8 +36,7 @@ model Post {
   id             Int      @id @default(autoincrement())
   date_created   DateTime @default(now())
   // TODO - Figure out how to include rich text
-  content        String?
-  newContent     Json?
+  content        Json?
   upvoted_number Int
 
   // Relations

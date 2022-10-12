@@ -6,11 +6,11 @@
 	import { postsStore } from '../lib/stores/postsStore';
 	import { onMount } from 'svelte/internal';
 	import Topic from '$lib/Topic.svelte';
-
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
-	import QuillEditor from '../utils/Quill/QuillEditor.svelte';
-	import QuillOutput from '../utils/Quill/QuillOutput.svelte';
+	import AddCollectionBtnLight from '$lib/AddCollectionBtnLight.svelte';
+	import { slide } from 'svelte/transition';
+	import { quintInOut } from 'svelte/easing';
 
 	export let data: PageData;
 	console.log(data.post);
@@ -23,6 +23,7 @@
 	let editor;
 	let quillDelta;
 	let deltaData;
+	let showInputContent: boolean = false;
 
 	$: quillDeltaDerived = JSON.stringify(quillDelta);
 
@@ -47,17 +48,26 @@
 
 		quill.on('text-change', function () {
 			quillDelta = quill.getContents();
-			console.log(quillDelta);
 		});
 
 		quill.setContents(JSON.parse(deltaData));
 	});
+
+	function togglePostInput() {
+		showInputContent = !showInputContent;
+		console.log(showInputContent);
+	}
 </script>
 
-<!-- <QuillEditor /> -->
-<!-- <QuillOutput OutputArray={data.post} /> -->
+<button on:click={togglePostInput}>
+	<AddCollectionBtnLight addText="content" />
+</button>
 
-<form class="bg-purple-200 " method="POST" action="?/actionNameTwo" use:enhance>
+{#if showInputContent}
+	<div transition:slide={{ duration: 300, easing: quintInOut }} />
+{/if}
+
+<form class="bg-purple-200 " method="POST" action="?/actionName" use:enhance>
 	<textarea
 		class=" bg-teal-400 m-3"
 		style="display:none"
@@ -69,8 +79,6 @@
 	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
 </form>
 
-<!-- <QuillEditor  /> -->
-
 <div class="flex flex-grow justify-center ">
 	<Navbar />
 
@@ -80,8 +88,8 @@
 		<Topic />
 		<TopicHeader />
 
-		<Collection OutputArray={data.post} {postCount} />
-		<Collection OutputArray={data.post} {postCount} />
+		<Collection posts={data.post} {postCount} />
+		<Collection posts={data.post} {postCount} />
 	</div>
 </div>
 

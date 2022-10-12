@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte/internal';
 	import { enhance } from '$app/forms';
-	import QuillOutput from './QuillOutput.svelte';
 
 	export let deltaDataOutput;
 	let editor;
@@ -13,14 +12,15 @@
 		const { default: Quill } = await import('quill');
 
 		let quill = new Quill(editor, {
-			modules: {}
+			modules: {},
+			readOnly: true
 		});
 
 		quill.setContents(JSON.parse(deltaDataOutput));
 	});
 </script>
 
-<div bind:this={editor} class="bg-slate-400" />
+<div bind:this={editor} class="text-white font-Gantari" />
 
 <style>
 	@import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
