@@ -12,7 +12,7 @@
 	import { slide } from 'svelte/transition';
 	import { quintInOut } from 'svelte/easing';
 	import QuillInput from '../utils/Quill/DisplayQuill.svelte';
-	import { count } from 'console';
+	// import { count } from 'console';
 
 	export let data: PageData;
 	// console.log(data.count);
