@@ -17,9 +17,12 @@
 	} from 'svelte/easing';
 	import PostHeaderDark from '$lib/PostHeaderDark.svelte';
 	import DisplayQuill from '../utils/Quill/DisplayQuill.svelte';
+	import AddCollectionBtnLight from './AddCollectionBtnLight.svelte';
+	import QuillInput from '../utils/Quill/QuillInput.svelte';
 
 	export let posts;
 	export let postCount: Number;
+	let showInputContent: boolean = false;
 
 	$: direction = 'right';
 	$: currentCard = 0;
@@ -38,18 +41,21 @@
 		}
 	}
 
-	// function togglePostInput() {
-	// 	showInputContent = !showInputContent;
-	// }
+	function togglePostInput() {
+		showInputContent = !showInputContent;
+	}
 </script>
 
-<!-- <button on:click={togglePostInput}>
+<button on:click={togglePostInput}>
 	<AddCollectionBtnLight addText="content" />
 </button>
 
 {#if showInputContent}
 	<div transition:slide={{ duration: 300, easing: quintInOut }} />
-{/if} -->
+	<div>
+		<QuillInput />
+	</div>
+{/if}
 
 <div class="mt-2 flex transform justify-between ">
 	<!-- Button left  -->
@@ -118,7 +124,7 @@
 
 <!-- <div class="relative">
 	<div class="mt-4 rounded-sm  bg-white bg-opacity-5 ">
-		<!-- <div class="px-6 pt-3">
+		<div class="px-6 pt-3">
 			<CollectionHeader />
 		</div> -->
 
@@ -195,7 +201,7 @@
 
 <!-- Button group and nav dots group-->
 <!-- <div class="mb-3 mt-5 flex transform justify-between ">
-				<!-- Button left  -->
+				Button left  -->
 <!-- <button on:click={prevCard}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"

@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte/internal';
+	import { enhance } from '$app/forms';
 
 	let editor;
 	let quillDelta;
-	let deltaData;
+	// let deltaData;
 
 	$: quillDeltaDerived = JSON.stringify(quillDelta);
 
@@ -31,11 +32,11 @@
 			console.log(quillDelta);
 		});
 
-		quill.setContents(JSON.parse(deltaData));
+		// quill.setContents(JSON.parse(deltaData));
 	});
 </script>
 
-<form class="bg-purple-200 " method="POST" action="?/actionNameTwo" use:enhance>
+<form class="bg-purple-200" method="POST" action="?/actionName" use:enhance>
 	<textarea
 		class=" bg-teal-400 m-3"
 		style="display:none"
@@ -46,3 +47,5 @@
 
 	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
 </form>
+
+<!-- ToDO -->

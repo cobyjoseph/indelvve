@@ -11,9 +11,11 @@
 	import AddCollectionBtnLight from '$lib/AddCollectionBtnLight.svelte';
 	import { slide } from 'svelte/transition';
 	import { quintInOut } from 'svelte/easing';
+	import QuillInput from '../utils/Quill/DisplayQuill.svelte';
+	import { count } from 'console';
 
 	export let data: PageData;
-	console.log(data.post);
+	// console.log(data.count);
 
 	let postCount = data.post?.length;
 	//THIS ISN'T WORKING BELOW BECAUSE THERE IS NOT JUST ONE ID FOR THE POST DATA FIELD. IT WORKED FOR LENGHT BECAUSE THERE IS ONE LENGHT. BUT FOR THE ID TO WORK I THINK I NEED TO LOOP THROUGH THEM ALL. NOT SURE EXACTLY.
@@ -23,7 +25,7 @@
 	let editor;
 	let quillDelta;
 	let deltaData;
-	let showInputContent: boolean = false;
+	let showTestInputContent: boolean = true;
 
 	$: quillDeltaDerived = JSON.stringify(quillDelta);
 
@@ -35,49 +37,28 @@
 		['clean']
 	];
 
+	let quill = null;
+
 	onMount(async () => {
 		const { default: Quill } = await import('quill');
 
-		let quill = new Quill(editor, {
+		quill = new Quill(editor, {
 			modules: {
 				toolbar: toolbarOptions
 			},
-			theme: 'snow',
+			// theme: 'snow',
 			placeholder: 'Post here...'
 		});
 
 		quill.on('text-change', function () {
 			quillDelta = quill.getContents();
 		});
-
-		quill.setContents(JSON.parse(deltaData));
 	});
-
-	function togglePostInput() {
-		showInputContent = !showInputContent;
-		console.log(showInputContent);
-	}
 </script>
 
-<button on:click={togglePostInput}>
-	<AddCollectionBtnLight addText="content" />
-</button>
+<div transition:slide={{ duration: 300, easing: quintInOut }} />
 
-{#if showInputContent}
-	<div transition:slide={{ duration: 300, easing: quintInOut }} />
-{/if}
-
-<form class="bg-purple-200 " method="POST" action="?/actionName" use:enhance>
-	<textarea
-		class=" bg-teal-400 m-3"
-		style="display:none"
-		name="inputField"
-		bind:value={quillDeltaDerived}
-	/>
-	<div bind:this={editor} />
-
-	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
-</form>
+<QuillInput />
 
 <div class="flex flex-grow justify-center ">
 	<Navbar />
@@ -95,4 +76,8 @@
 
 <style>
 	@import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+
+	.ql-editor h1 {
+		font-size: 32px;
+	}
 </style>

@@ -3,10 +3,19 @@ import type { Actions, PageServerLoad } from './$types';
 
 // LOAD DATA ----------------------------------------------------------
 export const load: PageServerLoad = async () => {
-	const post = await prisma.post.findMany({});
+	try {
+		const post = await prisma.post.findMany({});
+		const count = await prisma.post.count();
+		console.log('count log:', count);
+		// // need to use aggregate?
 
-	return { post };
+		return { post, count };
+	} catch (error) {
+		console.log(error);
+	}
 };
+
+// when user gets page from server, this loads the data into the page itself, its not really an appi endpoint.
 
 //---------------------------------------------------------------------
 

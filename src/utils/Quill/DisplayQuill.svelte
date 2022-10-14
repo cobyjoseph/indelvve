@@ -22,6 +22,13 @@
 
 <div bind:this={editor} class="text-white font-Gantari" />
 
+<!-- //one display quill object. OnMount we can pass prop to it and make canEdit true or false as a prop -->
 <style>
-	@import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+	.ql-editor h1 {
+		font-size: 32px;
+	}
+	.ql-editor p {
+		color: blue;
+	}
+	/* We need this styled but we dont want the snow default from the +[page.svelte to override */
 </style>

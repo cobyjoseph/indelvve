@@ -1,6 +1,7 @@
-// import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
-// export const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
+
 
 // export async function createPost(request: Request) {
 // 	const form = await request.formData();
@@ -23,6 +24,9 @@
 // // 	const response = await fetch
 // }
 let item = 'banana';
+
+
+// we want to access an API, we don't want to have a whole page for this, or wait for that page to laod.
 
 export function GET() {
 	return {
