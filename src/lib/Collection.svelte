@@ -113,12 +113,14 @@
 			easing: quintOut
 		}}
 	>
-		<Card>
-			<span slot="topPost">
-				<PostHeaderDark upvotes="130" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
-				<DisplayQuill deltaDataOutput={post.content} />
-			</span>
-		</Card>
+		<div class="boxShadow">
+			<Card>
+				<span slot="topPost">
+					<PostHeaderDark upvotes="130" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
+					<DisplayQuill deltaDataOutput={post.content} />
+				</span>
+			</Card>
+		</div>
 	</div>
 {/each}
 
@@ -244,7 +246,7 @@
 prev count: {lastCard}
 {direction} -->
 <style>
-	/* .boxShadow {
+	.boxShadow {
 		box-shadow: -8px 8px 0 0 #33385a;
-	} */
+	}
 </style>

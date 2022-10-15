@@ -18,16 +18,12 @@
 	// console.log(data.count);
 
 	let postCount = data.post?.length;
-	//THIS ISN'T WORKING BELOW BECAUSE THERE IS NOT JUST ONE ID FOR THE POST DATA FIELD. IT WORKED FOR LENGHT BECAUSE THERE IS ONE LENGHT. BUT FOR THE ID TO WORK I THINK I NEED TO LOOP THROUGH THEM ALL. NOT SURE EXACTLY.
-	// dont think I need this though
-	// let id = data.post.id;
+	
 
 	let editor;
 	let quillDelta;
 	let deltaData;
 	let showTestInputContent: boolean = true;
-
-	$: quillDeltaDerived = JSON.stringify(quillDelta);
 
 	export let toolbarOptions = [
 		[{ header: 1 }, { header: 2 }, 'blockquote', 'link', 'image', 'video'],

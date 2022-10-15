@@ -1,5 +1,5 @@
 <!-- A container that flexes the search bar and the user image -->
-<container class="flex gap-7 mt-5 ml-1 mb-1 justify-center">
+<container class="flex gap-7 mt-5 ml-1 mb-1 justify-center boxShadow">
 	<!-- A horizontal container with one column that spans ~75% of the viewport with a maximum width -->
 	<div class="h-7 relative w-full">
 		<!-- a box that takes up 100% of its parent -->
@@ -11,9 +11,9 @@
 
 		<!-- come back and add a search icon at some point -->
 
-		<div
+		<!-- <div
 			class=" absolute  w-full h-full mt-[5px] -ml-[5px] z-10  outline-[#3F4565]  outline-2 outline-dotted"
-		/>
+		/> -->
 	</div>
 	<!-- user image -->
 	<!-- <div class="h-[40px] w-[40px] items-center">
@@ -24,3 +24,9 @@
 		/>
 	</div> -->
 </container>
+
+<style>
+	.boxShadow {
+		box-shadow: -4px 4px 0 0 #4e547c;
+	}
+</style>
