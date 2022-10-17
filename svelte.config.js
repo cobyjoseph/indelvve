@@ -10,7 +10,12 @@ const config = {
 	}),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		alias: {
+			$houdini: './$houdini',
+			$graphql: './src/lib/graphql',
+			$modules: './src/lib/modules'
+		}
 	}
 };
 

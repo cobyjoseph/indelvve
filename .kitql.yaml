@@ -1,0 +1,14 @@
+generates:
+  ./src/lib/graphql/$kitql:
+  modules:
+    - ./src/lib/modules/*
+  actions:
+  # createEnumsModule:
+  # prismaFile: ./prisma/schema.prisma
+  mergeModuleTypedefs: true
+  mergeModuleResolvers: true
+  mergeContexts: true
+  mergeModules: true
+
+  moduleOutputFolder: $kitql
+  importBaseTypesFrom: $graphql/$kitql/graphqlTypes
