@@ -18,7 +18,6 @@
 	// console.log(data.count);
 
 	let postCount = data.post?.length;
-	
 
 	let editor;
 	let quillDelta;
@@ -56,7 +55,9 @@
 
 <QuillInput />
 
-<div class="flex flex-grow justify-center ">
+<div>test to see if source control works</div>
+
+<div class="flex flex-grow justify-center">
 	<Navbar />
 
 	<div class=" relative mx-4 mb-6 grid h-full grid-cols-1 md:w-3/4 md:max-w-[620px] ">
