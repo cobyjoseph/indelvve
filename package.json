@@ -28,7 +28,7 @@
         "eslint": "^8.23.1",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-svelte3": "^4.0.0",
-        "graphql": "^15.5.0",
+        "graphql": "^15.8.0",
         "postcss": "^8.4.16",
         "prettier": "^2.7.1",
         "prettier-plugin-svelte": "^2.7.0",
@@ -44,6 +44,7 @@
     "type": "module",
     "dependencies": {
         "@prisma/client": "^4.5.0-dev.47",
+        "@urql/svelte": "^3.0.1",
         "bcrypt": "^5.0.1",
         "esbuild-linux-64": "^0.15.11",
         "prisma": "^4.5.0-dev.47",

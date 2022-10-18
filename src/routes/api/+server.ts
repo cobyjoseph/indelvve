@@ -1,7 +1,19 @@
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '@prisma/client';
+import { getContextClient, gql, queryStore } from '@urql/svelte';
 
-export const prisma = new PrismaClient();
+// export const prisma = new PrismaClient();
 
+// export const testQuery = queryStore({
+// 	client: getContextClient(),
+// 	query: gql`
+// 		query testQuery {
+// 			queryPerson {
+// 				name
+// 				id
+// 			}
+// 		}
+// 	`
+// });
 
 // export async function createPost(request: Request) {
 // 	const form = await request.formData();
@@ -24,7 +36,6 @@ export const prisma = new PrismaClient();
 // // 	const response = await fetch
 // }
 let item = 'banana';
-
 
 // we want to access an API, we don't want to have a whole page for this, or wait for that page to laod.
 

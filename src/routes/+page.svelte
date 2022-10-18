@@ -12,47 +12,31 @@
 	import { slide } from 'svelte/transition';
 	import { quintInOut } from 'svelte/easing';
 	import QuillInput from '../utils/Quill/DisplayQuill.svelte';
+	import { getContextClient, gql, queryStore } from '@urql/svelte';
 
 	export let data: PageData;
 
 	let postCount = data.post?.length;
 
-	let editor;
-	let quillDelta;
-	let deltaData;
-	let showTestInputContent: boolean = true;
-
-	$: quillDeltaDerived = JSON.stringify(quillDelta);
-
-	export let toolbarOptions = [
-		[{ header: 1 }, { header: 2 }, 'blockquote', 'link', 'image', 'video'],
-		['bold', 'italic', 'underline', 'strike'],
-		[{ list: 'bullet' }, { list: 'ordered' }],
-		[{ align: [] }],
-		['clean']
-	];
-
-	let quill = null;
-
-	onMount(async () => {
-		const { default: Quill } = await import('quill');
-
-		quill = new Quill(editor, {
-			modules: {
-				toolbar: toolbarOptions
-			},
-			// theme: 'snow',
-			placeholder: 'Post here...'
-		});
-
-		quill.on('text-change', function () {
-			quillDelta = quill.getContents();
-		});
-	});
+	
 </script>
 
 <!-- --------------------------------------------------------- -->
 <div class="text-white font-bold">Experimental area:</div>
+
+<!-- <div>
+	{#if $testQuery.fetching}
+		<p>Loading...</p>
+	{:else if $testQuery.error}
+		<p>Oopsie! {$testQuery.error.message}</p>
+	{:else}
+		{#each $testQuery.data.queryPerson as person}
+			<section>
+				<h2>{person.name}</h2>
+			</section>
+		{/each}
+	{/if}
+</div> -->
 
 <div class="w-full h-1 bg-white mt-5" />
 
