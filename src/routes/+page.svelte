@@ -51,6 +51,13 @@
 	});
 </script>
 
+<!-- --------------------------------------------------------- -->
+<div class="text-white font-bold">Experimental area:</div>
+
+<div class="w-full h-1 bg-white mt-5" />
+
+<!-- ------------------------------------------------------- -->
+
 <QuillInput />
 
 <div class="flex flex-grow justify-center">
@@ -71,6 +78,6 @@
 	@import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
 
 	.ql-editor h1 {
-		font-size: 32px;
+		font-size: 12px;
 	}
 </style>

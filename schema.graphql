@@ -1,0 +1,1667 @@
+""""""
+directive @auth(add: AuthRule, delete: AuthRule, password: AuthRule, query: AuthRule, update: AuthRule) on INTERFACE | OBJECT
+
+""""""
+directive @cacheControl(maxAge: Int!) on QUERY
+
+""""""
+directive @cascade(fields: [String]) on FIELD
+
+""""""
+directive @custom(dql: String, http: CustomHTTP) on FIELD_DEFINITION
+
+""""""
+directive @dgraph(pred: String, type: String) on FIELD_DEFINITION | INTERFACE | OBJECT
+
+""""""
+directive @generate(mutation: GenerateMutationParams, query: GenerateQueryParams, subscription: Boolean) on INTERFACE | OBJECT
+
+""""""
+directive @hasInverse(field: String!) on FIELD_DEFINITION
+
+""""""
+directive @id on FIELD_DEFINITION
+
+""""""
+directive @lambda on FIELD_DEFINITION
+
+""""""
+directive @lambdaOnMutate(add: Boolean, delete: Boolean, update: Boolean) on INTERFACE | OBJECT
+
+""""""
+directive @remote on ENUM | INPUT_OBJECT | INTERFACE | OBJECT | UNION
+
+""""""
+directive @remoteResponse(name: String) on FIELD_DEFINITION
+
+""""""
+directive @search(by: [DgraphIndex!]) on FIELD_DEFINITION
+
+""""""
+directive @secret(field: String!, pred: String) on INTERFACE | OBJECT
+
+""""""
+directive @withSubscription on FIELD_DEFINITION | INTERFACE | OBJECT
+
+""""""
+input AddAnimalInput {
+  """"""
+  name: String!
+
+  """"""
+  owner: PersonRef
+
+  """"""
+  xid: String!
+}
+
+""""""
+type AddAnimalPayload {
+  """"""
+  animal(filter: AnimalFilter, first: Int, offset: Int, order: AnimalOrder): [Animal]
+
+  """"""
+  numUids: Int
+}
+
+""""""
+input AddCompanyInput {
+  """"""
+  employees: [PersonRef]
+
+  """"""
+  industry: String
+
+  """"""
+  name: String!
+}
+
+""""""
+type AddCompanyPayload {
+  """"""
+  company(filter: CompanyFilter, first: Int, offset: Int, order: CompanyOrder): [Company]
+
+  """"""
+  numUids: Int
+}
+
+""""""
+input AddLineInput {
+  """"""
+  by: PersonRef!
+
+  """"""
+  in: MovieRef
+
+  """"""
+  line: String!
+
+  """"""
+  to: PersonRef
+}
+
+""""""
+type AddLinePayload {
+  """"""
+  line(filter: LineFilter, first: Int, offset: Int, order: LineOrder): [Line]
+
+  """"""
+  numUids: Int
+}
+
+""""""
+input AddMovieInput {
+  """"""
+  lines: [LineRef]
+
+  """"""
+  name: String!
+
+  """"""
+  released: DateTime
+}
+
+""""""
+type AddMoviePayload {
+  """"""
+  movie(filter: MovieFilter, first: Int, offset: Int, order: MovieOrder): [Movie]
+
+  """"""
+  numUids: Int
+}
+
+""""""
+input AddPersonInput {
+  """"""
+  age: Int
+
+  """"""
+  employers: [CompanyRef]
+
+  """"""
+  friends: [PersonRef]
+
+  """"""
+  lines: [LineRef]
+
+  """"""
+  manager: PersonRef
+
+  """"""
+  manages: [PersonRef]
+
+  """"""
+  name: String!
+
+  """"""
+  ownsPets: [AnimalRef]
+
+  """"""
+  xid: String!
+}
+
+""""""
+type AddPersonPayload {
+  """"""
+  numUids: Int
+
+  """"""
+  person(filter: PersonFilter, first: Int, offset: Int, order: PersonOrder): [Person]
+}
+
+""""""
+type Animal {
+  """"""
+  id: ID!
+
+  """"""
+  name: String!
+
+  """"""
+  owner(filter: PersonFilter): Person
+
+  """"""
+  xid: String!
+}
+
+""""""
+type AnimalAggregateResult {
+  """"""
+  count: Int
+
+  """"""
+  nameMax: String
+
+  """"""
+  nameMin: String
+
+  """"""
+  xidMax: String
+
+  """"""
+  xidMin: String
+}
+
+""""""
+input AnimalFilter {
+  """"""
+  and: [AnimalFilter]
+
+  """"""
+  has: [AnimalHasFilter]
+
+  """"""
+  id: [ID!]
+
+  """"""
+  name: StringFullTextFilter_StringHashFilter_StringRegExpFilter_StringTermFilter
+
+  """"""
+  not: AnimalFilter
+
+  """"""
+  or: [AnimalFilter]
+
+  """"""
+  xid: StringHashFilter
+}
+
+""""""
+enum AnimalHasFilter {
+  """"""
+  name
+
+  """"""
+  owner
+
+  """"""
+  xid
+}
+
+""""""
+input AnimalOrder {
+  """"""
+  asc: AnimalOrderable
+
+  """"""
+  desc: AnimalOrderable
+
+  """"""
+  then: AnimalOrder
+}
+
+""""""
+enum AnimalOrderable {
+  """"""
+  name
+
+  """"""
+  xid
+}
+
+""""""
+input AnimalPatch {
+  """"""
+  name: String
+
+  """"""
+  owner: PersonRef
+}
+
+""""""
+input AnimalRef {
+  """"""
+  id: ID
+
+  """"""
+  name: String
+
+  """"""
+  owner: PersonRef
+
+  """"""
+  xid: String
+}
+
+""""""
+input AuthRule {
+  """"""
+  and: [AuthRule]
+
+  """"""
+  not: AuthRule
+
+  """"""
+  or: [AuthRule]
+
+  """"""
+  rule: String
+}
+
+""""""
+type Company {
+  """"""
+  employees(filter: PersonFilter, first: Int, offset: Int, order: PersonOrder): [Person]
+
+  """"""
+  employeesAggregate(filter: PersonFilter): PersonAggregateResult
+
+  """"""
+  id: ID
+
+  """"""
+  industry: String
+
+  """"""
+  name: String!
+}
+
+""""""
+type CompanyAggregateResult {
+  """"""
+  count: Int
+
+  """"""
+  industryMax: String
+
+  """"""
+  industryMin: String
+
+  """"""
+  nameMax: String
+
+  """"""
+  nameMin: String
+}
+
+""""""
+input CompanyFilter {
+  """"""
+  and: [CompanyFilter]
+
+  """"""
+  has: [CompanyHasFilter]
+
+  """"""
+  id: [ID!]
+
+  """"""
+  industry: StringHashFilter_StringTermFilter
+
+  """"""
+  name: StringFullTextFilter_StringHashFilter_StringRegExpFilter_StringTermFilter
+
+  """"""
+  not: CompanyFilter
+
+  """"""
+  or: [CompanyFilter]
+}
+
+""""""
+enum CompanyHasFilter {
+  """"""
+  employees
+
+  """"""
+  industry
+
+  """"""
+  name
+}
+
+""""""
+input CompanyOrder {
+  """"""
+  asc: CompanyOrderable
+
+  """"""
+  desc: CompanyOrderable
+
+  """"""
+  then: CompanyOrder
+}
+
+""""""
+enum CompanyOrderable {
+  """"""
+  industry
+
+  """"""
+  name
+}
+
+""""""
+input CompanyPatch {
+  """"""
+  employees: [PersonRef]
+
+  """"""
+  industry: String
+
+  """"""
+  name: String
+}
+
+""""""
+input CompanyRef {
+  """"""
+  employees: [PersonRef]
+
+  """"""
+  id: ID
+
+  """"""
+  industry: String
+
+  """"""
+  name: String
+}
+
+""""""
+input ContainsFilter {
+  """"""
+  point: PointRef
+
+  """"""
+  polygon: PolygonRef
+}
+
+""""""
+input CustomHTTP {
+  """"""
+  body: String
+
+  """"""
+  forwardHeaders: [String!]
+
+  """"""
+  graphql: String
+
+  """"""
+  introspectionHeaders: [String!]
+
+  """"""
+  method: HTTPMethod!
+
+  """"""
+  mode: Mode
+
+  """"""
+  secretHeaders: [String!]
+
+  """"""
+  skipIntrospection: Boolean
+
+  """"""
+  url: String!
+}
+
+"""
+The DateTime scalar type represents date and time as a string in RFC3339 format.
+For example: "1985-04-12T23:20:50.52Z" represents 20 minutes and 50.52 seconds after the 23rd hour of April 12th, 1985 in UTC.
+"""
+scalar DateTime
+
+""""""
+input DateTimeFilter {
+  """"""
+  between: DateTimeRange
+
+  """"""
+  eq: DateTime
+
+  """"""
+  ge: DateTime
+
+  """"""
+  gt: DateTime
+
+  """"""
+  in: [DateTime]
+
+  """"""
+  le: DateTime
+
+  """"""
+  lt: DateTime
+}
+
+""""""
+input DateTimeRange {
+  """"""
+  max: DateTime!
+
+  """"""
+  min: DateTime!
+}
+
+""""""
+type DeleteAnimalPayload {
+  """"""
+  animal(filter: AnimalFilter, first: Int, offset: Int, order: AnimalOrder): [Animal]
+
+  """"""
+  msg: String
+
+  """"""
+  numUids: Int
+}
+
+""""""
+type DeleteCompanyPayload {
+  """"""
+  company(filter: CompanyFilter, first: Int, offset: Int, order: CompanyOrder): [Company]
+
+  """"""
+  msg: String
+
+  """"""
+  numUids: Int
+}
+
+""""""
+type DeleteLinePayload {
+  """"""
+  line(filter: LineFilter, first: Int, offset: Int, order: LineOrder): [Line]
+
+  """"""
+  msg: String
+
+  """"""
+  numUids: Int
+}
+
+""""""
+type DeleteMoviePayload {
+  """"""
+  movie(filter: MovieFilter, first: Int, offset: Int, order: MovieOrder): [Movie]
+
+  """"""
+  msg: String
+
+  """"""
+  numUids: Int
+}
+
+""""""
+type DeletePersonPayload {
+  """"""
+  msg: String
+
+  """"""
+  numUids: Int
+
+  """"""
+  person(filter: PersonFilter, first: Int, offset: Int, order: PersonOrder): [Person]
+}
+
+""""""
+enum DgraphIndex {
+  """"""
+  bool
+
+  """"""
+  day
+
+  """"""
+  exact
+
+  """"""
+  float
+
+  """"""
+  fulltext
+
+  """"""
+  geo
+
+  """"""
+  hash
+
+  """"""
+  hour
+
+  """"""
+  int
+
+  """"""
+  int64
+
+  """"""
+  month
+
+  """"""
+  regexp
+
+  """"""
+  term
+
+  """"""
+  trigram
+
+  """"""
+  year
+}
+
+""""""
+input FloatFilter {
+  """"""
+  between: FloatRange
+
+  """"""
+  eq: Float
+
+  """"""
+  ge: Float
+
+  """"""
+  gt: Float
+
+  """"""
+  in: [Float]
+
+  """"""
+  le: Float
+
+  """"""
+  lt: Float
+}
+
+""""""
+input FloatRange {
+  """"""
+  max: Float!
+
+  """"""
+  min: Float!
+}
+
+""""""
+input GenerateMutationParams {
+  """"""
+  add: Boolean
+
+  """"""
+  delete: Boolean
+
+  """"""
+  update: Boolean
+}
+
+""""""
+input GenerateQueryParams {
+  """"""
+  aggregate: Boolean
+
+  """"""
+  get: Boolean
+
+  """"""
+  password: Boolean
+
+  """"""
+  query: Boolean
+}
+
+""""""
+enum HTTPMethod {
+  """"""
+  DELETE
+
+  """"""
+  GET
+
+  """"""
+  PATCH
+
+  """"""
+  POST
+
+  """"""
+  PUT
+}
+
+"""
+The Int64 scalar type represents a signed 64‐bit numeric non‐fractional value.
+Int64 can represent values in range [-(2^63),(2^63 - 1)].
+"""
+scalar Int64
+
+""""""
+input Int64Filter {
+  """"""
+  between: Int64Range
+
+  """"""
+  eq: Int64
+
+  """"""
+  ge: Int64
+
+  """"""
+  gt: Int64
+
+  """"""
+  in: [Int64]
+
+  """"""
+  le: Int64
+
+  """"""
+  lt: Int64
+}
+
+""""""
+input Int64Range {
+  """"""
+  max: Int64!
+
+  """"""
+  min: Int64!
+}
+
+""""""
+input IntFilter {
+  """"""
+  between: IntRange
+
+  """"""
+  eq: Int
+
+  """"""
+  ge: Int
+
+  """"""
+  gt: Int
+
+  """"""
+  in: [Int]
+
+  """"""
+  le: Int
+
+  """"""
+  lt: Int
+}
+
+""""""
+input IntRange {
+  """"""
+  max: Int!
+
+  """"""
+  min: Int!
+}
+
+""""""
+input IntersectsFilter {
+  """"""
+  multiPolygon: MultiPolygonRef
+
+  """"""
+  polygon: PolygonRef
+}
+
+""""""
+type Line {
+  """"""
+  by(filter: PersonFilter): Person!
+
+  """"""
+  id: ID!
+
+  """"""
+  in(filter: MovieFilter): Movie
+
+  """"""
+  line: String!
+
+  """"""
+  to(filter: PersonFilter): Person
+}
+
+""""""
+type LineAggregateResult {
+  """"""
+  count: Int
+
+  """"""
+  lineMax: String
+
+  """"""
+  lineMin: String
+}
+
+""""""
+input LineFilter {
+  """"""
+  and: [LineFilter]
+
+  """"""
+  has: [LineHasFilter]
+
+  """"""
+  id: [ID!]
+
+  """"""
+  line: StringFullTextFilter_StringHashFilter_StringRegExpFilter_StringTermFilter
+
+  """"""
+  not: LineFilter
+
+  """"""
+  or: [LineFilter]
+}
+
+""""""
+enum LineHasFilter {
+  """"""
+  by
+
+  """"""
+  in
+
+  """"""
+  line
+
+  """"""
+  to
+}
+
+""""""
+input LineOrder {
+  """"""
+  asc: LineOrderable
+
+  """"""
+  desc: LineOrderable
+
+  """"""
+  then: LineOrder
+}
+
+""""""
+enum LineOrderable {
+  """"""
+  line
+}
+
+""""""
+input LinePatch {
+  """"""
+  by: PersonRef
+
+  """"""
+  in: MovieRef
+
+  """"""
+  line: String
+
+  """"""
+  to: PersonRef
+}
+
+""""""
+input LineRef {
+  """"""
+  by: PersonRef
+
+  """"""
+  id: ID
+
+  """"""
+  in: MovieRef
+
+  """"""
+  line: String
+
+  """"""
+  to: PersonRef
+}
+
+""""""
+enum Mode {
+  """"""
+  BATCH
+
+  """"""
+  SINGLE
+}
+
+""""""
+type Movie {
+  """"""
+  id: ID!
+
+  """"""
+  lines(filter: LineFilter, first: Int, offset: Int, order: LineOrder): [Line]
+
+  """"""
+  linesAggregate(filter: LineFilter): LineAggregateResult
+
+  """"""
+  name: String!
+
+  """"""
+  released: DateTime
+}
+
+""""""
+type MovieAggregateResult {
+  """"""
+  count: Int
+
+  """"""
+  nameMax: String
+
+  """"""
+  nameMin: String
+
+  """"""
+  releasedMax: DateTime
+
+  """"""
+  releasedMin: DateTime
+}
+
+""""""
+input MovieFilter {
+  """"""
+  and: [MovieFilter]
+
+  """"""
+  has: [MovieHasFilter]
+
+  """"""
+  id: [ID!]
+
+  """"""
+  name: StringExactFilter_StringFullTextFilter_StringRegExpFilter_StringTermFilter
+
+  """"""
+  not: MovieFilter
+
+  """"""
+  or: [MovieFilter]
+
+  """"""
+  released: DateTimeFilter
+}
+
+""""""
+enum MovieHasFilter {
+  """"""
+  lines
+
+  """"""
+  name
+
+  """"""
+  released
+}
+
+""""""
+input MovieOrder {
+  """"""
+  asc: MovieOrderable
+
+  """"""
+  desc: MovieOrderable
+
+  """"""
+  then: MovieOrder
+}
+
+""""""
+enum MovieOrderable {
+  """"""
+  name
+
+  """"""
+  released
+}
+
+""""""
+input MoviePatch {
+  """"""
+  lines: [LineRef]
+
+  """"""
+  name: String
+
+  """"""
+  released: DateTime
+}
+
+""""""
+input MovieRef {
+  """"""
+  id: ID
+
+  """"""
+  lines: [LineRef]
+
+  """"""
+  name: String
+
+  """"""
+  released: DateTime
+}
+
+""""""
+type MultiPolygon {
+  """"""
+  polygons: [Polygon!]!
+}
+
+""""""
+input MultiPolygonRef {
+  """"""
+  polygons: [PolygonRef!]!
+}
+
+""""""
+type Mutation {
+  """"""
+  addAnimal(input: [AddAnimalInput!]!, upsert: Boolean): AddAnimalPayload
+
+  """"""
+  addCompany(input: [AddCompanyInput!]!): AddCompanyPayload
+
+  """"""
+  addLine(input: [AddLineInput!]!): AddLinePayload
+
+  """"""
+  addMovie(input: [AddMovieInput!]!): AddMoviePayload
+
+  """"""
+  addPerson(input: [AddPersonInput!]!, upsert: Boolean): AddPersonPayload
+
+  """"""
+  deleteAnimal(filter: AnimalFilter!): DeleteAnimalPayload
+
+  """"""
+  deleteCompany(filter: CompanyFilter!): DeleteCompanyPayload
+
+  """"""
+  deleteLine(filter: LineFilter!): DeleteLinePayload
+
+  """"""
+  deleteMovie(filter: MovieFilter!): DeleteMoviePayload
+
+  """"""
+  deletePerson(filter: PersonFilter!): DeletePersonPayload
+
+  """"""
+  updateAnimal(input: UpdateAnimalInput!): UpdateAnimalPayload
+
+  """"""
+  updateCompany(input: UpdateCompanyInput!): UpdateCompanyPayload
+
+  """"""
+  updateLine(input: UpdateLineInput!): UpdateLinePayload
+
+  """"""
+  updateMovie(input: UpdateMovieInput!): UpdateMoviePayload
+
+  """"""
+  updatePerson(input: UpdatePersonInput!): UpdatePersonPayload
+}
+
+""""""
+input NearFilter {
+  """"""
+  coordinate: PointRef!
+
+  """"""
+  distance: Float!
+}
+
+""""""
+type Person {
+  """"""
+  age: Int
+
+  """"""
+  employers(filter: CompanyFilter, first: Int, offset: Int, order: CompanyOrder): [Company]
+
+  """"""
+  employersAggregate(filter: CompanyFilter): CompanyAggregateResult
+
+  """"""
+  friends(filter: PersonFilter, first: Int, offset: Int, order: PersonOrder): [Person]
+
+  """"""
+  friendsAggregate(filter: PersonFilter): PersonAggregateResult
+
+  """"""
+  id: ID!
+
+  """"""
+  lines(filter: LineFilter, first: Int, offset: Int, order: LineOrder): [Line]
+
+  """"""
+  linesAggregate(filter: LineFilter): LineAggregateResult
+
+  """"""
+  manager(filter: PersonFilter): Person
+
+  """"""
+  manages(filter: PersonFilter, first: Int, offset: Int, order: PersonOrder): [Person]
+
+  """"""
+  managesAggregate(filter: PersonFilter): PersonAggregateResult
+
+  """"""
+  name: String!
+
+  """"""
+  ownsPets(filter: AnimalFilter, first: Int, offset: Int, order: AnimalOrder): [Animal]
+
+  """"""
+  ownsPetsAggregate(filter: AnimalFilter): AnimalAggregateResult
+
+  """"""
+  xid: String!
+}
+
+""""""
+type PersonAggregateResult {
+  """"""
+  ageAvg: Float
+
+  """"""
+  ageMax: Int
+
+  """"""
+  ageMin: Int
+
+  """"""
+  ageSum: Int
+
+  """"""
+  count: Int
+
+  """"""
+  nameMax: String
+
+  """"""
+  nameMin: String
+
+  """"""
+  xidMax: String
+
+  """"""
+  xidMin: String
+}
+
+""""""
+input PersonFilter {
+  """"""
+  age: IntFilter
+
+  """"""
+  and: [PersonFilter]
+
+  """"""
+  has: [PersonHasFilter]
+
+  """"""
+  id: [ID!]
+
+  """"""
+  name: StringFullTextFilter_StringHashFilter_StringRegExpFilter_StringTermFilter
+
+  """"""
+  not: PersonFilter
+
+  """"""
+  or: [PersonFilter]
+
+  """"""
+  xid: StringHashFilter
+}
+
+""""""
+enum PersonHasFilter {
+  """"""
+  age
+
+  """"""
+  employers
+
+  """"""
+  friends
+
+  """"""
+  lines
+
+  """"""
+  manager
+
+  """"""
+  manages
+
+  """"""
+  name
+
+  """"""
+  ownsPets
+
+  """"""
+  xid
+}
+
+""""""
+input PersonOrder {
+  """"""
+  asc: PersonOrderable
+
+  """"""
+  desc: PersonOrderable
+
+  """"""
+  then: PersonOrder
+}
+
+""""""
+enum PersonOrderable {
+  """"""
+  age
+
+  """"""
+  name
+
+  """"""
+  xid
+}
+
+""""""
+input PersonPatch {
+  """"""
+  age: Int
+
+  """"""
+  employers: [CompanyRef]
+
+  """"""
+  friends: [PersonRef]
+
+  """"""
+  lines: [LineRef]
+
+  """"""
+  manager: PersonRef
+
+  """"""
+  manages: [PersonRef]
+
+  """"""
+  name: String
+
+  """"""
+  ownsPets: [AnimalRef]
+}
+
+""""""
+input PersonRef {
+  """"""
+  age: Int
+
+  """"""
+  employers: [CompanyRef]
+
+  """"""
+  friends: [PersonRef]
+
+  """"""
+  id: ID
+
+  """"""
+  lines: [LineRef]
+
+  """"""
+  manager: PersonRef
+
+  """"""
+  manages: [PersonRef]
+
+  """"""
+  name: String
+
+  """"""
+  ownsPets: [AnimalRef]
+
+  """"""
+  xid: String
+}
+
+""""""
+type Point {
+  """"""
+  latitude: Float!
+
+  """"""
+  longitude: Float!
+}
+
+""""""
+input PointGeoFilter {
+  """"""
+  near: NearFilter
+
+  """"""
+  within: WithinFilter
+}
+
+""""""
+type PointList {
+  """"""
+  points: [Point!]!
+}
+
+""""""
+input PointListRef {
+  """"""
+  points: [PointRef!]!
+}
+
+""""""
+input PointRef {
+  """"""
+  latitude: Float!
+
+  """"""
+  longitude: Float!
+}
+
+""""""
+type Polygon {
+  """"""
+  coordinates: [PointList!]!
+}
+
+""""""
+input PolygonGeoFilter {
+  """"""
+  contains: ContainsFilter
+
+  """"""
+  intersects: IntersectsFilter
+
+  """"""
+  near: NearFilter
+
+  """"""
+  within: WithinFilter
+}
+
+""""""
+input PolygonRef {
+  """"""
+  coordinates: [PointListRef!]!
+}
+
+""""""
+type Query {
+  """"""
+  aggregateAnimal(filter: AnimalFilter): AnimalAggregateResult
+
+  """"""
+  aggregateCompany(filter: CompanyFilter): CompanyAggregateResult
+
+  """"""
+  aggregateLine(filter: LineFilter): LineAggregateResult
+
+  """"""
+  aggregateMovie(filter: MovieFilter): MovieAggregateResult
+
+  """"""
+  aggregatePerson(filter: PersonFilter): PersonAggregateResult
+
+  """"""
+  getAnimal(id: ID, xid: String): Animal
+
+  """"""
+  getCompany(id: ID!): Company
+
+  """"""
+  getLine(id: ID!): Line
+
+  """"""
+  getMovie(id: ID!): Movie
+
+  """"""
+  getPerson(id: ID, xid: String): Person
+
+  """"""
+  queryAnimal(filter: AnimalFilter, first: Int, offset: Int, order: AnimalOrder): [Animal]
+
+  """"""
+  queryCompany(filter: CompanyFilter, first: Int, offset: Int, order: CompanyOrder): [Company]
+
+  """"""
+  queryLine(filter: LineFilter, first: Int, offset: Int, order: LineOrder): [Line]
+
+  """"""
+  queryMovie(filter: MovieFilter, first: Int, offset: Int, order: MovieOrder): [Movie]
+
+  """"""
+  queryPerson(filter: PersonFilter, first: Int, offset: Int, order: PersonOrder): [Person]
+}
+
+""""""
+input StringExactFilter {
+  """"""
+  between: StringRange
+
+  """"""
+  eq: String
+
+  """"""
+  ge: String
+
+  """"""
+  gt: String
+
+  """"""
+  in: [String]
+
+  """"""
+  le: String
+
+  """"""
+  lt: String
+}
+
+""""""
+input StringExactFilter_StringFullTextFilter_StringRegExpFilter_StringTermFilter {
+  """"""
+  allofterms: String
+
+  """"""
+  alloftext: String
+
+  """"""
+  anyofterms: String
+
+  """"""
+  anyoftext: String
+
+  """"""
+  between: StringRange
+
+  """"""
+  eq: String
+
+  """"""
+  ge: String
+
+  """"""
+  gt: String
+
+  """"""
+  in: [String]
+
+  """"""
+  le: String
+
+  """"""
+  lt: String
+
+  """"""
+  regexp: String
+}
+
+""""""
+input StringFullTextFilter {
+  """"""
+  alloftext: String
+
+  """"""
+  anyoftext: String
+}
+
+""""""
+input StringFullTextFilter_StringHashFilter_StringRegExpFilter_StringTermFilter {
+  """"""
+  allofterms: String
+
+  """"""
+  alloftext: String
+
+  """"""
+  anyofterms: String
+
+  """"""
+  anyoftext: String
+
+  """"""
+  eq: String
+
+  """"""
+  in: [String]
+
+  """"""
+  regexp: String
+}
+
+""""""
+input StringHashFilter {
+  """"""
+  eq: String
+
+  """"""
+  in: [String]
+}
+
+""""""
+input StringHashFilter_StringTermFilter {
+  """"""
+  allofterms: String
+
+  """"""
+  anyofterms: String
+
+  """"""
+  eq: String
+
+  """"""
+  in: [String]
+}
+
+""""""
+input StringRange {
+  """"""
+  max: String!
+
+  """"""
+  min: String!
+}
+
+""""""
+input StringRegExpFilter {
+  """"""
+  regexp: String
+}
+
+""""""
+input StringTermFilter {
+  """"""
+  allofterms: String
+
+  """"""
+  anyofterms: String
+}
+
+""""""
+input UpdateAnimalInput {
+  """"""
+  filter: AnimalFilter!
+
+  """"""
+  remove: AnimalPatch
+
+  """"""
+  set: AnimalPatch
+}
+
+""""""
+type UpdateAnimalPayload {
+  """"""
+  animal(filter: AnimalFilter, first: Int, offset: Int, order: AnimalOrder): [Animal]
+
+  """"""
+  numUids: Int
+}
+
+""""""
+input UpdateCompanyInput {
+  """"""
+  filter: CompanyFilter!
+
+  """"""
+  remove: CompanyPatch
+
+  """"""
+  set: CompanyPatch
+}
+
+""""""
+type UpdateCompanyPayload {
+  """"""
+  company(filter: CompanyFilter, first: Int, offset: Int, order: CompanyOrder): [Company]
+
+  """"""
+  numUids: Int
+}
+
+""""""
+input UpdateLineInput {
+  """"""
+  filter: LineFilter!
+
+  """"""
+  remove: LinePatch
+
+  """"""
+  set: LinePatch
+}
+
+""""""
+type UpdateLinePayload {
+  """"""
+  line(filter: LineFilter, first: Int, offset: Int, order: LineOrder): [Line]
+
+  """"""
+  numUids: Int
+}
+
+""""""
+input UpdateMovieInput {
+  """"""
+  filter: MovieFilter!
+
+  """"""
+  remove: MoviePatch
+
+  """"""
+  set: MoviePatch
+}
+
+""""""
+type UpdateMoviePayload {
+  """"""
+  movie(filter: MovieFilter, first: Int, offset: Int, order: MovieOrder): [Movie]
+
+  """"""
+  numUids: Int
+}
+
+""""""
+input UpdatePersonInput {
+  """"""
+  filter: PersonFilter!
+
+  """"""
+  remove: PersonPatch
+
+  """"""
+  set: PersonPatch
+}
+
+""""""
+type UpdatePersonPayload {
+  """"""
+  numUids: Int
+
+  """"""
+  person(filter: PersonFilter, first: Int, offset: Int, order: PersonOrder): [Person]
+}
+
+""""""
+input WithinFilter {
+  """"""
+  polygon: PolygonRef!
+}

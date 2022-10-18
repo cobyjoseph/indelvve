@@ -25,7 +25,7 @@
 <!-- //one display quill object. OnMount we can pass prop to it and make canEdit true or false as a prop -->
 <style>
 	.ql-editor h1 {
-		font-size: 32px;
+		font-size: 12px;
 	}
 	.ql-editor p {
 		color: blue;

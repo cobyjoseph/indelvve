@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	// import { page } from '$app/stores';
 	import { dataset_dev } from 'svelte/internal';
 	import '../app.css';
 </script>
 
-<nav>
+<!-- <nav>
 	{#if !$page.data.user}
 		<a href="/login" class="text-white">Login</a>
 		<a href="/register" class="text-white">Sign up</a>
@@ -17,7 +17,7 @@
 			<button type="submit">Log out</button>
 		</form>
 	{/if}
-</nav>
+</nav> -->
 
 <main>
 	<slot />
