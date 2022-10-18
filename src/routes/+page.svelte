@@ -12,18 +12,10 @@
 	import { slide } from 'svelte/transition';
 	import { quintInOut } from 'svelte/easing';
 	import QuillInput from '../utils/Quill/DisplayQuill.svelte';
-	// import { count } from 'console';
 
 	export let data: PageData;
-	// console.log(data.count);
 
 	let postCount = data.post?.length;
-<<<<<<< HEAD
-=======
-	//THIS ISN'T WORKING BELOW BECAUSE THERE IS NOT JUST ONE ID FOR THE POST DATA FIELD. IT WORKED FOR LENGHT BECAUSE THERE IS ONE LENGHT. BUT FOR THE ID TO WORK I THINK I NEED TO LOOP THROUGH THEM ALL. NOT SURE EXACTLY.
-	// dont think I need this though
-	// let id = data.post.id;
->>>>>>> parent of 86a4773 (small ui updates)
 
 	let editor;
 	let quillDelta;
@@ -59,13 +51,7 @@
 	});
 </script>
 
-<div transition:slide={{ duration: 300, easing: quintInOut }} />
-
 <QuillInput />
-
-<div>test to see if source control works don't know why this is here?</div>
-<div class=" bg-green-500">i would have thought above would be gone on revert</div>
-
 
 <div class="flex flex-grow justify-center">
 	<Navbar />
