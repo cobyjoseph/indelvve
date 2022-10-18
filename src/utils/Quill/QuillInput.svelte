@@ -48,4 +48,3 @@
 	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
 </form>
 
-<!-- ToDO -->

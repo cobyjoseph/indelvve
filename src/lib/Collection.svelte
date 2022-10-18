@@ -21,7 +21,7 @@
 	import QuillInput from '../utils/Quill/QuillInput.svelte';
 	import { getContextClient, gql, queryStore } from '@urql/svelte';
 
-	export let posts;
+	export let any;
 	export let postCount: Number;
 	let showInputContent: boolean = false;
 
@@ -49,14 +49,17 @@
 	const testQuery = queryStore({
 		client: getContextClient(),
 		query: gql`
-			query testQuery {
+			query AllPeople {
 				queryPerson {
 					name
 					id
+					content
 				}
 			}
 		`
 	});
+
+	console.log('log from collection:', testQuery);
 </script>
 
 <button on:click={togglePostInput}>
@@ -69,20 +72,6 @@
 		<QuillInput />
 	</div>
 {/if}
-
-<div>
-	{#if $testQuery.fetching}
-		<p>Loading...</p>
-	{:else if $testQuery.error}
-		<p>Oopsie! {$testQuery.error.message}</p>
-	{:else}
-		{#each $testQuery.data.queryPerson as person}
-			<section>
-				<h2>{person.name}</h2>
-			</section>
-		{/each}
-	{/if}
-</div>
 
 <div class="mt-2 flex transform justify-between ">
 	<!-- Button left  -->
@@ -99,8 +88,8 @@
 
 	<!-- Nav dots group -->
 	<div class="mx-12 flex h-[26px] items-center justify-center gap-1.5 ">
-		{#each posts as post, i (post.id)}
-			{#if currentCard === i}
+		{#each any as i, index (i.id)}
+			{#if currentCard === index}
 				<div class="h-[18px] w-[18px]  rounded-sm bg-secondary" />
 			{:else}
 				<div class="h-[15px] w-[15px] rounded-sm bg-white" />
@@ -121,7 +110,21 @@
 	</button>
 </div>
 
-{#each [posts[currentCard]] as post (post.id)}
+<div>
+	{#if $testQuery.fetching}
+		<p>Loading...</p>
+	{:else if $testQuery.error}
+		<p>Oopsie! {$testQuery.error.message}</p>
+	{:else}
+		{#each [$testQuery.data.queryPerson[currentCard]] as i (i.id)}
+			<section>
+				<h2>{i.content}</h2>
+			</section>
+		{/each}
+	{/if}
+</div>
+
+{#each [any[currentCard]] as i (i.id)}
 	<div
 		class="pt-2"
 		in:fly={{
@@ -143,7 +146,7 @@
 		<Card>
 			<span slot="topPost">
 				<PostHeaderDark upvotes="130" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
-				<DisplayQuill deltaDataOutput={post.content} />
+				<DisplayQuill deltaDataOutput={i.content} />
 			</span>
 		</Card>
 	</div>

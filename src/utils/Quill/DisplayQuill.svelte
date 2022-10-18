@@ -6,8 +6,6 @@
 	let editor;
 	let quill;
 
-	$: quillDeltaDerived = JSON.stringify(quill);
-
 	onMount(async () => {
 		const { default: Quill } = await import('quill');
 
@@ -22,7 +20,7 @@
 
 <div bind:this={editor} class="text-white font-Gantari" />
 
-<!-- //one display quill object. OnMount we can pass prop to it and make canEdit true or false as a prop -->
+<!-- //TODO one component to display and input quill object. OnMount we can pass prop to it and make canEdit true or false as a prop -->
 <style>
 	.ql-editor h1 {
 		font-size: 12px;

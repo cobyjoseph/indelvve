@@ -15,28 +15,26 @@
 	import { getContextClient, gql, queryStore } from '@urql/svelte';
 
 	export let data: PageData;
+	console.log(data)
 
 	let postCount = data.post?.length;
 
-	
+	const testQuery = queryStore({
+		client: getContextClient(),
+		query: gql`
+			query AllPeople {
+				queryPerson {
+					name
+					id
+					content
+				}
+			}
+		`
+	});
 </script>
 
 <!-- --------------------------------------------------------- -->
 <div class="text-white font-bold">Experimental area:</div>
-
-<!-- <div>
-	{#if $testQuery.fetching}
-		<p>Loading...</p>
-	{:else if $testQuery.error}
-		<p>Oopsie! {$testQuery.error.message}</p>
-	{:else}
-		{#each $testQuery.data.queryPerson as person}
-			<section>
-				<h2>{person.name}</h2>
-			</section>
-		{/each}
-	{/if}
-</div> -->
 
 <div class="w-full h-1 bg-white mt-5" />
 
@@ -53,8 +51,8 @@
 		<Topic />
 		<TopicHeader />
 
-		<Collection posts={data.post} {postCount} />
-		<Collection posts={data.post} {postCount} />
+		<!-- <Collection any={$testQuery.data.queryPerson} {postCount} /> -->
+		<Collection any={data.post} {postCount} />
 	</div>
 </div>
 

@@ -1,5 +1,5 @@
 // import { PrismaClient } from '@prisma/client';
-import { getContextClient, gql, queryStore } from '@urql/svelte';
+// import { getContextClient, gql, queryStore } from '@urql/svelte';
 
 // export const prisma = new PrismaClient();
 
@@ -7,7 +7,7 @@ import { getContextClient, gql, queryStore } from '@urql/svelte';
 // 	client: getContextClient(),
 // 	query: gql`
 // 		query testQuery {
-// 			queryPerson {
+// 			Person {
 // 				name
 // 				id
 // 			}
