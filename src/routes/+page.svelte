@@ -55,7 +55,9 @@
 
 <QuillInput />
 
-<div>test to see if source control works</div>
+<div>test to see if source control works don't know why this is here?</div>
+<div class=" bg-green-500">i would have thought above would be gone on revert</div>
+
 
 <div class="flex flex-grow justify-center">
 	<Navbar />
