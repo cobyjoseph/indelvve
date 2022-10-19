@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte/internal';
-	import { enhance } from '$app/forms';
 
 	export let deltaDataOutput;
 	let editor;
-	let quill;
 
 	onMount(async () => {
 		const { default: Quill } = await import('quill');

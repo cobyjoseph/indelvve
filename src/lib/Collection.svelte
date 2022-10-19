@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Card from '$lib/Card.svelte';
-	import CollectionHeader from '$lib/CollectionHeader.svelte';
 	import { fade, fly, scale, slide } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	import {
@@ -110,18 +109,21 @@
 	</button>
 </div>
 
-<div>
-	{#if $testQuery.fetching}
-		<p>Loading...</p>
-	{:else if $testQuery.error}
-		<p>Oopsie! {$testQuery.error.message}</p>
-	{:else}
-		{#each [$testQuery.data.queryPerson[currentCard]] as i (i.id)}
-			<section>
-				<h2>{i.content}</h2>
-			</section>
-		{/each}
-	{/if}
+<div class="text-white outline outline-2 outline-blue-400">
+	<div class=" underline">Before Card starts, but within Collection. THIS IS COMING FROM DGRPAH:</div>
+	<div class="m-3">
+		{#if $testQuery.fetching}
+			<p>Loading...</p>
+		{:else if $testQuery.error}
+			<p>Oopsie! {$testQuery.error.message}</p>
+		{:else}
+			{#each [$testQuery.data.queryPerson[currentCard]] as i (i.id)}
+				<section>
+					<h2>{i.content}</h2>
+				</section>
+			{/each}
+		{/if}
+	</div>
 </div>
 
 {#each [any[currentCard]] as i (i.id)}
@@ -143,8 +145,15 @@
 			easing: quintOut
 		}}
 	>
+		<div />
 		<Card>
 			<span slot="topPost">
+				<div class="text-white underline outline outline-2 outline-green-400 p-2">
+					Within Card format, but not being passed as a prop into an object. NOTE THIS IS COMING FROM POSTGRES DB, NOT DGRAPH:
+					<div class="m-2">
+						{i.content}
+					</div>
+				</div>
 				<PostHeaderDark upvotes="130" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
 				<DisplayQuill deltaDataOutput={i.content} />
 			</span>

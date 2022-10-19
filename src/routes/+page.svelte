@@ -3,7 +3,6 @@
 	import SearchBar from '$lib/SearchBar.svelte';
 	import TopicHeader from '$lib/TopicHeader.svelte';
 	import Collection from '$lib/Collection.svelte';
-	import { postsStore } from '../lib/stores/postsStore';
 	import { onMount } from 'svelte/internal';
 	import Topic from '$lib/Topic.svelte';
 	import type { PageData } from './$types';
@@ -13,9 +12,10 @@
 	import { quintInOut } from 'svelte/easing';
 	import QuillInput from '../utils/Quill/DisplayQuill.svelte';
 	import { getContextClient, gql, queryStore } from '@urql/svelte';
+	import RecieveData from '$lib/RecieveData.svelte';
 
 	export let data: PageData;
-	console.log(data)
+	console.log(data);
 
 	let postCount = data.post?.length;
 
@@ -35,6 +35,8 @@
 
 <!-- --------------------------------------------------------- -->
 <div class="text-white font-bold">Experimental area:</div>
+
+<!-- <RecieveData /> -->
 
 <div class="w-full h-1 bg-white mt-5" />
 
