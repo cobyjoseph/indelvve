@@ -18,7 +18,6 @@
 	import DisplayQuill from '../utils/Quill/DisplayQuill.svelte';
 	import AddCollectionBtnLight from './AddCollectionBtnLight.svelte';
 	import QuillInput from '../utils/Quill/QuillInput.svelte';
-	import { getContextClient, gql, queryStore } from '@urql/svelte';
 
 	export let any;
 	export let postCount: Number;
@@ -44,21 +43,6 @@
 	function togglePostInput() {
 		showInputContent = !showInputContent;
 	}
-
-	const testQuery = queryStore({
-		client: getContextClient(),
-		query: gql`
-			query AllPeople {
-				queryPerson {
-					name
-					id
-					content
-				}
-			}
-		`
-	});
-
-	console.log('log from collection:', testQuery);
 </script>
 
 <button on:click={togglePostInput}>
@@ -109,23 +93,6 @@
 	</button>
 </div>
 
-<div class="text-white outline outline-2 outline-blue-400">
-	<div class=" underline">Before Card starts, but within Collection. THIS IS COMING FROM DGRPAH:</div>
-	<div class="m-3">
-		{#if $testQuery.fetching}
-			<p>Loading...</p>
-		{:else if $testQuery.error}
-			<p>Oopsie! {$testQuery.error.message}</p>
-		{:else}
-			{#each [$testQuery.data.queryPerson[currentCard]] as i (i.id)}
-				<section>
-					<h2>{i.content}</h2>
-				</section>
-			{/each}
-		{/if}
-	</div>
-</div>
-
 {#each [any[currentCard]] as i (i.id)}
 	<div
 		class="pt-2"
@@ -149,7 +116,8 @@
 		<Card>
 			<span slot="topPost">
 				<div class="text-white underline outline outline-2 outline-green-400 p-2">
-					Within Card format, but not being passed as a prop into an object. NOTE THIS IS COMING FROM POSTGRES DB, NOT DGRAPH:
+					Within Card format, but not being passed as a prop into an object. NOTE THIS IS COMING
+					FROM POSTGRES DB, NOT DGRAPH:
 					<div class="m-2">
 						{i.content}
 					</div>

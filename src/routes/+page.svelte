@@ -11,32 +11,19 @@
 	import { slide } from 'svelte/transition';
 	import { quintInOut } from 'svelte/easing';
 	import QuillInput from '../utils/Quill/DisplayQuill.svelte';
-	import { getContextClient, gql, queryStore } from '@urql/svelte';
-	import RecieveData from '$lib/RecieveData.svelte';
 
 	export let data: PageData;
 	console.log(data);
 
 	let postCount = data.post?.length;
 
-	const testQuery = queryStore({
-		client: getContextClient(),
-		query: gql`
-			query AllPeople {
-				queryPerson {
-					name
-					id
-					content
-				}
-			}
-		`
-	});
+	console.log('console log from page.svelte', $testQuery.data);
+
+	//use trpc to query getPosts folder or make fetch request from here.
 </script>
 
 <!-- --------------------------------------------------------- -->
 <div class="text-white font-bold">Experimental area:</div>
-
-<!-- <RecieveData /> -->
 
 <div class="w-full h-1 bg-white mt-5" />
 
@@ -53,7 +40,6 @@
 		<Topic />
 		<TopicHeader />
 
-		<!-- <Collection any={$testQuery.data.queryPerson} {postCount} /> -->
 		<Collection any={data.post} {postCount} />
 	</div>
 </div>
