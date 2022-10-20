@@ -2,7 +2,7 @@ import { invalid, redirect } from '@sveltejs/kit';
 import type { Action, Actions, PageServerLoad } from './$types';
 import bcrypt from 'bcrypt';
 
-import { prisma } from '../../../utils/prisma';
+import prisma from '$lib/server/prisma';
 
 enum Role {
 	ADMIN = 'ADMIN',

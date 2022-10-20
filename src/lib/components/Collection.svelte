@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Card from '$lib/Card.svelte';
+	import Card from '$lib/components/Card.svelte';
 	import { fade, fly, scale, slide } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	import {
@@ -14,10 +14,10 @@
 		quintOut,
 		sineInOut
 	} from 'svelte/easing';
-	import PostHeaderDark from '$lib/PostHeaderDark.svelte';
-	import DisplayQuill from '../utils/Quill/DisplayQuill.svelte';
-	import AddCollectionBtnLight from './AddCollectionBtnLight.svelte';
-	import QuillInput from '../utils/Quill/QuillInput.svelte';
+	import PostHeaderDark from '$lib/components/PostHeaderDark.svelte';
+	import DisplayQuill from '$lib/quill/DisplayQuill.svelte';
+	import AddCollectionBtnLight from '$lib/components/AddCollectionBtnLight.svelte';
+	import QuillInput from '$lib/quill/QuillInput.svelte';
 
 	export let any;
 	export let postCount: Number;

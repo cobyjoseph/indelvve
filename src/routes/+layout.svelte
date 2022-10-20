@@ -1,7 +1,6 @@
 <script lang="ts">
 	// import { page } from '$app/stores';
 
-	import { dataset_dev } from 'svelte/internal';
 	import '../app.css';
 </script>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import AddCollectionBtn from '$lib/AddCollectionBtn.svelte';
-	import SortButtonDark from '$lib/SortButtonDark.svelte';
+	import AddCollectionBtn from '$lib/components/AddCollectionBtn.svelte';
+	import SortButtonDark from '$lib/components/SortButtonDark.svelte';
 </script>
 
 <div class=" flex gap-2">

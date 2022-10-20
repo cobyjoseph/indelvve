@@ -1,23 +1,22 @@
 <script lang="ts">
-	import Navbar from '$lib/Navbar.svelte';
-	import SearchBar from '$lib/SearchBar.svelte';
-	import TopicHeader from '$lib/TopicHeader.svelte';
-	import Collection from '$lib/Collection.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
+	import SearchBar from '$lib/components/SearchBar.svelte';
+	import TopicHeader from '$lib/components/TopicHeader.svelte';
+	import Collection from '$lib/components/Collection.svelte';
 	import { onMount } from 'svelte/internal';
-	import Topic from '$lib/Topic.svelte';
+	import Topic from '$lib/components/Topic.svelte';
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
-	import AddCollectionBtnLight from '$lib/AddCollectionBtnLight.svelte';
+	import AddCollectionBtnLight from '$lib/components/AddCollectionBtnLight.svelte';
 	import { slide } from 'svelte/transition';
 	import { quintInOut } from 'svelte/easing';
-	import QuillInput from '../utils/Quill/DisplayQuill.svelte';
+	import QuillInput from '$lib/quill/DisplayQuill.svelte';
+	import trpcClient from '$lib/client/trpcClient';
 
 	export let data: PageData;
 	console.log(data);
 
 	let postCount = data.post?.length;
-
-	console.log('console log from page.svelte', $testQuery.data);
 
 	//use trpc to query getPosts folder or make fetch request from here.
 </script>

@@ -2,8 +2,7 @@ import { invalid, redirect } from '@sveltejs/kit';
 import * as bcrypt from 'bcrypt';
 import type { Action, Actions, PageServerLoad } from './$types';
 
-import { prisma } from '../../../utils/prisma';
-import path from 'path';
+import prisma from '$lib/server/prisma';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (locals.user) {

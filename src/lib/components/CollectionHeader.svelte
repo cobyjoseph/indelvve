@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PostHeaderLight from '$lib/PostHeaderLight.svelte';
+	import PostHeaderLight from '$lib/components/PostHeaderLight.svelte';
 </script>
 
 <!-- First need the header -->

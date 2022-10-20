@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Navbar from '$lib/Navbar.svelte';
-	import SearchBar from '$lib/SearchBar.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
+	import SearchBar from '$lib/components/SearchBar.svelte';
 
 	import type { PageData } from './$types';
 
