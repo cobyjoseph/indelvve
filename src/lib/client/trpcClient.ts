@@ -10,3 +10,5 @@ export default (loadFetch?: LoadEvent['fetch']) =>
 		transformer: trpcTransformer,
 		...(loadFetch && { fetch: loadFetch as typeof fetch })
 	});
+
+    trpc.getFetch()

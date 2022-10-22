@@ -14,11 +14,9 @@
 
 		quill.setContents(JSON.parse(deltaDataOutput));
 	});
-
-
 </script>
 
-	<div bind:this={editor} class="text-white font-Gantari" />
+<div bind:this={editor} class="text-white font-Gantari" />
 
 <!-- //TODO one component to display and input quill object. OnMount we can pass prop to it and make canEdit true or false as a prop -->
 <style>

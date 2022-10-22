@@ -14,7 +14,7 @@
 	import trpcClient from '$lib/client/trpcClient';
 
 	export let data: PageData;
-	console.log(data);
+	// console.log(data);
 
 	let postCount = data.post?.length;
 
