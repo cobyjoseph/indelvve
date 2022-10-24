@@ -2,7 +2,7 @@
 //set this up for node-fetch
 import fetch from 'node-fetch';
 
-export const GET = async ({ request }) => {
+export const GET = async ({}) => {
 	function fetchGraphQL(operationsDoc, operationName, variables) {
 		return fetch('https://blue-surf-640086.us-east-1.aws.cloud.dgraph.io/graphql', {
 			method: 'POST',

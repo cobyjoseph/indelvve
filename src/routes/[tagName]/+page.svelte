@@ -5,14 +5,16 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	console.log('logging page data on +page.svelte:', data.data.queryTag[0].name);
+	console.log(data.tagName);
+	// console.log('logging queried page data on +page.svelte:', data.data.queryTag[0].name);
 	$: extractedData = data.data.queryTag;
-	let tags = JSON.stringify(data);
+	// console.log('logging extractedData,', data.data.queryTag);
+	// let tagName = JSON.stringify(data);
 	// parsedData = JSON.parse(data);
 
 	//read tihs about fixing parsing data
 
-	console.log('logging data from client (page.svelte)', data);
+	// console.log('logging data from client (page.svelte)', data);
 </script>
 
 <div class="flex flex-grow justify-center">
@@ -20,6 +22,11 @@
 
 	<div class=" relative mx-4 mb-6 grid h-full grid-cols-1 md:w-3/4 md:max-w-[620px] ">
 		<SearchBar />
+
+		<div>
+			<!-- This totally works. It takes the text directly from the url. because that's what params is. and I returned params and called it tagName. So it tagName is part of the page data -->
+			{data.tagName}
+		</div>
 
 		<div class="text-green-400">
 			{extractedData[0].name}
@@ -32,21 +39,6 @@
 				</li>
 			{/each}
 		</div>
-
-		<div class="text-white">
-			not stringified: {data}
-		</div>
-		<div class="text-white">
-			stringified: {tags}
-		</div>
-		<!-- 
-		{#each tags as tag}
-			<div class="text-white">
-				<li>
-					{tag.data}
-				</li>
-			</div>
-		{/each} -->
 
 		<div class="text-white">testing</div>
 	</div>

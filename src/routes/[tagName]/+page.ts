@@ -1,23 +1,27 @@
-// export const load = ({ fetch }) => {
+// export async function load({ fetch, params }) {
+// 	console.log('this is my param', params);
 
-//     const fetchTags = async () => {
+// 	const fetchTag = async () => {
 // 		const res = await fetch('/api/getPosts');
 // 		const data = await res.json();
-// 		return data.tag;
+// 		return data;
+// 		console.log('logging at page.ts', data);
 // 	};
 
 // 	return {
-// 		tag: fetchTags()
+// 		tagName: fetchTag(params)
 // 	};
-// };
+// }
 
-export async function load({ fetch }) {
-	const res = await fetch('/api/getPosts');
+export async function load({ fetch, params }) {
+	console.log('this is my param', params);
+	console.log('this is my param.tagName', params.tagName);
+
+	const res = await fetch(`/api/getPosts`);
 	const data = await res.json();
 
-	console.log('logging at page.ts', data);
-
 	return {
-		data
+		data,
+		tagName: params.tagName
 	};
 }
