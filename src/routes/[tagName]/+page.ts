@@ -1,5 +1,5 @@
 // export const load = ({ fetch }) => {
-	
+
 //     const fetchTags = async () => {
 // 		const res = await fetch('/api/getPosts');
 // 		const data = await res.json();
@@ -15,7 +15,7 @@ export async function load({ fetch }) {
 	const res = await fetch('/api/getPosts');
 	const data = await res.json();
 
-	console.log(data);
+	console.log('logging at page.ts', data);
 
 	return {
 		data

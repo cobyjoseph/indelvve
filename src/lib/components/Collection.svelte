@@ -116,8 +116,6 @@
 		<Card>
 			<span slot="topPost">
 				<div class="text-white underline outline outline-2 outline-green-400 p-2">
-					Within Card format, but not being passed as a prop into an object. NOTE THIS IS COMING
-					FROM POSTGRES DB, NOT DGRAPH:
 					<div class="m-2">
 						{i.content}
 					</div>
