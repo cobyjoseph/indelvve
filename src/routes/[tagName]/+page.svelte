@@ -35,7 +35,9 @@
 		<div class="text-red-400">
 			{#each extractedData as i}
 				<li>
-					{i.name}
+					<a href="/{i.name}">
+						{i.name}
+					</a>
 				</li>
 			{/each}
 		</div>
