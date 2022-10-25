@@ -2,7 +2,8 @@
 //set this up for node-fetch
 import fetch from 'node-fetch';
 
-export const GET = async ({}) => {
+export const GET = async ({ params }) => {
+	console.log('logging params from the +server.ts page', params);
 	function fetchGraphQL(operationsDoc, operationName, variables) {
 		return fetch('https://blue-surf-640086.us-east-1.aws.cloud.dgraph.io/graphql', {
 			method: 'POST',
@@ -22,8 +23,11 @@ export const GET = async ({}) => {
 	const operationsDoc = `
   query MyQuery {
     queryTag {
-      name
+    	name
     }
+	queryPerson {
+		name
+	}
   }
 `;
 

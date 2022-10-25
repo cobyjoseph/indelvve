@@ -14,14 +14,14 @@
 // }
 
 export async function load({ fetch, params }) {
-	console.log('this is my param', params);
-	console.log('this is my param.tagName', params.tagName);
+	console.log('this is my params', params);
+	console.log('this is my params.tagName', params.personName);
 
 	const res = await fetch(`/api/getPosts`);
 	const data = await res.json();
 
 	return {
 		data,
-		tagName: params.tagName
+		personName: params.personName
 	};
 }
