@@ -2,9 +2,9 @@
 	export let childTagName: String;
 </script>
 
-<div class="flex">
+<div class="flex gap-3 mt-6 ">
 	<div
-		class="text-white flex font-semibold bg-secondary text-[18px] pt-[2px] pb-[4.5px] px-3  mt-6 rounded-md"
+		class="text-white flex font-semibold bg-secondary text-[18px] pt-[2px] pb-[4.5px] px-3  rounded-md"
 	>
 		# {childTagName}
 		<div class="ml-[11px] mt-[3.8px]">
@@ -23,5 +23,20 @@
 				/>
 			</svg>
 		</div>
+	</div>
+
+	<div
+		class="flex items-center justify-center gap-[6px] rounded-md  bg-white bg-opacity-[0.07] pl-3 pr-4 py-1  "
+	>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			class="h-4 w-4 self-center stroke-white stroke-[3px]"
+			fill="none"
+			viewBox="0 0 24 24"
+		>
+			<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+		</svg>
+
+		<div class=" font-medium text-white text-[18px]">Add post</div>
 	</div>
 </div>

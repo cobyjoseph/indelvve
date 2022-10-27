@@ -6,7 +6,7 @@
 	<div class=" my-[21px] grid grid-cols-1 ">
 		<!-- =solid container-->
 		<div
-			class="z-20 h-8 w-[130px] ml-auto mr-auto transform place-items-center justify-center bg-secondary"
+			class="z-20 h-8 w-[130px] ml-auto mr-auto transform place-items-center justify-center bg-secondary  "
 		>
 			<!-- Logo text -->
 			<div class="-py-[0.7px] text-center font-fugaz text-[22px]  text-white">Indelvve</div>
@@ -17,7 +17,7 @@
 		/>
 
 		<div
-			class="mt-7 text-xl font-semibold grid w-full grid-cols-1 gap-4 bg-white text-white  bg-opacity-[0.07]  py-[4.5px]  pl-3"
+			class="mt-6 text-xl font-semibold grid w-full grid-cols-1 gap-4 bg-white text-white  bg-opacity-[0.07]  py-[4.5px]  pl-3"
 		>
 			<div class="flex items-center gap-2">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5">
