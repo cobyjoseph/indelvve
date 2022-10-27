@@ -5,11 +5,12 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	console.log('data on +page.svelte', data);
+	console.log(data.data);
 
 	// console.log('logging queried page data on +page.svelte:', data.data.queryTag[0].name);
-	$: extractedTagData = data.data.queryTag;
-	$: extractedPersonData = data.data.queryPerson;
+	// $: extractedTagData = data.data.queryTag;
+
+	// $: extractedPersonData = data.data.queryPerson;
 	// console.log('logging extractedData,', data.data.queryTag);
 	// let tagName = JSON.stringify(data);
 	// parsedData = JSON.parse(data);
@@ -25,19 +26,19 @@
 	<div class=" relative mx-4 mb-6 grid h-full grid-cols-1 md:w-3/4 md:max-w-[620px] ">
 		<SearchBar />
 
-		<div class="text-white">
-			data extracted from url: {data.personName}
+		<div class="text-white bg-secondary text-[26px] p-2 inline-block">
+			data extracted from url: {data.keyName}
 		</div>
 
-		<div class="text-pink-500">
-			<!-- This totally works. It takes the text directly from the url. because that's what params is. and I returned params and called it tagName. So it tagName is part of the page data -->
+		<!-- This totally works. It takes the text directly from the url. because that's what params is. and I returned params and called it tagName. So it tagName is part of the page data -->
+		<!-- <div class="text-pink-500">
 			data extracted queryPerson:
 			{extractedPersonData[0].name}
-		</div>
+		</div> -->
 
-		<div class="text-green-400">
-			data extracted queryTag: {extractedTagData[0].name}
-		</div>
+		<!-- <div class="text-green-400">
+			data extracted queryTag: {data.data.queryTag[5].name}
+		</div> -->
 
 		<div class="text-white mt-4">
 			here I show the properties of the person who's name (or xid?) matches the url parameter. In
@@ -47,12 +48,14 @@
 		</div>
 
 		<div class="text-red-400 mt-4">
-			{#each extractedPersonData as i}
-				<li>
-					<a href="/{i.name}">
-						{i.name}
-					</a>
-				</li>
+			{#each data.data.queryTag[0].childTag as i}
+				{#if i.name}
+					<li>
+						<a href="/{i.name}">
+							{i.name}
+						</a>
+					</li>
+				{/if}
 			{/each}
 		</div>
 	</div>

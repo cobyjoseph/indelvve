@@ -1,3 +1,14 @@
+export async function load({ fetch, params }) {
+	// when you don't specify the fetch method, the default is a get request. that's what happens here. get request to our api
+	const res = await fetch(`/api/getPosts?slug=${params.folderName}`); 
+	const data = await res.json();
+
+	return {
+		data,
+		keyName: params.folderName
+	};
+}
+
 // export async function load({ fetch, params }) {
 // 	console.log('this is my param', params);
 
@@ -12,16 +23,3 @@
 // 		tagName: fetchTag(params)
 // 	};
 // }
-
-export async function load({ fetch, params }) {
-	console.log('this is my params', params);
-	console.log('this is my params.tagName', params.personName);
-
-	const res = await fetch(`/api/getPosts`);
-	const data = await res.json();
-
-	return {
-		data,
-		personName: params.personName
-	};
-}

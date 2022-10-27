@@ -12,8 +12,14 @@
 		</div> -->
 
 		<!-- a box that takes up 100% of its parent -->
-		<div class="relative z-20 h-auto w-full justify-center bg-white bg-opacity-5 rounded-sm ">
+		<div class="relative z-20 h-auto w-full justify-center bg-secondary bg-opacity-20 rounded-sm ">
 			<slot name="topPost" />
 		</div>
 	</div>
 </div>
+<!-- 
+<style>
+	.boxShadow {
+		box-shadow: 8px 8px 0 0 #33385a;
+	}
+</style> -->

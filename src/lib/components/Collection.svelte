@@ -115,7 +115,7 @@
 		<div />
 		<Card>
 			<span slot="topPost">
-				<div class="text-white underline outline outline-2 outline-green-400 p-2">
+				<div class="text-white underline  p-2">
 					<div class="m-2">
 						{i.content}
 					</div>

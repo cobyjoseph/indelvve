@@ -1,39 +1,103 @@
-//this is post request to database
-//set this up for node-fetch
 import fetch from 'node-fetch';
 
-export const GET = async ({ params }) => {
-	console.log('logging params from the +server.ts page', params);
-	function fetchGraphQL(operationsDoc, operationName, variables) {
-		return fetch('https://blue-surf-640086.us-east-1.aws.cloud.dgraph.io/graphql', {
+// export const GET = async ({ params }) => {
+// 	console.log('logging params from the +server.ts page', params);
+// 	function fetchGraphQL(operationsDoc, operationName, variables) {
+// 		return fetch('https://blue-surf-640086.us-east-1.aws.cloud.dgraph.io/graphql', {
+// 			method: 'POST',
+// 			headers: {
+// 				'Content-Type': 'application/json',
+// 				'X-Auth-Token':
+// 					'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzL3Byb3h5IiwiZHVpZCI6IjB4NzNmZGQ5MjYiLCJleHAiOjE2NjY0MTQ2MzIsImlzcyI6InMvYXBpIn0.J2XNg_PF4P45jfrEqQ06VlrwmOTDHkm7Fj5AlH1lZP8'
+// 			},
+// 			body: JSON.stringify({
+// 				query: operationsDoc,
+// 				variables: variables,
+// 				operationName: operationName
+// 			})
+// 		}).then((result) => result.json());
+// 	}
+
+// 	const operationsDoc = `
+//   query MyQuery {
+//     queryTag {
+//     	name
+//     }
+// 	queryPerson {
+// 		name
+// 	}
+//   }
+// `;
+
+// 	function fetchMyQuery() {
+// 		return fetchGraphQL(operationsDoc, 'MyQuery', {});
+// 	}
+
+// 	const result = await fetchMyQuery()
+// 		.then(({ data, errors }) => {
+// 			if (errors) {
+// 				// handle those errors like a pro
+// 				console.error(errors);
+// 			}
+// 			return data;
+// 			console.log(data);
+// 		})
+// 		.catch((error) => {
+// 			// handle errors from fetch itself
+// 			console.error(error);
+// 		});
+
+// 	return new Response(JSON.stringify(result));
+// };
+
+//--------------------------------------------------------------
+// somehow I need to get access to the $slug variable so I can access it on page.ts. BUT actually I also need to set it here so that the right query gets performed. I need to somehow bring in the url parameter from the page.ts param into here so that the query gets updated correctly?
+
+//query dgrpah function 
+
+//the url.search
+
+export const GET = async ({ request, url }) => {
+	const slug = url.searchParams.get('slug');
+	console.log('slug:', slug);
+	// console.log('slug:', slug);
+	// const slug = params;
+	async function fetchGraphQL(operationsDoc, operationName, variables) {
+		const result = await fetch('https://blue-surf-640086.us-east-1.aws.cloud.dgraph.io/graphql', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				//need to put X-auth into secret file. .env file and then call upon it here. also put the blue-surf string in the env
 				'X-Auth-Token':
-					'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzL3Byb3h5IiwiZHVpZCI6IjB4NzNmZGQ5MjYiLCJleHAiOjE2NjY0MTQ2MzIsImlzcyI6InMvYXBpIn0.J2XNg_PF4P45jfrEqQ06VlrwmOTDHkm7Fj5AlH1lZP8'
+					'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzL3Byb3h5IiwiZHVpZCI6IjB4NzNmZGQ5MjYiLCJleHAiOjE2NjY3Mjg2NTUsImlzcyI6InMvYXBpIn0.uRlMcR348jJTfkKQRXkzmafyLmtfbOa6dDd5cIepH9s'
 			},
 			body: JSON.stringify({
 				query: operationsDoc,
 				variables: variables,
 				operationName: operationName
 			})
-		}).then((result) => result.json());
+		});
+
+		return await result.json();
 	}
 
 	const operationsDoc = `
-  query MyQuery {
-    queryTag {
-    	name
-    }
-	queryPerson {
-		name
-	}
-  }
-`;
+	query MyQuery($slug: String) {
+		queryTag(filter: {name: {eq: $slug}}) {
+		  name
+			childTag {
+			name
+		  }
+		}
+	  }
+	`;
 
 	function fetchMyQuery() {
-		return fetchGraphQL(operationsDoc, 'MyQuery', {});
+		console.log('from fetchMyQuery:', slug);
+		return fetchGraphQL(operationsDoc, null, { slug });
 	}
+
+//give UUIDs to the data
 
 	const result = await fetchMyQuery()
 		.then(({ data, errors }) => {
@@ -52,80 +116,5 @@ export const GET = async ({ params }) => {
 	return new Response(JSON.stringify(result));
 };
 
-// export async function fetchGraphQL(operationsDoc, operationName, variables) {
-// const result = await fetch('https://blue-surf-640086.us-east-1.aws.cloud.dgraph.io/graphql', {
-// 	method: 'POST',
-// 	headers: {
-// 		'Content-Type': 'application/json',
-// 		'X-Auth-Token':
-// 			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzL3Byb3h5IiwiZHVpZCI6IjB4NzNmZGQ5MjYiLCJleHAiOjE2NjYzOTE5NjIsImlzcyI6InMvYXBpIn0.cqY4dhIyu0nyrqHFlGW1MWQXJn6FyqJqV0OMEW5YLW8'
-// 	},
-// 	body: JSON.stringify({
-// 		query: operationsDoc,
-// 		variables: variables,
-// 		operationName: operationName
-// 	})
-// });
 
-// 	// return await result.json();
-// 	return { test: 'hi' };
-// }
-
-// const operationsDoc = `
-//   query MyQuery {
-//     queryTag {
-//       name
-//     }
-//   }
-// `;
-
-// function fetchMyQuery() {
-// 	return fetchGraphQL(operationsDoc, 'MyQuery', {});
-// }
-
-// async function startFetchMyQuery() {
-// 	const { errors, data } = await fetchMyQuery();
-
-// 	if (errors) {
-// 		// handle those errors like a pro
-// 		console.error(errors);
-// 	}
-
-// 	// do something great with this precious data
-// 	console.log('logging form within +server.ts in api/getPosts folder', data);
-// }
-
-// startFetchMyQuery();
-
-// OLD NOTES BELOW ------------------------------------------------------------------
-
-// use standard fetch request or axios to query data, not urql. urql is for front end requests.
-// graphql language is not the same as the way that dgrpah uses. urql is for the server, not the database, and we want to query the database.
-// we can use trpc to connect from client to server, and then at server we query database.
-//if use dql you need http or grpc.
-// resolvers are for going between client and server. graphql is used for querying apis. that's where resolvers are needed. when graphql is actually the querying language for the database, we don't need resolvers
-// axios lets you do http request from
-
-// import Axios from 'axios';
-// import { gql } from '@urql/svelte'; //install seperate gql package without urql
-
-// const query = ` query AllPeople {
-//             queryPerson {
-//                 name
-//                 id
-//                 content
-//             }
-//         }
-//     `;
-
-// we are making an http post rquest - look up fetch syntax for http post request. look at how to fetch request for post. axios is just a wrapper
-// const options = {
-//     headers: {
-//         "content-type": "application/json",
-//         "x-auth-token": "dgraph-api-key"
-//     }
-// }
-
-// const {data} = axios.post(url-of-graph-ql-endpoint, {query}, options)
-
-// we send a post request to /getPosts server.ts file from the client
+//set up a separate export post function 
