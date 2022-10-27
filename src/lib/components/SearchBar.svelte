@@ -1,18 +1,18 @@
 <!-- A container that flexes the search bar and the user image -->
 <container class="flex gap-7 mt-5 ml-1 mb-1 justify-center">
 	<!-- A horizontal container with one column that spans ~75% of the viewport with a maximum width -->
-	<div class="h-7 relative w-full">
+	<div class="h-8 relative w-full">
 		<!-- a box that takes up 100% of its parent -->
 		<input
 			type="text"
-			placeholder="Search topics, chapters, posts, and people"
-			class="peer z-40 absolute  bg-[#33385A] w-full h-full  placeholder-white px-2 focus:placeholder-[#c4c0c0] focus:outline-mainDark"
+			placeholder="Search posts, tags, and people"
+			class="peer z-40 absolute  bg-[#33385A] w-full h-full  placeholder-white  px-2 focus:placeholder-[#c4c0c0] focus:outline-mainDark"
 		/>
 
 		<!-- come back and add a search icon at some point -->
 
 		<div
-			class=" absolute  w-full h-full mt-[5px] -ml-[5px] z-10  outline-[#3F4565]  outline-2 outline-dotted"
+			class=" absolute  w-full h-full mt-[5px] -ml-[6px] z-10  border-[#3F4565] translate-x-[1px] transform border-[3px] border-dotted"
 		/>
 	</div>
 	<!-- user image -->

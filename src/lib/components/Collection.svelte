@@ -14,7 +14,7 @@
 		quintOut,
 		sineInOut
 	} from 'svelte/easing';
-	import PostHeaderDark from '$lib/components/PostHeaderDark.svelte';
+
 	import DisplayQuill from '$lib/quill/DisplayQuill.svelte';
 	import AddCollectionBtnLight from '$lib/components/AddCollectionBtnLight.svelte';
 	import QuillInput from '$lib/quill/QuillInput.svelte';
@@ -120,7 +120,7 @@
 						{i.content}
 					</div>
 				</div>
-				<PostHeaderDark upvotes="130" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
+
 				<DisplayQuill deltaDataOutput={i.content} />
 			</span>
 		</Card>
