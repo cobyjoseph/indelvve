@@ -6,8 +6,12 @@
 	<div
 		class="text-white flex font-semibold bg-secondary text-[18px] pt-[2px] pb-[4.5px] px-3  rounded-md"
 	>
-		# {childTagName}
-		<div class="ml-[11px] mt-[3.8px]">
+		<div>
+			<a href="/{childTagName}">
+				# {childTagName}
+			</a>
+		</div>
+		<div class="ml-[11px] mt-[3.8px] flex ">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
