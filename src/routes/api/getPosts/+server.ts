@@ -33,8 +33,6 @@ export const GET: RequestHandler = async ({ request, url }) => {
 		  name
 		  childPosts {
 			content
-			date
-			votes
 		  }
 		}
 	  }

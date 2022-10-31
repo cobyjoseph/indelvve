@@ -6,6 +6,7 @@
 	import ChildTags from '$lib/components/ChildTags.svelte';
 	import Sort from '$lib/components/Sort.svelte';
 	import DisplayQuill from '$lib/quill/DisplayQuill.svelte';
+	import Card from '$lib/components/Card.svelte';
 
 	export let data: PageData;
 	console.log(data.data);
@@ -54,6 +55,22 @@
 				{i.content}
 			</div>
 		{/each}
+
+		<!-- <div>
+			<Card>
+				<span slot="topPost">
+					<DisplayQuill deltaDataOutput={extractedQueryTag.childTag[0].childPosts[0].content} />
+				</span>
+			</Card>
+		</div> -->
+
+		<Card>
+			<span slot="topPost">
+				<DisplayQuill
+					deltaDataOutput={'{"ops":[{"insert":"back to "},{"attributes":{"bold":true},"insert":"maps-post-3"},{"insert":"\\n"}]}'}
+				/>
+			</span>
+		</Card>
 
 		<!-- <Collection any={extractedQueryTag.childTag[0].childPosts} postCount={navBarLength} /> -->
 
