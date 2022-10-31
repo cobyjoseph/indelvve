@@ -14,7 +14,7 @@
 	let extractedQueryTag = data.data.queryTag[0];
 
 	let navBarLength = data.data.queryTag[0].childTag[0].childPosts.length;
-	console.log('childPosts', data.data.queryTag[0].childTag[0].childPosts);
+	console.log('childPosts id', data.data.queryTag[0].childTag[0].childPosts[0].id);
 	console.log('navBarLength', navBarLength);
 	console.log(
 		'extractedQueryTag.childTag[0].childPosts:',
@@ -61,53 +61,12 @@
 		<Sort />
 
 		<div class="text-red-400 mt-4">
-			{#each extractedQueryTag.childTag as i}
+			{#each extractedQueryTag.childTag as i (i.id)}
 				{#if i.name}
 					<ChildTags childTagName={i.name} />
 				{/if}
 			{/each}
 		</div>
-
-		<!-- NAV CAROUSEL BAR BROUGHT IN FROM COLLECTION COMPONENT ------------------------>
-
-		<div class="mt-2 flex transform justify-between ">
-			<!-- Button left  -->
-			<button on:click={prevCard}>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-[26px] w-[26px] justify-center stroke-white stroke-[3px]"
-					fill="none"
-					viewBox="0 0 24 24"
-				>
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-				</svg>
-			</button>
-
-			<!-- Nav dots group -->
-			<div class="mx-12 flex h-[26px] items-center justify-center gap-1.5 ">
-				{#each data.data.queryTag[0].childTag[0].childPosts as i, index (i.xid)}
-					{#if currentCard === index}
-						<div class="h-[18px] w-[18px]  rounded-sm bg-secondary" />
-					{:else}
-						<div class="h-[15px] w-[15px] rounded-sm bg-white" />
-					{/if}
-				{/each}
-			</div>
-
-			<!-- Button right -->
-			<button on:click={nextCard}>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-[26px] w-[26px] justify-center stroke-white stroke-[3px]"
-					fill="none"
-					viewBox="0 0 24 24"
-				>
-					<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-				</svg>
-			</button>
-		</div>
-
-		<!-- ---------------------------------------------------------------------------- -->
 
 		<!-- <div class="text-orange-400">
 			Rendering one instance of DisplayQuill with manual delta data entered and in the Card format:
@@ -123,19 +82,67 @@
 		<!-- <div class="text-indigo-500 mt-4">
 			just pure content without display quill:
 			{#if extractedQueryTag.childTag[0].childPosts[0].content}
-				{#each data.data.queryTag[0].childTag[0].childPosts as i, index}
-					<div class="text-white">
-						{i.content}
-					</div>
-				{/each}
+			{#each data.data.queryTag[0].childTag[0].childPosts as i, index}
+			<div class="text-white">
+				{i.content}
+			</div>
+			{/each}
 			{/if}
 		</div> -->
 
 		<div class="text-green-500 mt-4">
 			Display quill area:
-			<Card>
-				<span slot="topPost">
-					{#each data.data.queryTag[0].childTag[0].childPosts as i, index}
+
+			{#each [data.data.queryTag[0].childTag[0].childPosts[currentCard]] as i, index (i.id)}
+				<!-- NAV CAROUSEL BAR BROUGHT IN FROM COLLECTION COMPONENT ------------------------>
+
+				<div>
+					{currentCard}
+				</div>
+
+				{i.id}
+
+				<div class="mt-2 flex transform justify-between ">
+					<!-- Button left  -->
+					<button on:click={prevCard}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-[26px] w-[26px] justify-center stroke-white stroke-[3px]"
+							fill="none"
+							viewBox="0 0 24 24"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+						</svg>
+					</button>
+
+					<!-- Nav dots group -->
+					<div class="mx-12 flex h-[26px] items-center justify-center gap-1.5 ">
+						{#each data.data.queryTag[0].childTag[0].childPosts as i, index (i.id)}
+							{#if currentCard === index}
+								<div class="h-[18px] w-[18px]  rounded-sm bg-secondary" />
+							{:else}
+								<div class="h-[15px] w-[15px] rounded-sm bg-white" />
+							{/if}
+						{/each}
+					</div>
+
+					<!-- Button right -->
+					<button on:click={nextCard}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-[26px] w-[26px] justify-center stroke-white stroke-[3px]"
+							fill="none"
+							viewBox="0 0 24 24"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+						</svg>
+					</button>
+				</div>
+
+				<!-- ---------------------------------------------------------------------------- -->
+
+				<Card>
+					<span slot="topPost">
 						<div class="text-pink-300 p-2 outline-dashed m-2">
 							rendering displayQuill in an each block with i.content:
 							<DisplayQuill deltaDataOutput={i.content} />
@@ -147,16 +154,19 @@
 								deltaDataOutput={'{"ops":[{"insert":"and another "},{"attributes":{"bold":true},"insert":"maps-post-2"},{"insert":"\\n"}]}'}
 							/>
 						</div> -->
-					{/each}
-				</span>
-			</Card>
+					</span>
+				</Card>
+			{/each}
 		</div>
+
+		<Collection any={extractedQueryTag.childTag[0].childPosts} postCount={navBarLength} />
 
 		<!-- <div class="text-red-500 mt-5">
 			Collection component within an each block:
-			{#each extractedQueryTag.childTag[0].childPosts as i}
+			{#each extractedQueryTag.childTag[0].childPosts as i, index (i.id)}
 				<Collection any={i.content} postCount={navBarLength} />
 			{/each}
 		</div> -->
+		<!-- MAYBE THIS DOESN'T WORK BECAUSE I NEED TO PASS ID AS A PROP AND EXPORT IT, BECAUSE IT ONLY APPEARS FROM THE DATA THAT I ACCESS ON +PAGE.SVELTE, NOT IN. no it's because it shjouldn't be in an each block. The each block already comes in at the collection stage.  -->
 	</div>
 </div>

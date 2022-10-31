@@ -29,8 +29,10 @@ export const GET: RequestHandler = async ({ request, url }) => {
 	query MyQuery($slug: String) {
 	  queryTag(filter: {name: {eq: $slug}}) {
 		name
+		id
 		childTag {
 		  name
+		  id
 		  childPosts {
 			id
 			xid

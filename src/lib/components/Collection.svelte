@@ -21,6 +21,7 @@
 
 	export let any;
 	export let postCount: Number;
+
 	let showInputContent: boolean = false;
 
 	$: direction = 'right';
