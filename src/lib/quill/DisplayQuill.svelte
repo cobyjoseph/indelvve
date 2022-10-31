@@ -20,11 +20,11 @@
 
 <!-- //TODO one component to display and input quill object. OnMount we can pass prop to it and make canEdit true or false as a prop -->
 <style>
-	.ql-editor h1 {
+	/* .ql-editor h1 {
 		font-size: 12px;
 	}
 	.ql-editor p {
 		color: blue;
-	}
+	} */
 	/* We need this styled but we dont want the snow default from the +[page.svelte to override */
 </style>

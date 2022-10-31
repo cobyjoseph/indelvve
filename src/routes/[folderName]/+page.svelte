@@ -5,6 +5,7 @@
 	import type { PageData } from './$types';
 	import ChildTags from '$lib/components/ChildTags.svelte';
 	import Sort from '$lib/components/Sort.svelte';
+	import QuillInput from '$lib/quill/QuillInput.svelte';
 
 	export let data: PageData;
 

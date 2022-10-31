@@ -37,6 +37,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 			id
 			xid
 			content
+			date
 		  }
 		}
 	  }

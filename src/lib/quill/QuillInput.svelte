@@ -36,15 +36,29 @@
 	});
 </script>
 
-<form class="bg-purple-200" method="POST" action="?/actionName" use:enhance>
-	<textarea
-		class=" bg-teal-400 m-3"
-		style="display:none"
-		name="inputField"
-		bind:value={quillDeltaDerived}
-	/>
-	<div bind:this={editor} />
+<form class="mt-2 bg-black bg-opacity-40 rounded-md p-3 " method="POST" action="?/actionName" use:enhance>
+	<div class="bg-white bg-opacity-[0.07] text-white mt-1">
+		<textarea style="display:none" name="inputField" bind:value={quillDeltaDerived} />
+		<div class="" bind:this={editor} />
+	</div>
 
-	<button type="submit" class="bg-red-300 hover:bg-red-600">Submit</button>
+	<div class=" flex gap-2 text-white bg-white bg-opacity-[0.07] mt-2 px-2 py-1 rounded-sm ">
+		<div class="text-[18px] ">Tag(s):</div>
+		<input type="text" class="bg-white bg-opacity-[0.07] rounded-sm " />
+	</div>
+
+	<button
+		type="submit"
+		class=" text-white font-semibold text-[18px] bg-white bg-opacity-[0.2] hover:bg-third  px-4 rounded-md ml-auto mr-[0.5px] mt-2  flex"
+		>Post</button
+	>
 </form>
 
+<style>
+	@import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+
+	/* .ql-snow.ql-toolbar button {
+		background-color: white;
+		color: white;
+	} */
+</style>
