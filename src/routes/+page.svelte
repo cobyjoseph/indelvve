@@ -4,7 +4,6 @@
 
 	import Collection from '$lib/components/Collection.svelte';
 	import { onMount } from 'svelte/internal';
-	import Topic from '$lib/components/Topic.svelte';
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
 	import AddCollectionBtnLight from '$lib/components/AddCollectionBtnLight.svelte';
@@ -17,15 +16,11 @@
 	let postCount = data.post?.length;
 </script>
 
-<QuillInput />
-
 <div class="flex flex-grow justify-center">
 	<Navbar />
 
 	<div class=" relative mx-4 mb-6 grid h-full grid-cols-1 md:w-3/4 md:max-w-[620px] ">
 		<SearchBar />
-
-		<Topic />
 
 		<Collection any={data.post} {postCount} />
 	</div>

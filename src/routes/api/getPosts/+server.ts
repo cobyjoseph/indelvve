@@ -27,14 +27,19 @@ export const GET: RequestHandler = async ({ request, url }) => {
 
 	const operationsDoc = `
 	query MyQuery($slug: String) {
-		queryTag(filter: {name: {eq: $slug}}) {
+	  queryTag(filter: {name: {eq: $slug}}) {
+		name
+		childTag {
 		  name
-			childTag {
-			name
+		  childPosts {
+			content
+			date
+			votes
 		  }
 		}
 	  }
-	`;
+	}
+  `;
 
 	function fetchMyQuery() {
 		console.log('from fetchMyQuery:', slug);

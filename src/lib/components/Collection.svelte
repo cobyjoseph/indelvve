@@ -24,7 +24,7 @@
 	let showInputContent: boolean = false;
 
 	$: direction = 'right';
-	$: currentCard = 0;
+	let currentCard = 0;
 
 	function nextCard() {
 		direction = 'right';
@@ -45,9 +45,9 @@
 	}
 </script>
 
-<button on:click={togglePostInput}>
+<!-- <button on:click={togglePostInput}>
 	<AddCollectionBtnLight addText="content" />
-</button>
+</button> -->
 
 {#if showInputContent}
 	<div transition:slide={{ duration: 300, easing: quintInOut }} />
@@ -71,7 +71,7 @@
 
 	<!-- Nav dots group -->
 	<div class="mx-12 flex h-[26px] items-center justify-center gap-1.5 ">
-		{#each any as i, index (i.id)}
+		{#each any as i, index (i.xid)}
 			{#if currentCard === index}
 				<div class="h-[18px] w-[18px]  rounded-sm bg-secondary" />
 			{:else}
@@ -93,7 +93,7 @@
 	</button>
 </div>
 
-{#each [any[currentCard]] as i (i.id)}
+{#each [any[currentCard]] as i (i.xid)}
 	<div
 		class="pt-2"
 		in:fly={{
@@ -115,12 +115,6 @@
 		<div />
 		<Card>
 			<span slot="topPost">
-				<div class="text-white underline  p-2">
-					<div class="m-2">
-						{i.content}
-					</div>
-				</div>
-
 				<DisplayQuill deltaDataOutput={i.content} />
 			</span>
 		</Card>
