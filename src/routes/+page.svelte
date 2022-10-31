@@ -12,6 +12,7 @@
 	import QuillInput from '$lib/quill/DisplayQuill.svelte';
 
 	export let data: PageData;
+	console.log(data)
 
 	let postCount = data.post?.length;
 </script>

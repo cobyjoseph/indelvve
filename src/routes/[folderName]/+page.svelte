@@ -50,15 +50,18 @@
 			{/each}
 		</div>
 
-		<Card>
-			<span slot="topPost">
-				<DisplayQuill
+		<div class="text-orange-400">
+			Rendering one instance of DisplayQuill with manual delta data entered and in the Card format:
+			<Card>
+				<span slot="topPost">
+					<DisplayQuill
 					deltaDataOutput={'{"ops":[{"insert":"and another "},{"attributes":{"bold":true},"insert":"maps-post-2"},{"insert":"\\n"}]}'}
-				/>
-			</span>
-		</Card>
+					/>
+				</span>
+			</Card>
+		</div>
 
-		<!-- <div class="text-indigo-500 mt-4">
+		<div class="text-indigo-500 mt-4">
 			just pure content without display quill:
 			{#if extractedQueryTag.childTag[0].childPosts[0].content}
 				{#each data.data.queryTag[0].childTag[0].childPosts as i, index}
@@ -74,18 +77,27 @@
 			<Card>
 				<span slot="topPost">
 					{#each data.data.queryTag[0].childTag[0].childPosts as i, index}
-						<DisplayQuill deltaDataOutput={i.content} />
-						<DisplayQuill
-							deltaDataOutput={'{"ops":[{"insert":"and another "},{"attributes":{"bold":true},"insert":"maps-post-2"},{"insert":"\\n"}]}'}
-						/>
+						<div class="text-pink-300 p-2 outline-dashed m-2">
+							rendering displayQuill in an each block with i.content:
+							<DisplayQuill deltaDataOutput={i.content} />
+						</div>
+						<div class="text-blue-400  outline-dashed p-2 m-2">
+							rendering displayQuill in the same each block but with manually inserting the delta
+							data for one instance:
+							<DisplayQuill
+								deltaDataOutput={'{"ops":[{"insert":"and another "},{"attributes":{"bold":true},"insert":"maps-post-2"},{"insert":"\\n"}]}'}
+							/>
+						</div>
 					{/each}
 				</span>
 			</Card>
 		</div>
 
-		<div class="text-red-500 mt-5">
-			Collection area:
-			<Collection any={extractedQueryTag.childTag[0].childPosts} postCount={navBarLength} />
+		<!-- <div class="text-red-500 mt-5">
+			Collection component within an each block:
+			{#each extractedQueryTag.childTag[0].childPosts as i}
+				<Collection any={i.content} postCount={navBarLength} />
+			{/each}
 		</div> -->
 	</div>
 </div>
