@@ -32,6 +32,8 @@ export const GET: RequestHandler = async ({ request, url }) => {
 		childTag {
 		  name
 		  childPosts {
+			id
+			xid
 			content
 		  }
 		}

@@ -24,7 +24,7 @@
 	let showInputContent: boolean = false;
 
 	$: direction = 'right';
-	let currentCard = 0;
+	$: currentCard = 0;
 
 	function nextCard() {
 		direction = 'right';
@@ -71,7 +71,7 @@
 
 	<!-- Nav dots group -->
 	<div class="mx-12 flex h-[26px] items-center justify-center gap-1.5 ">
-		{#each any as i, index (i.xid)}
+		{#each any as i, index (i.id)}
 			{#if currentCard === index}
 				<div class="h-[18px] w-[18px]  rounded-sm bg-secondary" />
 			{:else}
@@ -93,7 +93,7 @@
 	</button>
 </div>
 
-{#each [any[currentCard]] as i (i.xid)}
+{#each [any[currentCard]] as i (i.id)}
 	<div
 		class="pt-2"
 		in:fly={{
