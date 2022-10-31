@@ -50,35 +50,42 @@
 			{/each}
 		</div>
 
-		{#each data.data.queryTag[0].childTag[0].childPosts as i, index}
-			<div class="text-white">
-				{i.content}
-			</div>
-		{/each}
-
-		<!-- <div>
-			<Card>
-				<span slot="topPost">
-					<DisplayQuill deltaDataOutput={extractedQueryTag.childTag[0].childPosts[0].content} />
-				</span>
-			</Card>
-		</div> -->
-
 		<Card>
 			<span slot="topPost">
 				<DisplayQuill
-					deltaDataOutput={'{"ops":[{"insert":"back to "},{"attributes":{"bold":true},"insert":"maps-post-3"},{"insert":"\\n"}]}'}
+					deltaDataOutput={'{"ops":[{"insert":"and another "},{"attributes":{"bold":true},"insert":"maps-post-2"},{"insert":"\\n"}]}'}
 				/>
 			</span>
 		</Card>
 
-		<!-- <Collection any={extractedQueryTag.childTag[0].childPosts} postCount={navBarLength} /> -->
-
-		<!-- {#each extractedQueryTag.childTag[0].childPosts as i}
-			{#if i.content}
-				<Collection any={i.content} postCount={navBarLength} />
-				{i.content}
+		<!-- <div class="text-indigo-500 mt-4">
+			just pure content without display quill:
+			{#if extractedQueryTag.childTag[0].childPosts[0].content}
+				{#each data.data.queryTag[0].childTag[0].childPosts as i, index}
+					<div class="text-white">
+						{i.content}
+					</div>
+				{/each}
 			{/if}
-		{/each} -->
+		</div>
+
+		<div class="text-green-500 mt-4">
+			Display quill area:
+			<Card>
+				<span slot="topPost">
+					{#each data.data.queryTag[0].childTag[0].childPosts as i, index}
+						<DisplayQuill deltaDataOutput={i.content} />
+						<DisplayQuill
+							deltaDataOutput={'{"ops":[{"insert":"and another "},{"attributes":{"bold":true},"insert":"maps-post-2"},{"insert":"\\n"}]}'}
+						/>
+					{/each}
+				</span>
+			</Card>
+		</div>
+
+		<div class="text-red-500 mt-5">
+			Collection area:
+			<Collection any={extractedQueryTag.childTag[0].childPosts} postCount={navBarLength} />
+		</div> -->
 	</div>
 </div>
