@@ -12,7 +12,7 @@
 	import QuillInput from '$lib/quill/DisplayQuill.svelte';
 
 	export let data: PageData;
-	console.log(data);
+	
 
 	let postCount = data.post?.length;
 </script>
@@ -23,10 +23,10 @@
 	<div class=" relative mx-4 mb-6 grid h-full grid-cols-1 md:w-3/4 md:max-w-[620px] ">
 		<SearchBar />
 
-		<div class="text-white">
+		<!-- <div class="text-white">
 			Does this even show?
 			<QuillInput />
-		</div>
+		</div> -->
 
 		<Collection any={data.post} {postCount} />
 	</div>

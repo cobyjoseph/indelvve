@@ -6,7 +6,7 @@ export const load: PageServerLoad = async () => {
 	try {
 		const post = await prisma.post.findMany({});
 		const count = await prisma.post.count();
-		console.log('count log:', count);
+		
 		// // need to use aggregate?
 
 		return { post, count };
@@ -20,13 +20,13 @@ export const load: PageServerLoad = async () => {
 //---------------------------------------------------------------------
 
 export const actions: Actions = {
-	actionName: async ({ request }) => {
+	prismaAction: async ({ request }) => {
 		const form = await request.formData();
-		const inputVar = form.get('inputField');
+		const content = form.get('contentInput');
 
 		await prisma.post.create({
 			data: {
-				content: inputVar,
+				content: content,
 				upvoted_number: 34
 			}
 		});

@@ -36,20 +36,29 @@
 	});
 </script>
 
-<form class="mt-2 bg-black bg-opacity-40 rounded-md p-3 " method="POST" action="?/actionName" use:enhance>
-	<div class="bg-white bg-opacity-[0.07] text-white mt-1">
-		<textarea style="display:none" name="inputField" bind:value={quillDeltaDerived} />
+<div class="max-w-20 bg-blue-300">
+	{quillDeltaDerived}
+</div>
+
+<form
+	class="mt-2 bg-black bg-opacity-40 rounded-md p-4 "
+	method="POST"
+	action="?/postAction"
+	use:enhance
+>
+	<div class="bg-white bg-opacity-[0.07] text-white ">
+		<textarea style="display:none" name="contentInput" bind:value={quillDeltaDerived} />
 		<div class="" bind:this={editor} />
 	</div>
 
-	<div class=" flex gap-2 text-white bg-white bg-opacity-[0.07] mt-2 px-2 py-1 rounded-sm ">
+	<div class=" flex gap-2 text-white bg-white bg-opacity-[0.07] mt-3 px-2 py-1 rounded-sm ">
 		<div class="text-[18px] ">Tag(s):</div>
-		<input type="text" class="bg-white bg-opacity-[0.07] rounded-sm " />
+		<input type="text" name="xidInput" class="bg-white bg-opacity-[0.07] rounded-sm " />
 	</div>
 
 	<button
 		type="submit"
-		class=" text-white font-semibold text-[18px] bg-white bg-opacity-[0.2] hover:bg-third  px-4 rounded-md ml-auto mr-[0.5px] mt-2  flex"
+		class=" text-white font-semibold text-[18px] bg-white bg-opacity-[0.2] hover:bg-third  px-4 rounded-md ml-auto mr-[0.5px] mt-3  flex"
 		>Post</button
 	>
 </form>

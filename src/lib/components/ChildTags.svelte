@@ -9,7 +9,7 @@
 		quillInput = !quillInput;
 	}
 
-	console.log(quillInput);
+	
 </script>
 
 <div class="flex gap-3 mt-6 ">

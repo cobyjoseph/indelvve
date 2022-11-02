@@ -13,7 +13,7 @@
 
 		<!-- a box that takes up 100% of its parent -->
 		<div
-			class="relative z-20 h-auto w-full justify-center bg-secondary bg-opacity-20 rounded-sm py-3 px-5"
+			class="relative z-20 h-auto w-full justify-center bg-secondary bg-opacity-20 rounded-sm p-1"
 		>
 			<slot name="topPost" />
 		</div>

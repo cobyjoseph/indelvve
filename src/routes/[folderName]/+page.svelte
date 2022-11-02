@@ -6,6 +6,7 @@
 	import ChildTags from '$lib/components/ChildTags.svelte';
 	import Sort from '$lib/components/Sort.svelte';
 	import QuillInput from '$lib/quill/QuillInput.svelte';
+	import { enhance } from '$app/forms';
 
 	export let data: PageData;
 
@@ -15,7 +16,6 @@
 	$: postCount: Number;
 	$: direction = 'right';
 	$: currentCard = 0;
-	console.log('data.data', data.data.queryTag[0]);
 
 	function nextCard() {
 		direction = 'right';
@@ -61,3 +61,10 @@
 		</div>
 	</div>
 </div>
+
+<!-- {#each data.data.queryTag[0].childTag as i, index (i.id)}
+	{#if i.name}
+		<ChildTags childTagName={i.name} />
+		<Collection any={data.data.queryTag[0].childTag[index].childPosts} postCount={navBarLength} />
+	{/if}
+{/each} -->
