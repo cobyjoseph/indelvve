@@ -47,14 +47,19 @@
 	use:enhance
 >
 	<div class="bg-white bg-opacity-[0.07] text-white ">
-		<textarea style="display:none" name="contentInput" bind:value={quillDeltaDerived} />
+		<textarea style="display:none" name="content" bind:value={quillDeltaDerived} />
 		<div class="" bind:this={editor} />
 	</div>
 
 	<div class=" flex gap-2 text-white bg-white bg-opacity-[0.07] mt-3 px-2 py-1 rounded-sm ">
 		<div class="text-[18px] ">Tag(s):</div>
-		<input type="text" name="xidInput" class="bg-white bg-opacity-[0.07] rounded-sm " />
+		<input type="text" name="xid" class="bg-white bg-opacity-[0.07] rounded-sm " />
 	</div>
+
+	<!-- Save the query result showing the cihld tag into a store and then can access it -->
+	<!-- Look into store and context to access the data to access across components. -->
+	<!-- And use that to change the value of the input with bind. write a custom component for the tags input. Listen for the enter or tab keyword - event listener, and that creates a new. Instead of using a div maybe use a div and make it content editable -->
+	<!-- For the upsert - maybe do it through a put request - for updating operations - or mayb ethe same to do in dgraph -->
 
 	<button
 		type="submit"

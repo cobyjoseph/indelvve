@@ -1,4 +1,4 @@
-import { SECRET_API_KEY, SECRET_X_AUTH } from '$env/static/private';
+import { SECRET_API_URL, SECRET_X_AUTH } from '$env/static/private';
 import type { RequestHandler } from '@sveltejs/kit';
 import fetch from 'node-fetch';
 
@@ -9,7 +9,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 	console.log('slug:', slug);
 
 	async function fetchGraphQL(operationsDoc, operationName, variables) {
-		const result = await fetch(SECRET_API_KEY, {
+		const result = await fetch(SECRET_API_URL, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 export const POST: RequestHandler = async ({ request }) => {
 	console.log(request.body);
 	async function fetchGraphQL(operationsDoc, operationName, variables) {
-		const result = await fetch(SECRET_API_KEY, {
+		const result = await fetch(SECRET_API_URL, {
 			method: 'POST',
 			headers: {
 				'x-sveltekit-action': 'true',
@@ -102,7 +102,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	  }
   `;
 
-// try doing it directly form the page.server
+	// try doing it directly form the page.server
 
 	function postMutation() {
 		console.log('from postMutation:', content);

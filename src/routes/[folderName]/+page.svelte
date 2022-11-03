@@ -9,6 +9,9 @@
 	import { enhance } from '$app/forms';
 
 	export let data: PageData;
+	export let form;
+
+	console.log(form);
 
 	let childTags: String;
 	$: extractedQueryTag = data.data.queryTag[0];
@@ -61,6 +64,12 @@
 		</div>
 	</div>
 </div>
+
+<!--this let's me get the response immediately from submitting the form. This could be a pop up showing successful submission/validation.  -->
+{#if form?.result}
+	show this if form works
+	<pre>{JSON.stringify(form.result)}</pre>
+{/if}
 
 <!-- {#each data.data.queryTag[0].childTag as i, index (i.id)}
 	{#if i.name}
