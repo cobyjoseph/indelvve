@@ -5,13 +5,13 @@
 	import type { PageData } from './$types';
 	import ChildTags from '$lib/components/ChildTags.svelte';
 	import Sort from '$lib/components/Sort.svelte';
-	import QuillInput from '$lib/quill/QuillInput.svelte';
-	import { enhance } from '$app/forms';
 
 	export let data: PageData;
 	export let form;
 
 	console.log(form);
+
+	console.log('digging into post', data.data.queryTag[0].childTag[0].childPosts)
 
 	let childTags: String;
 	$: extractedQueryTag = data.data.queryTag[0];
@@ -19,6 +19,8 @@
 	$: postCount: Number;
 	$: direction = 'right';
 	$: currentCard = 0;
+
+
 
 	function nextCard() {
 		direction = 'right';
@@ -58,6 +60,7 @@
 					<Collection
 						any={data.data.queryTag[0].childTag[index].childPosts}
 						postCount={navBarLength}
+						
 					/>
 				{/if}
 			{/each}
@@ -66,10 +69,12 @@
 </div>
 
 <!--this let's me get the response immediately from submitting the form. This could be a pop up showing successful submission/validation.  -->
-{#if form?.result}
-	show this if form works
-	<pre>{JSON.stringify(form.result)}</pre>
-{/if}
+<div class="bg-white">
+	{#if form?.result}
+		show this if form works
+		<pre>{JSON.stringify(form.result.votes)}</pre>
+	{/if}
+</div>
 
 <!-- {#each data.data.queryTag[0].childTag as i, index (i.id)}
 	{#if i.name}

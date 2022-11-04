@@ -38,6 +38,9 @@ export const GET: RequestHandler = async ({ request, url }) => {
 			xid
 			content
 			date
+			postUpvotesAggregate {
+				count
+			  }
 		  }
 		}
 	  }

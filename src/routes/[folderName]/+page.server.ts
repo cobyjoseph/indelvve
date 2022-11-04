@@ -4,7 +4,7 @@ import { SECRET_API_URL, SECRET_X_AUTH } from '$env/static/private';
 import { v4 as uuid } from 'uuid';
 
 const createPostMutation = `mutation MyMutation($content: String! = "", $xid: String! = "") {
-	addPost(input: {xid: $xid, content: $content}) {
+	addPost(input: {xid: $xid, content: $content, votes: 0}) {
 		post {
 			xid
 		} 

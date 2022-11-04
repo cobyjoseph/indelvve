@@ -14,10 +14,9 @@
 		quintOut,
 		sineInOut
 	} from 'svelte/easing';
-
 	import DisplayQuill from '$lib/quill/DisplayQuill.svelte';
-	import AddCollectionBtnLight from '$lib/components/AddCollectionBtnLight.svelte';
 	import QuillInput from '$lib/quill/QuillInput.svelte';
+	import PostHeader from './PostHeader.svelte';
 
 	export let any;
 	export let postCount: Number;
@@ -45,10 +44,6 @@
 		showInputContent = !showInputContent;
 	}
 </script>
-
-<!-- <button on:click={togglePostInput}>
-	<AddCollectionBtnLight addText="content" />
-</button> -->
 
 {#if showInputContent}
 	<div transition:slide={{ duration: 300, easing: quintInOut }} />
@@ -116,6 +111,9 @@
 		<div />
 		<Card>
 			<span slot="topPost">
+				<div class="m-2">
+					<PostHeader upvotes={i.postUpvotesAggregate.count} />
+				</div>
 				<DisplayQuill deltaDataOutput={i.content} />
 			</span>
 		</Card>

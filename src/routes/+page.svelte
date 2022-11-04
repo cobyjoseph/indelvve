@@ -6,7 +6,6 @@
 	import { onMount } from 'svelte/internal';
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
-	import AddCollectionBtnLight from '$lib/components/AddCollectionBtnLight.svelte';
 	import { slide } from 'svelte/transition';
 	import { quintInOut } from 'svelte/easing';
 	import QuillInput from '$lib/quill/DisplayQuill.svelte';

@@ -29,16 +29,12 @@
 
 		quill.on('text-change', function () {
 			quillDelta = quill.getContents();
-			console.log(quillDelta);
+			// console.log(quillDelta);
 		});
 
 		// quill.setContents(JSON.parse(deltaData));
 	});
 </script>
-
-<div class="max-w-20 bg-blue-300">
-	{quillDeltaDerived}
-</div>
 
 <form
 	class="mt-2 bg-black bg-opacity-40 rounded-md p-4 "
@@ -47,7 +43,7 @@
 	use:enhance
 >
 	<div class="bg-white bg-opacity-[0.07] text-white ">
-		<textarea style="display:none" name="content" bind:value={quillDeltaDerived} />
+		<textarea style="display:none" name="content" />
 		<div class="" bind:this={editor} />
 	</div>
 
