@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+
 	export let upvotes: number;
+	export let currentPostXID;
 	// export let authorName: string;
 	// export let timeSince: number;
 	// export let dOrMin: string;
@@ -12,20 +15,30 @@
 
 <div class=" mb-1 flex text-[16px] text-white items-center">
 	<!-- light and number -->
-	<div class="gap-0.3 mr-5 flex" on:click={incrementCount}>
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			class="h-[23px] w-[23px] fill-transparent stroke-white stroke-1 hover:fill-white"
-			viewBox="0 0 24 24"
-		>
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-			/>
-		</svg>
+	<div class="gap-0.3 mr-5 flex">
+		<form method="POST" action="?/addUpvoteAction" class="flex" use:enhance>
+			<button type="submit" class="flex">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-[23px] w-[23px] fill-transparent stroke-white stroke-1 hover:fill-white"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+					/>
+				</svg>
+				<div>{upvotes}</div>
 
-		<div>{upvotes}</div>
+				<input
+					style="display: none;"
+					type="text"
+					name="currentPostXID"
+					bind:value={currentPostXID}
+				/>
+			</button>
+		</form>
 	</div>
 
 	<!-- person icon and name - I NEEDED TO place self center for the icon. didnt seem to work when I tried to apply that to the praent. not sure why -->

@@ -108,11 +108,10 @@
 			easing: quintOut
 		}}
 	>
-		<div />
 		<Card>
 			<span slot="topPost">
 				<div class="m-2">
-					<PostHeader upvotes={i.postUpvotesAggregate.count} />
+					<PostHeader upvotes={i.postUpvotesAggregate.count} currentPostXID={i.xid} />
 				</div>
 				<DisplayQuill deltaDataOutput={i.content} />
 			</span>

@@ -11,7 +11,7 @@
 
 	console.log(form);
 
-	console.log('digging into post', data.data.queryTag[0].childTag[0].childPosts)
+	console.log('digging into post', data.data.queryTag[0].childTag[0].childPosts);
 
 	let childTags: String;
 	$: extractedQueryTag = data.data.queryTag[0];
@@ -19,8 +19,6 @@
 	$: postCount: Number;
 	$: direction = 'right';
 	$: currentCard = 0;
-
-
 
 	function nextCard() {
 		direction = 'right';
@@ -60,7 +58,6 @@
 					<Collection
 						any={data.data.queryTag[0].childTag[index].childPosts}
 						postCount={navBarLength}
-						
 					/>
 				{/if}
 			{/each}
