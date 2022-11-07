@@ -2,6 +2,14 @@ import { SECRET_API_URL, SECRET_X_AUTH } from '$env/static/private';
 import type { RequestHandler } from '@sveltejs/kit';
 import fetch from 'node-fetch';
 
+const app = require('express')();
+
+app.get('/', (req, res) =>
+	res.json({ message: 'Docker is easy' })
+)
+
+const port = process.env.PORT || 8080
+
 // export const POST:RequestHandler =
 
 export const GET: RequestHandler = async ({ request, url }) => {
@@ -26,14 +34,14 @@ export const GET: RequestHandler = async ({ request, url }) => {
 	}
 
 	const operationsDoc = `
-	query MyQuery($slug: String) {
+	query MyQuery($slug: String, $numUpvotes: PostOrderable = xid) {
 	  queryTag(filter: {name: {eq: $slug}}) {
 		name
 		id
 		childTag {
 		  name
 		  id
-		  childPosts {
+		  childPosts(order: {asc: $numUpvotes}) {
 			id
 			xid
 			content

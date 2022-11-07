@@ -19,6 +19,7 @@
 	import PostHeader from './PostHeader.svelte';
 
 	export let any;
+	export let numUpvotes;
 	export let postCount: Number;
 
 	let showInputContent: boolean = false;
@@ -108,6 +109,10 @@
 			easing: quintOut
 		}}
 	>
+		<div bind:this={numUpvotes}>
+			{i.postUpvotesAggregate.count}
+		</div>
+
 		<Card>
 			<span slot="topPost">
 				<div class="m-2">

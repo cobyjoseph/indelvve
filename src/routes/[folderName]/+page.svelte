@@ -9,15 +9,14 @@
 	export let data: PageData;
 	export let form;
 
-	console.log(form);
+	console.log('data', data);
 
-	console.log('digging into post', data.data.queryTag[0].childTag[0].childPosts);
+	console.log(
+		'digging into post',
+		data.data.queryTag[0].childTag[0].childPosts[0].postUpvotesAggregate
+	);
 
-	let childTags: String;
-	$: extractedQueryTag = data.data.queryTag[0];
 	$: navBarLength = data.data.queryTag[0].childTag[0].childPosts.length;
-	$: postCount: Number;
-	$: direction = 'right';
 	$: currentCard = 0;
 
 	function nextCard() {
