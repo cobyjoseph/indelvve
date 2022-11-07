@@ -38,7 +38,7 @@
 <div class="flex  justify-center">
 	<Navbar />
 
-	<div class=" mx-4  grid h-full  md:w-3/4 md:max-w-[620px] ">
+	<div class=" mx-4  grid h-full  md:w-3/4 md:max-w-[620px] overflow-hidden ">
 		<SearchBar />
 
 		<div class="flex">

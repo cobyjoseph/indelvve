@@ -91,7 +91,7 @@
 
 {#each [any[currentCard]] as i (i.id)}
 	<div
-		class="pt-2"
+		class="pt-2 "
 		in:fly={{
 			delay: 0,
 			duration: direction === 'right' ? 300 : 300,

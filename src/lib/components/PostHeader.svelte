@@ -2,15 +2,7 @@
 	import { enhance } from '$app/forms';
 
 	export let upvotes: number;
-	export let currentPostXID;
-	// export let authorName: string;
-	// export let timeSince: number;
-	// export let dOrMin: string;
-	// export let commentNumber;
-
-	function incrementCount() {
-		upvotes++;
-	}
+	export let currentPostXID: number;
 </script>
 
 <div class=" mb-1 flex text-[16px] text-white items-center">
@@ -31,12 +23,7 @@
 				</svg>
 				<div>{upvotes}</div>
 
-				<input
-					style="display: none;"
-					type="text"
-					name="currentPostXID"
-					bind:value={currentPostXID}
-				/>
+				<input type="hidden" name="currentPostXID" value={currentPostXID} />
 			</button>
 		</form>
 	</div>
