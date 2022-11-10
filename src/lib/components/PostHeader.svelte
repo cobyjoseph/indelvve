@@ -3,13 +3,17 @@
 
 	export let upvotes: number;
 	export let currentPostXID: number;
+
+	function eagerLoad() {
+		upvotes++;
+	}
 </script>
 
 <div class=" mb-1 flex text-[16px] text-white items-center">
 	<!-- light and number -->
 	<div class="gap-0.3 mr-5 flex">
 		<form method="POST" action="?/addUpvoteAction" class="flex" use:enhance>
-			<button type="submit" class="flex">
+			<button type="submit" class="flex" on:click={eagerLoad}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-[23px] w-[23px] fill-transparent stroke-white stroke-1 hover:fill-white"

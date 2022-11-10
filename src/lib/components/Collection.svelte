@@ -109,10 +109,6 @@
 			easing: quintOut
 		}}
 	>
-		<div bind:this={numUpvotes}>
-			{i.postUpvotesAggregate.count}
-		</div>
-
 		<Card>
 			<span slot="topPost">
 				<div class="m-2">

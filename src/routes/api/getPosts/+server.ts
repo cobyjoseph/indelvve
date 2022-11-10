@@ -2,13 +2,13 @@ import { SECRET_API_URL, SECRET_X_AUTH } from '$env/static/private';
 import type { RequestHandler } from '@sveltejs/kit';
 import fetch from 'node-fetch';
 
-const app = require('express')();
+// const app = require('express')();
 
-app.get('/', (req, res) =>
-	res.json({ message: 'Docker is easy' })
-)
+// app.get('/', (req, res) =>
+// 	res.json({ message: 'Docker is easy' })
+// )
 
-const port = process.env.PORT || 8080
+// const port = process.env.PORT || 8080
 
 // export const POST:RequestHandler =
 
@@ -54,6 +54,10 @@ export const GET: RequestHandler = async ({ request, url }) => {
 	  }
 	}
   `;
+	// separet query -
+	// eager loading - immiediately update the likes and then send request to server TODO
+
+	//could add upvote property to the childPost itself
 
 	function fetchMyQuery() {
 		console.log('from fetchMyQuery:', slug);
