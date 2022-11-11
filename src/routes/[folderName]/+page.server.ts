@@ -1,7 +1,32 @@
 import type { Actions } from './$types';
 import { SECRET_API_URL, SECRET_X_AUTH } from '$env/static/private';
 import { v4 as uuid } from 'uuid';
+import dgraphClient from '$lib/server/dgraph';
 
+const txn = dgraphClient.newTxn({
+	readOnly: true,
+	bestEffort: false
+});
+// ...
+const res = await txn.queryWithVars(query, vars);
+
+// Create data.
+const p = {
+	name: 'Alice'
+};
+
+// Run mutation.
+const mu = new dgraphClient.Mutation();
+mu.setSetJson(p);
+await txn.mutate(mu);
+
+//// FOR DGRAPH CLOUD ONLY BELOW -----------------------------------------------------------
+//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 const createPostMutation = `mutation MyMutation($content: String! = "", $xid: String! = "") {
 	addPost(input: {xid: $xid, content: $content, votes: 0}) {
 		post {
@@ -103,76 +128,3 @@ export const actions: Actions = {
 		}
 	}
 };
-
-// export const actions: Actions = {
-// 	postAction: async ({ request }) => {
-// 		const form = await request.formData();
-
-// 		const content = form.get('contentInput');
-// 		const xid = form.get('xidInput');
-// 		console.log('from +page.server.ts', form, 'content:', content, 'xid:', xid);
-
-// 		const res = await axios.post(
-// 			SECRET_API_KEY,
-// 			{
-// 				query: `
-// 			mutation MyMutation($content: String = "", $xid: String = "", $upsert: Boolean = false) {
-// 				addPost(input: {xid: $xid, content: $content})
-// 			  }
-// 		  `,
-// 				variables: {
-// 					content: content,
-// 					xid: xid
-// 				}
-// 			},
-// 			{
-// 				headers: {
-// 					'content-type': 'application/json',
-// 					'X-Auth-Token': SECRET_X_AUTH
-// 				}
-// 			}
-// 		);
-// 		return new Response(JSON.parse(JSON.stringify(res)));
-// 	}
-// };
-
-// export const actions: Actions = {
-// 	postAction: async ({ request }) => {
-// 		const form = await request.formData();
-
-// 		const content = form.get('contentInput');
-// 		const xid = form.get('xidInput');
-// 		console.log('log content from +page.server.ts', form, content, xid);
-
-// 		await axios.post(`http://localhost:5173/api/getPosts`, { content, xid });
-
-// 		return {
-// 			content: content,
-// 			xid: xid
-// 		};
-
-// 	}
-// };
-
-// export const regUser = async (username, password) => {
-//     return await axios.post(API_KEY, {
-//         query: `mutation MyMutation($name: String, $password: String) {
-//             insert_users(objects: {name: $name, password: $password}) {
-//               returning {
-//                 name
-//               }
-//             }
-//           }`,
-//         variables: {
-//           name: username,
-//           password: password
-//         }
-//       }, {
-//           headers: {
-//             'content-type': 'application/json',
-//             'x-hasura-admin-secret': ADMIN_SECRET
-//           }
-//         })
-// }
-
-// see dgraph example here https://discuss.dgraph.io/t/is-there-an-example-of-uploading-a-graphql-schema-with-post-using-node-request-or-axios-instead-of-curl/14400
