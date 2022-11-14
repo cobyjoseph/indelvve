@@ -1,15 +1,10 @@
-FROM node:18.12.0-alpine3.16 AS builder
+FROM node:19-alpine3.16
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package*.json ./
+RUN npm install
 COPY . .
-RUN npm run build
-RUN npm ci --prod
 
-FROM node:18.12.0-alpine3.16
-USER node:node
-WORKDIR /app
-COPY --from=builder --chown=node:node /app/build ./build
-COPY --from=builder --chown=node:node /app/node_modules ./node_modules
-COPY --chown=node:node package.json .
-CMD ["node","build"]
+EXPOSE 3333
+
+CMD ["npm", "run", "dev", "--", "--host", "--port", "3333"]
+
