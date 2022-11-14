@@ -1,24 +1,26 @@
 import type { Actions } from './$types';
 import { SECRET_API_URL, SECRET_X_AUTH } from '$env/static/private';
 import { v4 as uuid } from 'uuid';
-import dgraphClient from '$lib/server/dgraph';
+import { dgraphClient } from '$lib/server/dgraph';
 
-const txn = dgraphClient.newTxn({
-	readOnly: true,
-	bestEffort: false
-});
-// ...
-const res = await txn.queryWithVars(query, vars);
+// const txn = dgraphClient.newTxn({
+// 	readOnly: true,
+// 	bestEffort: false
+// });
+// // ...
+// const resolve = await txn.queryWithVars(query, vars);
 
-// Create data.
-const p = {
-	name: 'Alice'
-};
+// // Create data.
+// const p = {
+// 	name: 'Alice'
+// };
 
-// Run mutation.
-const mu = new dgraphClient.Mutation();
-mu.setSetJson(p);
-await txn.mutate(mu);
+// dgraphClient
+
+// // Run mutation.
+// const mu = new dgraphClient.Mutation();
+// mu.setSetJson(p);
+// await txn.mutate(mu);
 
 //// FOR DGRAPH CLOUD ONLY BELOW -----------------------------------------------------------
 //----------------------------------------------------------------------------------------
