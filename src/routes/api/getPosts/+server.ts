@@ -2,7 +2,7 @@ import { SECRET_API_URL, SECRET_X_AUTH } from '$env/static/private';
 import type { RequestHandler } from '@sveltejs/kit';
 import fetch from 'node-fetch';
 
-export const GET: RequestHandler = async ({ request, url }) => {
+export const GET: RequestHandler = async ({ url }) => {
 	const slug = url.searchParams.get('slug');
 	console.log('slug:', slug);
 
@@ -44,10 +44,7 @@ export const GET: RequestHandler = async ({ request, url }) => {
 	  }
 	}
   `;
-	// separet query -
-	// eager loading - immiediately update the likes and then send request to server TODO
 
-	//could add upvote property to the childPost itself
 
 	function fetchMyQuery() {
 		console.log('from fetchMyQuery:', slug);

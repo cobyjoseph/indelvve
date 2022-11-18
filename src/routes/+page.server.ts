@@ -6,7 +6,7 @@ export const load: PageServerLoad = async () => {
 	try {
 		const post = await prisma.post.findMany({});
 		const count = await prisma.post.count();
-		
+
 		// // need to use aggregate?
 
 		return { post, count };

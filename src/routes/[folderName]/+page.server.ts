@@ -1,26 +1,31 @@
 import type { Actions } from './$types';
 import { SECRET_API_URL, SECRET_X_AUTH } from '$env/static/private';
 import { v4 as uuid } from 'uuid';
-import { dgraphClient } from '$lib/server/dgraph';
+import type { RequestHandler } from '@sveltejs/kit';
 
-// const txn = dgraphClient.newTxn({
-// 	readOnly: true,
-// 	bestEffort: false
-// });
-// // ...
-// const resolve = await txn.queryWithVars(query, vars);
+export const GET: RequestHandler = async () => {
+	async function fetchDQL(dqlQuery, operationName, variables) {
+		const result = await fetch('http://localhost:8080', {
+			method: 'POST',
+			headers: {},
+			body: JSON.stringify({
+				query: dqlQuery,
+				variables: variables,
+				operationName: operationName
+			})
+		});
+		return await result.json;
+	}
 
-// // Create data.
-// const p = {
-// 	name: 'Alice'
-// };
-
-// dgraphClient
-
-// // Run mutation.
-// const mu = new dgraphClient.Mutation();
-// mu.setSetJson(p);
-// await txn.mutate(mu);
+	const dqlQuery = `
+		{
+			fetchTest(func: eq(name, "Coby1")){
+				uid
+				name
+				age
+		}
+		}`;
+};
 
 //// FOR DGRAPH CLOUD ONLY BELOW -----------------------------------------------------------
 //----------------------------------------------------------------------------------------
