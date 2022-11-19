@@ -1,13 +1,14 @@
 import prisma from '$lib/server/prisma';
 import type { Actions, PageServerLoad } from './$types';
 
+// THE STEPS FOR LOADING DATA
+
 // LOAD DATA ----------------------------------------------------------
 export const load: PageServerLoad = async () => {
 	try {
 		const post = await prisma.post.findMany({});
 		const count = await prisma.post.count();
 
-		// // need to use aggregate?
 
 		return { post, count };
 	} catch (error) {
