@@ -1,10 +1,10 @@
 import type { Actions } from './$types';
 import { SECRET_API_URL, SECRET_X_AUTH } from '$env/static/private';
 import { v4 as uuid } from 'uuid';
-import type { RequestHandler } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import dgraph from 'dgraph-js';
-import { set_data } from 'svelte/internal';
+
+// look here next- this seems helpful https://github.com/LauraVZuluaga/truoraJL/blob/19dd8b783f3e31684ddae95da8a08d0a8fd7fe2c/bd/dgraphdb.go
 
 // Create a client stub.
 function newClientStub() {
@@ -16,25 +16,15 @@ function newClient(clientStub) {
 	return new dgraph.DgraphClient(clientStub);
 }
 
-export const load: PageServerLoad = async (params: type) => {
+export const load: PageServerLoad = async () => {
 	async function queryData(dgraphClient) {
 		// Run query.
-		const query = `query all($a: string) {
-			all(func: eq(name, $a)) {
+		const query = `{
+			fetchTest(func: eq(name, "Coby1")){
 				uid
 				name
 				age
-				married
-				loc
-				dob
-				friend {
-					name
-					age
-				}
-				school {
-					name
-				}
-			}
+		  }
 		}`;
 		// const vars = { $a: 'Alice' };
 		const res = await dgraphClient.newTxn().queryWithVars(query);

@@ -7,7 +7,6 @@
 	import Sort from '$lib/components/Sort.svelte';
 
 	export let data: PageData;
-	export let form;
 
 	console.log('data', data);
 
