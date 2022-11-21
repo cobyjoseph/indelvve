@@ -16,6 +16,7 @@ function newClient(clientStub) {
 	return new dgraph.DgraphClient(clientStub);
 }
 
+
 export const load: PageServerLoad = async () => {
 	async function queryData(dgraphClient) {
 		// Run query.
