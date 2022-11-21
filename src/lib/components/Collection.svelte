@@ -19,7 +19,6 @@
 	import PostHeader from './PostHeader.svelte';
 
 	export let any;
-	export let numUpvotes;
 	export let postCount: Number;
 
 	let showInputContent: boolean = false;

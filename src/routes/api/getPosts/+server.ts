@@ -50,9 +50,11 @@ import fetch from 'node-fetch';
 // };
 //------------------------------------------------------------------------------
 
+//!!!!!
+//MAYBE THIS GET FUNCTION IS ONLY NEEDED SO I CAN USE THE URL QUERY. I AM STILL ULTIMATELY USING LOAD AND FETCH FUNCTIONS WHEN I CALL THIS FUNCTION IN +PAGE.TS!!
+//!!!
 export const GET: RequestHandler = async ({ url }) => {
 	const slug = url.searchParams.get('slug');
-	console.log('slug:', slug);
 
 	async function fetchGraphQL(operationsDoc, operationName, variables) {
 		const result = await fetch(SECRET_API_URL, {
@@ -94,7 +96,6 @@ export const GET: RequestHandler = async ({ url }) => {
   `;
 
 	function fetchMyQuery() {
-		console.log('from fetchMyQuery:', slug);
 		return fetchGraphQL(operationsDoc, null, { slug });
 	}
 
@@ -107,7 +108,6 @@ export const GET: RequestHandler = async ({ url }) => {
 				console.error(errors);
 			}
 			return data;
-			console.log(data);
 		})
 		.catch((error) => {
 			// handle errors from fetch itself

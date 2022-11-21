@@ -7,13 +7,9 @@
 	import Sort from '$lib/components/Sort.svelte';
 
 	export let data: PageData;
+	let form;
 
 	console.log('data', data);
-
-	console.log(
-		'digging into post',
-		data.data.queryTag[0].childTag[0].childPosts[0].postUpvotesAggregate
-	);
 
 	$: navBarLength = data.data.queryTag[0].childTag[0].childPosts.length;
 	$: currentCard = 0;

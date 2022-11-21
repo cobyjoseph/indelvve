@@ -2,7 +2,13 @@ import type { Actions } from './$types';
 import { SECRET_API_URL, SECRET_X_AUTH } from '$env/static/private';
 import { v4 as uuid } from 'uuid';
 import type { PageServerLoad } from './$types';
-import dgraph from 'dgraph-js';
+import dgraph, { DgraphClient, DgraphClientStub } from 'dgraph-js';
+
+console.log('dgraph.DgraphClient', dgraph.DgraphClient);
+
+let res;
+
+console.log('dgraphclient', DgraphClient);
 
 // look here next- this seems helpful https://github.com/LauraVZuluaga/truoraJL/blob/19dd8b783f3e31684ddae95da8a08d0a8fd7fe2c/bd/dgraphdb.go
 
@@ -16,6 +22,7 @@ function newClient(clientStub) {
 	return new dgraph.DgraphClient(clientStub);
 }
 
+console.log('newClient', newClientStub);
 
 export const load: PageServerLoad = async () => {
 	async function queryData(dgraphClient) {
@@ -28,7 +35,10 @@ export const load: PageServerLoad = async () => {
 		  }
 		}`;
 		// const vars = { $a: 'Alice' };
-		const res = await dgraphClient.newTxn().queryWithVars(query);
+		// const res = await dgraphClient.newTxn().queryWithVars(query);
+		const res = await dgraphClient.newTxn().query(query);
+		return { res };
+
 		// const ppl = res.data;
 
 		// // Print results.
@@ -45,18 +55,19 @@ export const load: PageServerLoad = async () => {
 		await queryData(dgraphClient);
 	}
 
-	// DO I NEED TO RETURN DATA HERE? WHERE DOES the term data come from? Is that prebuilt?
+	// DO I NEED TO RETURN DATA HERE? WHERE DOES the term data come from? Is that a property on dgraphClient?
 
-	const result = await main()
-		.then(({ data }) => {
-			console.log('\nDONE!');
-			return data;
-		})
-		.catch((e) => {
-			console.log('ERROR: ', e);
-		});
-	return new Response(JSON.stringify(result));
+	// const result = await main()
+	// 	.then(({ data }) => {
+	// 		console.log('\nDONE!');
+	// 		return data;
+	// 	})
+	// 	.catch((e) => {
+	// 		console.log('ERROR: ', e);
+	// 	});
+	// return new Response(JSON.stringify(result));
 };
+console.log('logging res which is dgraphClient.newTxn().querywithVars(query)', res);
 
 // Query for data.
 
