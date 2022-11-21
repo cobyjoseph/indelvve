@@ -18,21 +18,32 @@ export const GET: RequestHandler = async () => {
 	function newClient(clientStub) {
 		return new dgraph.DgraphClient(clientStub);
 	}
-
-	// Query for data.
 	async function queryData(dgraphClient) {
 		// Run query.
-		const query = `{
-		fetchTest(func: eq(name, "Coby1")){
-			uid
-			name
-			age
-	  }
-	}`;
+		const query = `query all($a: string) {
+			all(func: eq(name, $a)) {
+				uid
+				name
+				age
+				married
+				loc
+				dob
+				friend {
+					name
+					age
+				}
+				school {
+					name
+				}
+			}
+		}`;
+		const vars = { $a: 'Alice' };
+		const res = await dgraphClient.newTxn().queryWithVars(query, vars);
+		const ppl = res.data;
 
-		const res = await dgraphClient.newTxn().query(query);
-
-		return { res };
+		// Print results.
+		console.log(`Number of people named "Alice": ${ppl.all.length}`);
+		ppl.all.forEach((person) => console.log(person));
 	}
 
 	async function createData(dgraphClient) {
