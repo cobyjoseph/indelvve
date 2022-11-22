@@ -38,10 +38,22 @@ export const GET: RequestHandler = async () => {
 		const ppl = res.data;
 
 		return await ppl;
+	}
+	async function queryAlice(dgraphClient) {
+		// Run query.
+		const query2 = `query all($a: string) {
+			all(func: eq(name, $a)) {
+				uid
+				name
+				age
+			}
+		}`;
+		const vars = { $a: 'Alice' };
+		const res = await dgraphClient.newTxn().queryWithVars(query2, vars);
+		console.log('res', res.data);
+		const ppl = res.data;
 
-		// Print results.
-		console.log(`Number of people named "Alice": ${ppl.all.length}`);
-		// ppl.all.forEach((person) => console.log(person));
+		return await ppl;
 	}
 
 	// async function createData(dgraphClient) {
@@ -108,9 +120,11 @@ export const GET: RequestHandler = async () => {
 		// await queryData(dgraphClient);
 		// //THE CODE BELOW GETS ME CLOSER IT SEEMS
 		const res = await queryData(dgraphClient);
+		const res2 = await queryAlice(dgraphClient);
+		console.log('res2', res2);
 		console.log('log res within main()', res);
 
-		return { res };
+		return { res, res2 };
 	}
 
 	//FOR SOME REASON ADDING AWAIT BEFORE MAIN HERE BREAKS IT, EVEN THOUGH THAT SEEMS LIKE WHAT I DID IN THE GETPOSTS +SERVER.TS
@@ -124,10 +138,14 @@ export const GET: RequestHandler = async () => {
 	// 		console.log('ERROR: ', e);
 	// 	});
 
-	console.log('NEARLY THERE - MAIN()', await (await main()).res);
-	const result = await (await main()).res;
+	console.log('NEARLY THERE - MAIN()', (await main()).res);
+	const result = {
+		one: (await main()).res,
+		two: (await main()).res2
+	};
+	// const result2 = (await main()).res2;
 
-	console.log('logging result', result);
 	return new Response(JSON.stringify(result));
+	// return new Response(JSON.stringify(result2));
 	// return new Response(JSON.stringify(main()));
 };
