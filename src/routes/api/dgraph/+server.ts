@@ -8,16 +8,17 @@ import type { RequestHandler } from '@sveltejs/kit';
 // ONE FETCH TO GET THE DATA FROM DGRAPH TO THE SERVER
 // ANOTHER FETCH TO GET IT FROM SERVER.TS TO +PAGE.TS - EG FROM THE SERVER TO BE ACCESSIBLE BY THE CLIENT
 
-export const GET: RequestHandler = async () => {
-	// Create a client stub.
-	function newClientStub() {
-		return new dgraph.DgraphClientStub('http://localhost:8080');
-	}
+// Create a client stub.
+function newClientStub() {
+	return new dgraph.DgraphClientStub('http://localhost:8080');
+}
 
-	// Create a client.
-	function newClient(clientStub) {
-		return new dgraph.DgraphClient(clientStub);
-	}
+// Create a client.
+function newClient(clientStub) {
+	return new dgraph.DgraphClient(clientStub);
+}
+
+export const GET: RequestHandler = async () => {
 	async function queryData(dgraphClient) {
 		// Run query.
 		const query = `query all($a: string) {
@@ -44,6 +45,8 @@ export const GET: RequestHandler = async () => {
 		// Print results.
 		console.log(`Number of people named "Alice": ${ppl.all.length}`);
 		ppl.all.forEach((person) => console.log(person));
+
+		return queryData;
 	}
 
 	async function createData(dgraphClient) {
@@ -110,6 +113,7 @@ export const GET: RequestHandler = async () => {
 		await queryData(dgraphClient);
 	}
 
+	//FOR SOME REASON ADDING AWAIT BEFORE MAIN HERE BREAKS IT, EVEN THOUGH THAT SEEMS LIKE WHAT I DID IN THE GETPOSTS +SERVER.TS
 	const result = main()
 		.then(() => {
 			console.log('\nDONE!');
