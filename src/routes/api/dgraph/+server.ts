@@ -109,17 +109,23 @@ export const GET: RequestHandler = async () => {
 		// //THE CODE BELOW GETS ME CLOSER IT SEEMS
 		const res = await queryData(dgraphClient);
 		console.log('log res within main()', res);
+
+		return { res };
 	}
 
 	//FOR SOME REASON ADDING AWAIT BEFORE MAIN HERE BREAKS IT, EVEN THOUGH THAT SEEMS LIKE WHAT I DID IN THE GETPOSTS +SERVER.TS
-	const result = await main()
-		.then(() => {
-			console.log('\nDONE!');
-			return { queryData };
-		})
-		.catch((e) => {
-			console.log('ERROR: ', e);
-		});
+
+	// const result = await main()
+	// 	.then(() => {
+	// 		console.log('\nDONE!');
+	// 		return { queryData };
+	// 	})
+	// 	.catch((e) => {
+	// 		console.log('ERROR: ', e);
+	// 	});
+
+	console.log('NEARLY THERE - MAIN()', await (await main()).res);
+	const result = await (await main()).res;
 
 	console.log('logging result', result);
 	return new Response(JSON.stringify(result));
