@@ -65,5 +65,6 @@ export const GET: RequestHandler = async ({ url }) => {
 			console.error(error);
 		});
 
+	console.log('result on getPosts +server.ts', result);
 	return new Response(JSON.stringify(result));
 };
