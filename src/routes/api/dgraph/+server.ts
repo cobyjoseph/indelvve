@@ -1,6 +1,8 @@
 import dgraph from 'dgraph-js-http';
 import type { RequestHandler } from '@sveltejs/kit';
 
+let testEntry = 'Alice';
+
 //---------------------------------------------------------------------------------------------------------------------
 
 // Create a client stub.
@@ -18,6 +20,13 @@ function newClient(clientStub) {
 export const GET: RequestHandler = async () => {
 	async function queryData(dgraphClient) {
 		// Run query.
+
+		// WHAT do I want this query to do?
+		// 1. get the name of the tag that matches the varaible slug
+		// 2. get the name of that tag's child tag
+		// 3. Get that posts child posts
+		// 4. aggregate the number of like nodes that are connected to that post
+
 		const query = `query all($a: string) {
 			all(func: eq(name, $a)) {
 				uid
@@ -26,7 +35,7 @@ export const GET: RequestHandler = async () => {
 			}
 		}`;
 
-		const vars = { $a: 'Coby1' };
+		const vars = { $a: testEntry  };
 		const res = await dgraphClient.newTxn().queryWithVars(query, vars);
 
 		return await res.data;
