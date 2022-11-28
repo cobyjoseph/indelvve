@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import Navbar from '$lib/components/Navbar.svelte';
 	import SearchBar from '$lib/components/SearchBar.svelte';
 	import Collection from '$lib/components/Collection.svelte';
@@ -60,16 +60,16 @@
 </div>
 
 <!--this let's me get the response immediately from submitting the form. This could be a pop up showing successful submission/validation.  -->
-<div class="bg-white">
+<!-- <div class="bg-white">
 	{#if form?.result}
 		show this if form works
 		<pre>{JSON.stringify(form.result.votes)}</pre>
 	{/if}
-</div>
+</div> -->
 
 <!-- {#each data.data.queryTag[0].childTag as i, index (i.id)}
 	{#if i.name}
 		<ChildTags childTagName={i.name} />
 		<Collection any={data.data.queryTag[0].childTag[index].childPosts} postCount={navBarLength} />
 	{/if}
-{/each} -->
+{/each} --> -->

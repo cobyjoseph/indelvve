@@ -3,15 +3,9 @@
 	import SearchBar from '$lib/components/SearchBar.svelte';
 
 	import Collection from '$lib/components/Collection.svelte';
-	import { onMount } from 'svelte/internal';
 	import type { PageData } from './$types';
-	import { enhance } from '$app/forms';
-	import { slide } from 'svelte/transition';
-	import { quintInOut } from 'svelte/easing';
-	import QuillInput from '$lib/quill/DisplayQuill.svelte';
 
 	export let data: PageData;
-	
 
 	let postCount = data.post?.length;
 </script>
