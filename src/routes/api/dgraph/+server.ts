@@ -27,15 +27,30 @@ export const GET: RequestHandler = async () => {
 		// 3. Get that posts child posts
 		// 4. aggregate the number of like nodes that are connected to that post
 
-		const query = `query all($a: string) {
-			all(func: eq(name, $a)) {
-				uid
-				name
-				age
-			}
-		}`;
+		// const query = `query all($a: string) {
+		// 	all(func: eq(name, $a)) {
+		// 		uid
+		// 		name
+		// 		age
+		// 	}
+		// }`;
 
-		const vars = { $a: testEntry  };
+		const query = `query qTagsAndPosts($slug: string, $numUpvotes: int) {
+			slugTag(func: eq(Tag.name@en, $slug)) {
+			  Tag.name@en
+			  Tag.childTag{
+					  Tag.name
+					  Tag.childPosts(orderasc: count(upvotes)) {
+							Post.content
+							Post.postedDate
+							count(upvotes)
+				  }
+				}
+			}
+		  }
+		`;
+
+		const vars = { $a: testEntry };
 		const res = await dgraphClient.newTxn().queryWithVars(query, vars);
 
 		return await res.data;
@@ -56,3 +71,6 @@ export const GET: RequestHandler = async () => {
 
 	return new Response(JSON.stringify(result));
 };
+
+//Schema
+// use @reverse .
