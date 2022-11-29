@@ -78,13 +78,15 @@
 		<Sort />
 
 		<div class="text-red-400 ">
-			{#each [data.data.queryTag[0]['Tag.childTag']] as i, index}
+			{#each data.data.queryTag[0]['Tag.childTag'] as i, index}
 				<!-- {#if i['Tag.childTag']['Tag.name']} -->
 				<ChildTags childTagName={i['Tag.name']} />
-				<Collection
-					any={data.data.queryTag[0]['Tag.childTag'][index]['Tag.childPosts']}
-					postCount={navBarLength}
-				/>
+				{#each [data.data.queryTag[0]['Tag.childTag']] as inner, innerIndex}
+					<Collection
+						any={data.data.queryTag[0]['Tag.childTag'][innerIndex]['Tag.childPosts']}
+						postCount={navBarLength}
+					/>
+				{/each}
 				<!-- {/if} -->
 			{/each}
 		</div>
