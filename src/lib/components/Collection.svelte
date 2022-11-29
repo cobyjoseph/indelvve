@@ -17,20 +17,15 @@
 	import DisplayQuill from '$lib/quill/DisplayQuill.svelte';
 	import QuillInput from '$lib/quill/QuillInput.svelte';
 	import PostHeader from './PostHeader.svelte';
-
 	export let any;
 	export let postCount: Number;
-
 	let showInputContent: boolean = false;
-
 	$: direction = 'right';
 	$: currentCard = 0;
-
 	function nextCard() {
 		direction = 'right';
 		currentCard = (currentCard + 1) % postCount;
 	}
-
 	function prevCard() {
 		direction = 'left';
 		if (currentCard != 0) {
@@ -39,7 +34,6 @@
 			currentCard = postCount - 1;
 		}
 	}
-
 	function togglePostInput() {
 		showInputContent = !showInputContent;
 	}

@@ -38,19 +38,27 @@
 <div class="text-white">
 	data.slugName: {data.slugName}
 	<div>
-		{data.data.queryTag[0]['Tag.childTag'][0]['Tag.childPosts'][0]['Post.content']}
+		{data.data.queryTag[0]['Tag.childTag'][0]['Tag.childPosts']}
 	</div>
-	{#each data.data.queryTag[0]['Tag.childTag'] as i}
+	<!-- {#each data.data.queryTag[0]['Tag.childTag'] as i}
 		{i['Tag.name']}
-	{/each}
+	{/each} -->
 
 	<!-- <ChildTags childTagName={extractedData[1].queryTag[0]['Tag.childTag'][0]['Tag.name']} /> -->
 
 	<!-- i.queryTag[0]['Tag.childTag']['Tag.name'] -->
 
-	{#each data.data.queryTag[0]['Tag.childTag'] as i, index}
+	<!-- {#each data.data.queryTag[0]['Tag.childTag'] as i, index}
 		<ChildTags childTagName={i['Tag.name']} />
-	{/each}
+	{/each} -->
+
+	<div class="text-white outline outline-2 outline-green-500">
+		trying to render post here:
+
+		<!-- {#each data.data.queryTag[0]['Tag.childTag'] as i, index}
+			{i['Tag.childPosts']}
+		{/each} -->
+	</div>
 </div>
 
 <div class="flex  justify-center">
@@ -70,10 +78,13 @@
 		<Sort />
 
 		<div class="text-red-400 ">
-			{#each data.data.queryTag[0]['Tag.childTag'] as i, index (i.id)}
+			{#each [data.data.queryTag[0]['Tag.childTag']] as i, index}
 				<!-- {#if i['Tag.childTag']['Tag.name']} -->
 				<ChildTags childTagName={i['Tag.name']} />
-				<Collection any={['Tag.childPosts']} postCount={navBarLength} />
+				<Collection
+					any={data.data.queryTag[0]['Tag.childTag'][index]['Tag.childPosts']}
+					postCount={navBarLength}
+				/>
 				<!-- {/if} -->
 			{/each}
 		</div>

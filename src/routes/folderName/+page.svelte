@@ -1,4 +1,4 @@
-<!-- <script lang="ts">
+<script lang="ts">
 	import Navbar from '$lib/components/Navbar.svelte';
 	import SearchBar from '$lib/components/SearchBar.svelte';
 	import Collection from '$lib/components/Collection.svelte';
@@ -9,7 +9,7 @@
 	export let data: PageData;
 	let form;
 
-	console.log('data', data);
+	console.log('data on folder name', data);
 
 	$: navBarLength = data.data.queryTag[0].childTag[0].childPosts.length;
 	$: currentCard = 0;
@@ -73,4 +73,4 @@
 		<Collection any={data.data.queryTag[0].childTag[index].childPosts} postCount={navBarLength} />
 	{/if}
 {/each} -->
--->
+
