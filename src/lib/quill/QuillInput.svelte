@@ -25,7 +25,7 @@
 				toolbar: toolbarOptions
 			},
 			theme: 'snow',
-			placeholder: 'Post here...'
+			placeholder: 'Add post here'
 		});
 
 		quill.on('text-change', function () {
@@ -93,8 +93,50 @@
 		margin-left: 0.4em;
 	}
 
-	/* .ql-snow.ql-toolbar button {
-		background-color: white;
-		color: white;
-	} */
+	.ql-toolbar .ql-stroke {
+		fill: green !important;
+	}
+
+	.ql-toolbar .ql-fill {
+		fill: purple !important;
+	}
+
+	.ql-toolbar .ql-picker {
+		color: red !important;
+	}
+
+	.ql-formats {
+		color: aquamarine !important;
+		background-color: blue !important;
+		stroke: brown !important;
+	}
+
+	svg {
+		color: red !important;
+		background-color: green !important;
+		stroke: brown !important;
+	}
+
+	.ql-fill button {
+		fill: green !important;
+		color: blue !important;
+		background-color: red !important;
+	}
+
+	.ql-header {
+		fill: blue !important;
+		color: red !important;
+		background-color: green !important;
+	}
+
+	.ql-container {
+		border-color: red !important;
+	}
+
+	.ql-snow .ql-toolbar button {
+		color: red !important;
+		fill: red !important;
+		stroke: red !important;
+		background-color: red !important;
+	}
 </style>
