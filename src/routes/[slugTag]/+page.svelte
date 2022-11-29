@@ -13,23 +13,24 @@
 
 	console.log('data', data);
 
-	// $: navBarLength = data.data.queryTag[0].childTag[0].childPosts.length;
-	// $: currentCard = 0;
+	$: currentCard = 0;
 
-	// function nextCard() {
-	// 	direction = 'right';
-	// 	currentCard = (currentCard + 1) % postCount;
-	// }
+	function nextCard() {
+		direction = 'right';
+		currentCard = (currentCard + 1) % postCount;
+	}
 
-	// function prevCard() {
-	// 	direction = 'left';
-	// 	if (currentCard != 0) {
-	// 		currentCard = (currentCard - 1) % postCount;
-	// 	} else {
-	// 		currentCard = postCount - 1;
-	// 	}
-	// }
+	function prevCard() {
+		direction = 'left';
+		if (currentCard != 0) {
+			currentCard = (currentCard - 1) % postCount;
+		} else {
+			currentCard = postCount - 1;
+		}
+	}
 </script>
+
+<!-- NEXT step - recreate the childTags object piece by piece. Then do the same for collection. Something in there is causing the issue -->
 
 <div class="text-white">
 	data.slugName: {data.slugName}
@@ -44,7 +45,7 @@
 	{/each}
 
 	{#each data.data as i, index}
-		<ChildTags childTagName={i.queryTag[0]['Tag.childTag'][0]['Tag.name']} />
+		<ChildTags childTagName={i.queryTag[0]['Tag.childTag']['Tag.name']} />
 	{/each}
 </div>
 
