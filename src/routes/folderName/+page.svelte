@@ -72,4 +72,5 @@
 		<ChildTags childTagName={i.name} />
 		<Collection any={data.data.queryTag[0].childTag[index].childPosts} postCount={navBarLength} />
 	{/if}
-{/each} --> -->
+{/each} -->
+-->

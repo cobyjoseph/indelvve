@@ -111,9 +111,9 @@
 		<Card>
 			<span slot="topPost">
 				<div class="m-2">
-					<PostHeader upvotes={i.postUpvotesAggregate.count} currentPostXID={i.xid} />
+					<!-- <PostHeader upvotes={i.postUpvotesAggregate.count} currentPostXID={i.xid} /> -->
 				</div>
-				<DisplayQuill deltaDataOutput={i.content} />
+				<DisplayQuill deltaDataOutput={i['Post.content']} />
 			</span>
 		</Card>
 	</div>
