@@ -53,7 +53,7 @@
 	</div>
 
 	<div class=" grid grid-cols-1 text-white font-fugaz font-thin  mt-3  rounded-sm ">
-		<div class="text-[18px]  ">Enter tags:</div>
+		<div class="text-[18px] mb-1 ">Enter tags:</div>
 		<div class="w-full custom-tag-class">
 			<Tags />
 		</div>
@@ -78,6 +78,7 @@
 		background: #5772a8;
 		font-weight: 600;
 		letter-spacing: 0.05em;
+		padding-left: 0.6em;
 	}
 
 	.custom-tag-class :global(.svelte-tags-input-layout) {
@@ -86,6 +87,10 @@
 
 	.custom-tag-class :global(.svelte-tags-input) {
 		background: none;
+	}
+
+	.custom-tag-class :global(.svelte-tags-input-tag-remove) {
+		margin-left: 0.4em;
 	}
 
 	/* .ql-snow.ql-toolbar button {
