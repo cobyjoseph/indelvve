@@ -8,8 +8,6 @@
 	function toggleQuillInput() {
 		quillInput = !quillInput;
 	}
-
-	
 </script>
 
 <div class="flex gap-3 mt-6 ">
@@ -60,4 +58,3 @@
 		<QuillInput />
 	</div>
 {/if}
-

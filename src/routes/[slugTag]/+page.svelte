@@ -9,6 +9,9 @@
 	export let data: PageData;
 	let form;
 
+	let extractedData = Object.values(data);
+	console.log('extractedData:', extractedData);
+
 	$: navBarLength = data.data.queryTag[0]['Tag.childTag'][0]['Tag.childPosts'].length;
 
 	console.log('data', data);
@@ -36,16 +39,17 @@
 	data.slugName: {data.slugName}
 	<div>
 		{data.data.queryTag[0]['Tag.childTag'][0]['Tag.childPosts'][0]['Post.content']}
-		<div>
-			{data.data.queryTag[0]['Tag.childTag'][0]['Tag.name']}
-		</div>
 	</div>
 	{#each data.data.queryTag[0]['Tag.childTag'] as i}
 		{i['Tag.name']}
 	{/each}
 
-	{#each data.data as i, index}
-		<ChildTags childTagName={i.queryTag[0]['Tag.childTag']['Tag.name']} />
+	<!-- <ChildTags childTagName={extractedData[1].queryTag[0]['Tag.childTag'][0]['Tag.name']} /> -->
+
+	<!-- i.queryTag[0]['Tag.childTag']['Tag.name'] -->
+
+	{#each data.data.queryTag[0]['Tag.childTag'] as i, index}
+		<ChildTags childTagName={i['Tag.name']} />
 	{/each}
 </div>
 
@@ -66,13 +70,10 @@
 		<Sort />
 
 		<div class="text-red-400 ">
-			{#each data.data.queryTag[0] as i, index (i.id)}
+			{#each data.data.queryTag[0]['Tag.childTag'] as i, index (i.id)}
 				<!-- {#if i['Tag.childTag']['Tag.name']} -->
-				<ChildTags childTagName={i['Tag.childTag']['Tag.name']} />
-				<Collection
-					any={data.data.queryTag[0]['Tag.childTag'][index]['Tag.childPosts']}
-					postCount={navBarLength}
-				/>
+				<ChildTags childTagName={i['Tag.name']} />
+				<Collection any={['Tag.childPosts']} postCount={navBarLength} />
 				<!-- {/if} -->
 			{/each}
 		</div>
