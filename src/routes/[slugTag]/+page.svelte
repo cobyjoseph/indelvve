@@ -33,34 +33,6 @@
 	}
 </script>
 
-<!-- NEXT step - recreate the childTags object piece by piece. Then do the same for collection. Something in there is causing the issue -->
-
-<div class="text-white">
-	data.slugName: {data.slugName}
-	<div>
-		{data.data.queryTag[0]['Tag.childTag'][0]['Tag.childPosts']}
-	</div>
-	<!-- {#each data.data.queryTag[0]['Tag.childTag'] as i}
-		{i['Tag.name']}
-	{/each} -->
-
-	<!-- <ChildTags childTagName={extractedData[1].queryTag[0]['Tag.childTag'][0]['Tag.name']} /> -->
-
-	<!-- i.queryTag[0]['Tag.childTag']['Tag.name'] -->
-
-	<!-- {#each data.data.queryTag[0]['Tag.childTag'] as i, index}
-		<ChildTags childTagName={i['Tag.name']} />
-	{/each} -->
-
-	<div class="text-white outline outline-2 outline-green-500">
-		trying to render post here:
-
-		<!-- {#each data.data.queryTag[0]['Tag.childTag'] as i, index}
-			{i['Tag.childPosts']}
-		{/each} -->
-	</div>
-</div>
-
 <div class="flex  justify-center">
 	<Navbar />
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte/internal';
 	import { enhance } from '$app/forms';
+	import Tags from 'svelte-tags-input';
 
 	let editor;
 	let quillDelta;
@@ -37,19 +38,25 @@
 </script>
 
 <form
-	class="mt-2 bg-black bg-opacity-40 rounded-md p-4 "
+	class="mt-2 bg-secondary bg-opacity-20 rounded-sm px-4 py-2"
 	method="POST"
 	action="?/postAction"
 	use:enhance
 >
-	<div class="bg-white bg-opacity-[0.07] text-white ">
+	<div class="text-white text-2xl font-fugaz mb-3">Add post</div>
+
+	<!-- keep the color none but make the outline strong -->
+
+	<div class=" text-black rounded-lg outline-none">
 		<textarea style="display:none" name="content" />
 		<div class="" bind:this={editor} />
 	</div>
 
-	<div class=" flex gap-2 text-white bg-white bg-opacity-[0.07] mt-3 px-2 py-1 rounded-sm ">
-		<div class="text-[18px] ">Tag(s):</div>
-		<input type="text" name="xid" class="bg-white bg-opacity-[0.07] rounded-sm " />
+	<div class=" grid grid-cols-1 text-white font-fugaz font-thin  mt-3  rounded-sm ">
+		<div class="text-[18px]  ">Enter tags:</div>
+		<div class="w-full custom-tag-class">
+			<Tags />
+		</div>
 	</div>
 
 	<!-- Save the query result showing the cihld tag into a store and then can access it -->
@@ -66,6 +73,20 @@
 
 <style>
 	@import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+
+	.custom-tag-class :global(.svelte-tags-input-tag) {
+		background: #5772a8;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+	}
+
+	.custom-tag-class :global(.svelte-tags-input-layout) {
+		background: none;
+	}
+
+	.custom-tag-class :global(.svelte-tags-input) {
+		background: none;
+	}
 
 	/* .ql-snow.ql-toolbar button {
 		background-color: white;
