@@ -5,7 +5,7 @@
 
 	let editor;
 	let quillDelta;
-	let initialTagJoin;
+	// let initialTagJoin;
 
 	// export let initialTag;
 
@@ -22,10 +22,10 @@
 	onMount(async () => {
 		const { default: Quill } = await import('quill');
 
-		let array = Array.from(initialTag);
-		initialTagJoin = array.join('');
-		console.log('initialTagJoin', initialTagJoin);
-		$: initialTag = initialTagJoin;
+		// let array = Array.from(initialTag);
+		// initialTagJoin = array.join('');
+		// console.log('initialTagJoin', initialTagJoin);
+		// $: initialTag = initialTagJoin;
 
 		let quill = new Quill(editor, {
 			modules: {
