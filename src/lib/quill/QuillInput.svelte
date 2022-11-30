@@ -5,9 +5,9 @@
 
 	let editor;
 	let quillDelta;
-	export let initialTag;
+	let initialTagJoin;
 
-	// let deltaData;
+	// export let initialTag;
 
 	$: quillDeltaDerived = JSON.stringify(quillDelta);
 
@@ -21,6 +21,11 @@
 
 	onMount(async () => {
 		const { default: Quill } = await import('quill');
+
+		let array = Array.from(initialTag);
+		initialTagJoin = array.join('');
+		console.log('initialTagJoin', initialTagJoin);
+		$: initialTag = initialTagJoin;
 
 		let quill = new Quill(editor, {
 			modules: {
@@ -57,7 +62,7 @@
 	<div class=" grid grid-cols-1 text-white font-fugaz font-thin  mt-3  rounded-sm ">
 		<div class="text-[18px] mb-1 ">Enter tags:</div>
 		<div class="w-full custom-tag-class">
-			<Tags tags={initialTag} />
+			<Tags />
 		</div>
 	</div>
 

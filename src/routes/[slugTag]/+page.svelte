@@ -5,16 +5,12 @@
 	import type { PageData } from './$types';
 	import ChildTags from '$lib/components/ChildTags.svelte';
 	import Sort from '$lib/components/Sort.svelte';
-	import QuillInput from '$lib/quill/QuillInput.svelte';
 
 	export let data: PageData;
-	let tag3 = [data.data.queryTag[0]['Tag.childTag'][0]['Tag.name']];
-	let bracketedTag = [''];
+
 	let form;
 
 	$: navBarLength = data.data.queryTag[0]['Tag.childTag'][0]['Tag.childPosts'].length;
-
-	$: initialTag = bracketedTag;
 
 	$: currentCard = 0;
 
@@ -39,7 +35,7 @@
 	<div class=" mx-4  grid h-full  md:w-3/4 md:max-w-[620px] overflow-hidden ">
 		<SearchBar />
 
-		<QuillInput initialTag={tag3} />
+		<!-- <QuillInput bracketTag="test" /> -->
 
 		<div class="flex">
 			<div
@@ -54,6 +50,7 @@
 		<div class="text-red-400 ">
 			{#each data.data.queryTag[0]['Tag.childTag'] as i, index}
 				{#if i['Tag.name']}
+					
 					<ChildTags childTagName={i['Tag.name']} initialTag={i['Tag.name']} />
 					{#each [data.data.queryTag[0]['Tag.childTag']] as inner, innerIndex}
 						<Collection

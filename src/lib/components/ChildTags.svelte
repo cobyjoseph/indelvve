@@ -2,12 +2,16 @@
 	import QuillInput from '$lib/quill/QuillInput.svelte';
 
 	export let childTagName: String;
-	export let initialTag;
+	// export let initialTag;
+
+	console.log('array and join', Array.from(initialTag).join(''));
 
 	let quillInput: boolean = false;
 
 	function toggleQuillInput() {
 		quillInput = !quillInput;
+		initialTag = Array.from(initialTag).join('');
+		console.log('initialTag.join', initialTag);
 	}
 </script>
 
@@ -56,6 +60,6 @@
 </div>
 {#if quillInput}
 	<div>
-		<QuillInput {initialTag} />
+		<QuillInput />
 	</div>
 {/if}
