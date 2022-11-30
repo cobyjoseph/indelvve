@@ -2,6 +2,7 @@
 	import QuillInput from '$lib/quill/QuillInput.svelte';
 
 	export let childTagName: String;
+	export let initialTag;
 
 	let quillInput: boolean = false;
 
@@ -55,6 +56,6 @@
 </div>
 {#if quillInput}
 	<div>
-		<QuillInput />
+		<QuillInput {initialTag} />
 	</div>
 {/if}

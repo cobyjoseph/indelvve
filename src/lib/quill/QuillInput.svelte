@@ -5,6 +5,8 @@
 
 	let editor;
 	let quillDelta;
+	export let initialTag;
+
 	// let deltaData;
 
 	$: quillDeltaDerived = JSON.stringify(quillDelta);
@@ -55,7 +57,7 @@
 	<div class=" grid grid-cols-1 text-white font-fugaz font-thin  mt-3  rounded-sm ">
 		<div class="text-[18px] mb-1 ">Enter tags:</div>
 		<div class="w-full custom-tag-class">
-			<Tags />
+			<Tags tags={initialTag} />
 		</div>
 	</div>
 
@@ -138,5 +140,9 @@
 		fill: red !important;
 		stroke: red !important;
 		background-color: red !important;
+	}
+
+	.ql-toolbar .ql-formats .ql-fill button {
+		stroke: #fff !important;
 	}
 </style>
