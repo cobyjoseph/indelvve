@@ -35,6 +35,7 @@
 			placeholder: 'Add post here'
 		});
 
+		//dont think I need this below. Looks like it for a test to see if typing was registering data
 		quill.on('text-change', function () {
 			quillDelta = quill.getContents();
 			// console.log(quillDelta);
@@ -53,6 +54,7 @@
 	<div class="text-white text-2xl font-fugaz mb-3">Add post</div>
 
 	<!-- keep the color none but make the outline strong -->
+	<textarea name="testInput" />
 
 	<div class=" text-black rounded-lg outline-none">
 		<textarea style="display:none" name="content" />

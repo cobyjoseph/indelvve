@@ -19,13 +19,17 @@ export const actions: Actions = {
 	newPostAction: async ({ request }) => {
 		const form = await request.formData();
 		const content = form.get('content');
+		const testInput = form.get('testInput');
 
 		async function createData(dgraphClient) {
 			// Create a new transaction.
 			const txn = dgraphClient.newTxn();
 			try {
 				// Create data.
-				const p = '_:node1 <Post.content> "test upload" .';
+				const p = `
+				_:node1 <Post.content> "${content}" .
+				_:node2 <Tag.name> "${testInput}" .
+				`;
 
 				// Run mutation.
 				const assigned = await txn.mutate({ setNquads: p });
