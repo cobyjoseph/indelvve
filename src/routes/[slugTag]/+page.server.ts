@@ -18,6 +18,7 @@ function newClient(clientStub) {
 export const actions: Actions = {
 	newPostAction: async ({ request }) => {
 		const form = await request.formData();
+		//Maybe convert the delta data into plain text here. This is where it's actually collected, I think.
 		const content = form.get('content');
 		const testInput = form.get('testInput');
 

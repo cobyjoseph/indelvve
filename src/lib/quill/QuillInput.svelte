@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte/internal';
 	import { enhance } from '$app/forms';
 	import Tags from 'svelte-tags-input';
+	import toPlaintext from 'quill-delta-to-plaintext';
 
 	let editor;
 	let quillDelta;
@@ -32,16 +33,17 @@
 				toolbar: toolbarOptions
 			},
 			theme: 'snow',
+			// formats: [],
 			placeholder: 'Add post here'
 		});
 
 		//dont think I need this below. Looks like it for a test to see if typing was registering data
 		quill.on('text-change', function () {
-			quillDelta = quill.getContents();
-			// console.log(quillDelta);
+			quillDelta = toPlaintext(quill.getContents());
+			console.log(quillDelta);
 		});
 
-		// quill.setContents(JSON.parse(deltaData));
+		// quill.setContents(JSON.parse(deltaData)); - this is for displaying content, so not needed for input here. Needed for DisplayQuill
 	});
 </script>
 
