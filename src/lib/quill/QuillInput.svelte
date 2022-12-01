@@ -47,7 +47,7 @@
 <form
 	class="mt-2 bg-secondary bg-opacity-20 rounded-sm px-4 py-2"
 	method="POST"
-	action="?/postAction"
+	action="?/newPostAction"
 	use:enhance
 >
 	<div class="text-white text-2xl font-fugaz mb-3">Add post</div>
