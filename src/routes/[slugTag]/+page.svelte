@@ -10,7 +10,7 @@
 
 	let form;
 
-	$: navBarLength = data.data.queryTag[0]['Tag.childTag'][0]['Tag.childPosts'].length;
+	$: navBarLength = data.data.queryTag[0]['Tag.childTag'][0]['Tag.childPost'].length;
 
 	$: currentCard = 0;
 
@@ -53,7 +53,7 @@
 					<ChildTags childTagName={i['Tag.name']} />
 					{#each [data.data.queryTag[0]['Tag.childTag']] as inner, innerIndex}
 						<Collection
-							any={data.data.queryTag[0]['Tag.childTag'][innerIndex]['Tag.childPosts']}
+							any={data.data.queryTag[0]['Tag.childTag'][innerIndex]['Tag.childPost']}
 							postCount={navBarLength}
 						/>
 					{/each}

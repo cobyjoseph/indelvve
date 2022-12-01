@@ -32,7 +32,7 @@ export const GET: RequestHandler = async ({ url }) => {
 			  Tag.name
 			  Tag.childTag{
 					  Tag.name
-					  Tag.childPosts {
+					  Tag.childPost {
 							Post.content
 				  }
 				}

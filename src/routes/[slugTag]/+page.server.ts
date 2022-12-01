@@ -1,3 +1,4 @@
+import type { Actions } from '@sveltejs/kit';
 import dgraph from 'dgraph-js-http';
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -14,45 +15,28 @@ function newClient(clientStub) {
 
 //---------------------------------------------------------------------------------------------------------------------
 
-async function createData(dgraphClient) {
-	// Create a new transaction.
-	const txn = dgraphClient.newTxn();
-	try {
-		// Create data.
-		const p = {
-			name: 'Alice',
-			age: 26,
-			married: true,
-			loc: {
-				type: 'Point',
-				coordinates: [1.1, 2]
-			},
-			dob: new Date(1980, 1, 1, 23, 0, 0, 0),
-			friend: [
-				{
-					name: 'Bob',
-					age: 24
-				},
-				{
-					name: 'Charlie',
-					age: 29
-				}
-			],
-			school: [
-				{
-					name: 'Crown Public School'
-				}
-			]
-		};
+export const actions: Actions = {
+	newPostAction: async ({ request }) => {
+		const form = await request.formData();
+		const content = form.get('content');
 
-		// Run mutation.
-		const assigned = await txn.mutate({ setJson: p });
+		// async function createData(dgraphClient) {
+		// Create a new transaction.
+		const txn = dgraphClient.newTxn();
+		try {
+			// Create data.
+			const p = `'_:node1 <Post.content> "${content}"'`;
 
-		// Commit transaction.
-		await txn.commit();
-	} finally {
-		// Clean up. Calling this after txn.commit() is a no-op
-		// and hence safe.
-		await txn.discard();
+			// Run mutation.
+			const assigned = await txn.mutate({ setNquads: p });
+
+			// Commit transaction.
+			await txn.commit(assigned);
+		} finally {
+			// Clean up. Calling this after txn.commit() is a no-op
+			// and hence safe.
+			await txn.discard();
+		}
+		// }
 	}
-}
+};
