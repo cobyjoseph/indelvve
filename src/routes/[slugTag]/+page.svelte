@@ -70,3 +70,4 @@
 		<pre>{JSON.stringify(form.result.votes)}</pre>
 	{/if}
 </div> -->
+

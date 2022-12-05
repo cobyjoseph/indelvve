@@ -52,8 +52,6 @@ export const GET: RequestHandler = async ({ url }) => {
 
 		const res = await queryData(dgraphClient);
 
-		console.log('log res within main()', res);
-
 		return { res };
 	}
 

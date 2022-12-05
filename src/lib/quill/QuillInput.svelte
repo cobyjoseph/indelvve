@@ -4,6 +4,7 @@
 	import Tags from 'svelte-tags-input';
 	import toPlaintext from 'quill-delta-to-plaintext';
 
+	let tag;
 	let editor;
 	let quillDelta;
 	// let initialTagJoin;
@@ -45,6 +46,14 @@
 
 		// quill.setContents(JSON.parse(deltaData)); - this is for displaying content, so not needed for input here. Needed for DisplayQuill
 	});
+
+	function handleTags(event) {
+		tag = event.detail.tags;
+	}
+
+	function logTags() {
+		console.log('log Tags', tag);
+	}
 </script>
 
 <form
@@ -56,7 +65,9 @@
 	<div class="text-white text-2xl font-fugaz mb-3">Add post</div>
 
 	<!-- keep the color none but make the outline strong -->
-	<textarea name="testInput" />
+	<div class="text-white flex gap-2">
+		Temporary post input:<textarea name="testInput" class="w-full mb-2 text-black" />
+	</div>
 
 	<div class=" text-black rounded-lg outline-none">
 		<textarea style="display:none" name="content" />
@@ -65,8 +76,10 @@
 
 	<div class=" grid grid-cols-1 text-white font-fugaz font-thin  mt-3  rounded-sm ">
 		<div class="text-[18px] mb-1 ">Enter tags:</div>
+		<!-- <div class="w-full custom-tag-class" name="tagArray"> -->
 		<div class="w-full custom-tag-class">
-			<Tags />
+			<!-- <Tags on:tags={handleTags} name={'tagArray'} /> -->
+			<Tags on:tags={handleTags} name="tagArray" />
 		</div>
 	</div>
 
@@ -76,6 +89,7 @@
 	<!-- For the upsert - maybe do it through a put request - for updating operations - or mayb ethe same to do in dgraph -->
 
 	<button
+		on:click={logTags}
 		type="submit"
 		class=" text-white font-semibold text-[18px] bg-white bg-opacity-[0.2] hover:bg-third  px-4 rounded-md ml-auto mr-[0.5px] mt-3  flex"
 		>Post</button
