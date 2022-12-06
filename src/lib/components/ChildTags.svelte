@@ -16,7 +16,7 @@
 </script>
 
 <div class="flex gap-3 mt-6 ">
-	<a href="/{childTagName}">
+	<a rel="external" href="/{childTagName}">
 		<div
 			class="text-white flex font-semibold bg-secondary hover:bg-third text-[18px] pt-[2px] pb-[4.5px] px-3  rounded-md"
 		>

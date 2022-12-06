@@ -47,12 +47,9 @@
 		// quill.setContents(JSON.parse(deltaData)); - this is for displaying content, so not needed for input here. Needed for DisplayQuill
 	});
 
+	//THIS HANDLETAGS event seems to be necessary for passing along the value of tags --------------------------------------------
 	function handleTags(event) {
 		tagArray = event.detail.tags;
-	}
-
-	function logTags() {
-		console.log('log Tags', tagArray);
 	}
 </script>
 
@@ -90,7 +87,7 @@
 	<!-- For the upsert - maybe do it through a put request - for updating operations - or mayb ethe same to do in dgraph -->
 
 	<button
-		on:click={logTags}
+		on:click={() => location.reload()}
 		type="submit"
 		class=" text-white font-semibold text-[18px] bg-white bg-opacity-[0.2] hover:bg-third  px-4 rounded-md ml-auto mr-[0.5px] mt-3  flex"
 		>Post</button
