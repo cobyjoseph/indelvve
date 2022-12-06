@@ -4,7 +4,7 @@
 	import Tags from 'svelte-tags-input';
 	import toPlaintext from 'quill-delta-to-plaintext';
 
-	let tag;
+	let tagArray;
 	let editor;
 	let quillDelta;
 	// let initialTagJoin;
@@ -48,11 +48,11 @@
 	});
 
 	function handleTags(event) {
-		tag = event.detail.tags;
+		tagArray = event.detail.tags;
 	}
 
 	function logTags() {
-		console.log('log Tags', tag);
+		console.log('log Tags', tagArray);
 	}
 </script>
 
@@ -79,7 +79,8 @@
 		<!-- <div class="w-full custom-tag-class" name="tagArray"> -->
 		<div class="w-full custom-tag-class">
 			<!-- <Tags on:tags={handleTags} name={'tagArray'} /> -->
-			<Tags on:tags={handleTags} name="tagArray" />
+			<input type="hidden" bind:value={tagArray} class="text-black" name="tagArray" />
+			<Tags on:tags={handleTags} />
 		</div>
 	</div>
 
@@ -118,7 +119,7 @@
 		margin-left: 0.4em;
 	}
 
-	.ql-toolbar .ql-stroke {
+	/* .ql-toolbar .ql-stroke {
 		fill: green !important;
 	}
 
@@ -167,5 +168,5 @@
 
 	.ql-toolbar .ql-formats .ql-fill button {
 		stroke: #fff !important;
-	}
+	} */
 </style>
