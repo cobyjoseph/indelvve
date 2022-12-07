@@ -47,6 +47,12 @@
 		// quill.setContents(JSON.parse(deltaData)); - this is for displaying content, so not needed for input here. Needed for DisplayQuill
 	});
 
+	// const customAutocomplete = async () => {
+	// 	const list = await fetch('https://restcountries.com/v2/all?fields=name,alpha3Code,flag');
+	// 	const res = await list.json();
+	// 	return res;
+	// };
+
 	//THIS HANDLETAGS event seems to be necessary for passing along the value of tags --------------------------------------------
 	function handleTags(event) {
 		tagArray = event.detail.tags;

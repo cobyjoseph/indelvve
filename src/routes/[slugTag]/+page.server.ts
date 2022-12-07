@@ -1,5 +1,5 @@
 import type { Actions } from '@sveltejs/kit';
-import dgraph from 'dgraph-js-http';
+import dgraph, { Txn } from 'dgraph-js-http';
 import 'formdata-polyfill';
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -30,20 +30,33 @@ export const actions: Actions = {
 			// Create a new transaction.
 			const txn = dgraphClient.newTxn();
 			try {
-				// Create data.
 				const p = `
-				_:node1 <Post.content> "${content}" .
-				_:node2 <Tag.name> "${tagArraySplit[0]}" .
-				`;
+					upsert {
+						query {
+							q(func: eq(Tag.name, "testTag")) {
+								v as uid
+							}
+						}
 
-				// Run mutation.
+						mutation {
+							set {
+								uid(v) <Tag.name> "${tagArraySplit[0]}" .
+								_:node1 <Post.content> "${content}" .
+							}
+						}
+					}`;
+
+				// const p = `
+				// 		_:node1 <Tag.name> "${tagArraySplit[0]}" .
+				// 		_:node2 <Post.content> "${content}" .
+				// 	`;
+
+				const res = await dgraphClient.newTxn().query(p);
 				const assigned = await txn.mutate({ setNquads: p });
 
-				// Commit transaction.
+				await txn.commit(res);
 				await txn.commit(assigned);
 			} finally {
-				// Clean up. Calling this after txn.commit() is a no-op
-				// and hence safe.
 				await txn.discard();
 			}
 		}
@@ -52,14 +65,8 @@ export const actions: Actions = {
 			const dgraphClient = newClient(dgraphClientStub);
 
 			await createData(dgraphClient);
-
-			// console.log('log res within main()', res);
-
-			// return { res };
 		}
 
 		await main();
-		// const result = (await main()).res;
-		// return new Response(JSON.stringify(result));
 	}
 };
