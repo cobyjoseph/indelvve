@@ -30,31 +30,13 @@ export const actions: Actions = {
 			// Create a new transaction.
 			const txn = dgraphClient.newTxn();
 			try {
-				// const p = `
-				// 	upsert {
-				// 		query {
-				// 			q(func: eq(Tag.name, "testTag")) {
-				// 				v as uid
-				// 			}
-				// 		}
-
-				// 		mutation {
-				// 			set {
-				// 				uid(v) <Tag.name> "${tagArraySplit[0]}" .
-				// 				_:node1 <Post.content> "${content}" .
-				// 			}
-				// 		}
-				// 	}`;
-
 				const p = `
 						_:node1 <Tag.name> "${tagArraySplit[0]}" .
 						_:node2 <Post.content> "${content}" .
 					`;
 
-				// const res = await dgraphClient.newTxn().query(p);
 				const assigned = await txn.mutate({ setNquads: p });
 
-				// await txn.commit(res);
 				await txn.commit(assigned);
 			} finally {
 				await txn.discard();

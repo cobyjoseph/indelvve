@@ -81,6 +81,8 @@
 	</button>
 </div>
 
+
+
 {#each [any[currentCard]] as i (i.id)}
 	<div
 		class="pt-2 "
@@ -111,8 +113,4 @@
 	</div>
 {/each}
 
-<style>
-	/* .boxShadow {
-		box-shadow: -8px 8px 0 0 #33385a;
-	} */
-</style>
+

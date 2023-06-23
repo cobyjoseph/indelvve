@@ -6,6 +6,7 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+	console.log('data on home +page.svelte', data);
 
 	let postCount = data.post?.length;
 </script>
