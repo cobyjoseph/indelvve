@@ -16,8 +16,10 @@
 	} from 'svelte/easing';
 	import DisplayQuill from '$lib/quill/DisplayQuill.svelte';
 	import PostHeader from './PostHeader.svelte';
+	import QuillInput from '$lib/quill/QuillInput.svelte';
 
-	export let any;
+	export let posts;
+	// export let any;
 	export let postCount: Number;
 
 	let showInputContent: boolean = false;
@@ -44,6 +46,13 @@
 	}
 </script>
 
+{#if showInputContent}
+	<div transition:slide={{ duration: 300, easing: quintInOut }} />
+	<div>
+		<QuillInput />
+	</div>
+{/if}
+
 <div class="mt-2 flex transform justify-between ">
 	<!-- Button left  -->
 	<button on:click={prevCard}>
@@ -59,7 +68,7 @@
 
 	<!-- Nav dots group -->
 	<div class="mx-12 flex h-[26px] items-center justify-center gap-1.5 ">
-		{#each any as i, index (i.id)}
+		{#each posts as i, index (i.id)}
 			{#if currentCard === index}
 				<div class="h-[18px] w-[18px]  rounded-sm bg-secondary" />
 			{:else}
@@ -81,9 +90,37 @@
 	</button>
 </div>
 
+{#each [posts[currentCard]] as post (post.id)}
+	<div
+		class="pt-2"
+		in:fly={{
+			delay: 0,
+			duration: direction === 'right' ? 300 : 300,
+			x: direction === 'right' ? 100 : -100,
+			easing: sineIn
+		}}
+		out:fly={{
+			duration: 600,
+			x: direction === 'right' ? -100 : 100,
+			easing: sineOut
+		}}
+		animate:flip={{
+			delay: 0,
+			easing: quintOut
+		}}
+	>
+		<Card>
+			<span slot="topPost">
+				<PostHeader upvotes="130" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
+				<DisplayQuill deltaDataOutput={post.content} />
+			</span>
+		</Card>
+	</div>
+{/each}
 
+<!-- THE COMMENTED OUT CODE BEFORE WAS WHAT I WAS USING FOR DGRAPH, GOT RID OF IT WHEN i WENT BACK TO USING PRISMA AND POSTGRES FOR THE PURPOSE SOF THE PORTFOLIO DEMO -->
 
-{#each [any[currentCard]] as i (i.id)}
+<!-- {#each [any[currentCard]] as i (i.id)}
 	<div
 		class="pt-2 "
 		in:fly={{
@@ -106,11 +143,9 @@
 			<span slot="topPost">
 				<div class="m-2">
 					<!-- <PostHeader upvotes={i.postUpvotesAggregate.count} currentPostXID={i.xid} /> -->
-				</div>
+<!-- </div>
 				<DisplayQuill deltaDataOutput={i['Post.content']} />
 			</span>
 		</Card>
 	</div>
-{/each}
-
-
+{/each} -->

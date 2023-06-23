@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import Navbar from '$lib/components/Navbar.svelte';
 	import SearchBar from '$lib/components/SearchBar.svelte';
 	import Collection from '$lib/components/Collection.svelte';
@@ -73,4 +73,4 @@
 		<Collection any={data.data.queryTag[0].childTag[index].childPosts} postCount={navBarLength} />
 	{/if}
 {/each} -->
-
+ -->

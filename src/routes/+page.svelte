@@ -22,7 +22,7 @@
 			<QuillInput />
 		</div> -->
 
-		<Collection any={data.post} {postCount} />
+		<Collection posts={data.post} {postCount} />
 	</div>
 </div>
 
