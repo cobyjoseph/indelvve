@@ -111,7 +111,7 @@
 	>
 		<Card>
 			<span slot="topPost">
-				<PostHeader upvotes="130" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
+				<PostHeader upvotes="110" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
 				<DisplayQuill deltaDataOutput={post.content} />
 			</span>
 		</Card>

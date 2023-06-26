@@ -2,6 +2,9 @@
 	import { enhance } from '$app/forms';
 
 	export let upvotes: number;
+	export let authorName;
+	export let timeSince;
+	export let dOrMin;
 	export let currentPostXID: number;
 
 	function eagerLoad() {
@@ -9,9 +12,9 @@
 	}
 </script>
 
-<div class=" mb-1 flex text-[16px] text-white items-center">
+<div class=" mb-1 flex text-[16px] text-white items-center m-2">
 	<!-- light and number -->
-	<div class="gap-0.3 mr-5 flex">
+	<div class="gap-[0.3rem] mr-8 flex">
 		<form method="POST" action="?/addUpvoteAction" class="flex" use:enhance>
 			<button type="submit" class="flex" on:click={eagerLoad}>
 				<svg
@@ -33,27 +36,27 @@
 	</div>
 
 	<!-- person icon and name - I NEEDED TO place self center for the icon. didnt seem to work when I tried to apply that to the praent. not sure why -->
-	<!-- <div class="mr-5 flex gap-0.5 items-center">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				class=" h-[19px] w-[19px] place-self-center stroke-white stroke-1"
-				fill="none"
-				viewBox="0 0 24 24"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-				/>
-			</svg>
-			<div class="">{authorName}</div>
-		</div> -->
+	<div class="mr-8 flex gap-[0.3rem] items-center">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			class=" h-[19px] w-[19px] place-self-center stroke-white stroke-1"
+			fill="none"
+			viewBox="0 0 24 24"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+			/>
+		</svg>
+		<div class="">{authorName}</div>
+	</div>
 
 	<!-- number and d or minute -->
-	<!-- <div class="gap-0.3 mr-5 flex items-center">
-			<div>{timeSince}</div>
-			<div>{dOrMin}</div>
-		</div> -->
+	<div class="gap-[0.3rem] mr-5 flex items-center">
+		<div>{timeSince}</div>
+		<div>{dOrMin}</div>
+	</div>
 
 	<!-- Comment icon with number inside -->
 	<!-- <div class="min-w relative ml-auto flex gap-1 items-center">
