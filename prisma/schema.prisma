@@ -14,7 +14,7 @@ model User {
   id            String   @id @default(uuid())
   email         String   @unique
   username      String   @unique
-  passwordHash  String  
+  passwordHash  String
   userAuthToken String   @unique
   first_name    String
   last_name     String
@@ -33,14 +33,19 @@ model User {
 }
 
 model Post {
-  id             Int      @id @default(autoincrement())
-  date_created   DateTime @default(now())
+  id                    Int      @id @default(autoincrement())
+  date_created          DateTime @default(now())
   // TODO - Figure out how to include rich text
-  content        Json?
-  upvoted_number Int
+  content               Json?
+  upvoted_number        Int
+  postAuthorDemoOnly    String?
+  timeSinceDemoOnly     Int?
+  unitSinceDemoOnly     String?
+  plainTextDemoOnly     String?
+  seperateImageDemoOnly String?
 
   // Relations
-  post_author User? @relation(fields: [user_id_FK], references: [id])
+  post_author User?   @relation(fields: [user_id_FK], references: [id])
   user_id_FK  String?
 
   upvoted_by user_post[]
@@ -54,9 +59,9 @@ model Post {
 // Intermediate table
 model user_post {
   //Relations
-  user       User @relation(fields: [user_id_FK], references: [id])
+  user       User   @relation(fields: [user_id_FK], references: [id])
   user_id_FK String
-  post       Post @relation(fields: [post_id_FK], references: [id])
+  post       Post   @relation(fields: [post_id_FK], references: [id])
   post_id_FK Int
 
   @@id([user_id_FK, post_id_FK])
@@ -70,7 +75,7 @@ model Collection {
   upvoted_number Int
 
   // Relations
-  collection_author User @relation(fields: [user_id_FK], references: [id])
+  collection_author User   @relation(fields: [user_id_FK], references: [id])
   user_id_FK        String
 
   upvoted_by user_collection[]
@@ -96,7 +101,7 @@ model Topic {
   name String
 
   // Relations
-  topic_author User? @relation(fields: [user_id_FK], references: [id])
+  topic_author User?   @relation(fields: [user_id_FK], references: [id])
   user_id_FK   String?
 
   child_collections collection_topic[]
@@ -119,7 +124,7 @@ model Comments {
   content      String
 
   // Relations
-  comment_author User @relation(fields: [user_id_FK], references: [id])
+  comment_author User   @relation(fields: [user_id_FK], references: [id])
   user_id_FK     String
 
   parent_post Post @relation(fields: [post_id_FK], references: [id])

@@ -18,9 +18,11 @@
 	<div class=" relative mx-4 mb-6 grid h-full grid-cols-1 md:w-3/4 md:max-w-[620px] ">
 		<SearchBar />
 
-		<ChildTags childTagName="test" />
+		<ChildTags childTagName="Remote work" />
 
-		<Collection posts={data.post} {postCount} />
+		<div class="mt-4">
+			<Collection posts={data.post} {postCount} />
+		</div>
 	</div>
 </div>
 

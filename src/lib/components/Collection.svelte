@@ -27,6 +27,8 @@
 	$: direction = 'right';
 	$: currentCard = 0;
 
+	console.log('plain text demo', posts.plainTextDemoOnly);
+
 	function nextCard() {
 		direction = 'right';
 		currentCard = (currentCard + 1) % postCount;
@@ -111,8 +113,17 @@
 	>
 		<Card>
 			<span slot="topPost">
-				<PostHeader upvotes="110" authorName="Nicolas Bloom" timeSince="34" dOrMin="d" />
-				<DisplayQuill deltaDataOutput={post.content} />
+				<PostHeader
+					upvotes={post.upvoted_number}
+					authorName={post.postAuthorDemoOnly}
+					timeSince={post.timeSinceDemoOnly}
+					dOrMin={post.unitSinceDemoOnly}
+				/>
+				<!-- <DisplayQuill deltaDataOutput={post.content} /> -->
+				<div class="text-white p-3">
+					{post.plainTextDemoOnly}
+				</div>
+				{post.seperateImageDemoOnly}
 			</span>
 		</Card>
 	</div>

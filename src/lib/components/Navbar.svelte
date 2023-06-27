@@ -6,14 +6,14 @@
 	<div class=" my-[21px] grid grid-cols-1 ">
 		<!-- =solid container-->
 		<div
-			class="z-20 h-8 w-[130px] ml-auto mr-auto transform place-items-center justify-center bg-secondary  "
+			class="z-20 h-9 w-[130px] ml-auto mr-auto transform place-items-center justify-center bg-secondary  "
 		>
 			<!-- Logo text -->
-			<div class="-py-[0.7px] text-center font-fugaz text-[22px]  text-white">Indelvve</div>
+			<div class="py-[2px] text-center font-fugaz text-[22px]  text-white">Indelvve</div>
 		</div>
 
 		<div
-			class="absolute z-10 mt-1 h-8 w-[130px] -translate-x-[4px] transform border-[3px] border-dotted border-secondary"
+			class="absolute z-10 mt-1 h-9 w-[130px] -translate-x-[4px] transform border-[3px] border-dotted border-secondary"
 		/>
 
 		<div

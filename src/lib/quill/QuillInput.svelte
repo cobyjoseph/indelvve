@@ -40,6 +40,7 @@
 
 		//dont think I need this below. Looks like it for a test to see if typing was registering data
 		quill.on('text-change', function () {
+			console.log(quill.getContents());
 			quillDelta = toPlaintext(quill.getContents());
 			console.log(quillDelta);
 		});
