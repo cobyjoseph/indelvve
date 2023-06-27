@@ -28,7 +28,14 @@ module.exports = {
 			},
 			fontFamily: {
 				Gantari: ['Gantari', 'sans'],
-				fugaz: ['Fugaz One']
+				fugaz: ['Fugaz One'],
+				Yantramanav: ['Yantramanav'],
+				Chivo: ['Chivo'],
+				satoshi: ['Satoshi', 'sans-serif'],
+				genSans: ['General Sans', 'sans-serif'],
+				switzer: ['Switzer, sans-serif'],
+				ranade: ['Ranade, sans-serif'],
+				neco: ['Neco, serif']
 			}
 		}
 	},

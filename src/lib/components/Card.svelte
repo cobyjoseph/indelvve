@@ -2,7 +2,7 @@
 	let width: number;
 </script>
 
-<div class="mt-1 justify-center ">
+<div class="mt-1 justify-center font-switzer">
 	<div class="relative mt-1 justify-center">
 		<!-- NOTE that I need to order this like this so the top one can be absolute and the bottom can be relative. That way the relative one will push down the content below, but the absolute one still works because it is not pushed down by the relative one.  -->
 		<!-- <div

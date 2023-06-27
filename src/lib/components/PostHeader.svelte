@@ -12,7 +12,7 @@
 	}
 </script>
 
-<div class=" mb-1 flex text-[16px] text-white items-center m-2">
+<div class=" flex text-[16px] text-white items-center mx-6 mt-3">
 	<!-- light and number -->
 	<div class="gap-[0.3rem] mr-8 flex">
 		<form method="POST" action="?/addUpvoteAction" class="flex" use:enhance>

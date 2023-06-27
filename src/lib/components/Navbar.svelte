@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<div class="mr-5 hidden w-[130px] md:block">
+<div class="mr-5 hidden w-[130px] md:block font-satoshi">
 	<!-- contents of nav bar -->
 	<div class=" my-[21px] grid grid-cols-1 ">
 		<!-- =solid container-->

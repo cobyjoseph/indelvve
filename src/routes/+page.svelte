@@ -12,16 +12,31 @@
 	let postCount = data.post?.length;
 </script>
 
+
+
 <div class="flex flex-grow justify-center">
 	<Navbar />
 
-	<div class=" relative mx-4 mb-6 grid h-full grid-cols-1 md:w-3/4 md:max-w-[620px] ">
+	<div class=" relative mx-4 mb-6 grid h-full grid-cols-1 md:w-3/4 md:max-w-[620px] font-satoshi">
 		<SearchBar />
 
-		<ChildTags childTagName="Remote work" />
+		<div class="mt-2 gap-2 flex flex-col">
+			<div>
+				<ChildTags childTagName="Remote work" />
+			</div>
 
-		<div class="mt-4">
-			<Collection posts={data.post} {postCount} />
+			<div>
+				<Collection posts={data.post} {postCount} />
+			</div>
+		</div>
+		<div class="mt-6 gap-2 flex flex-col">
+			<div>
+				<ChildTags childTagName="Urban transport" />
+			</div>
+
+			<div>
+				<Collection posts={data.post} {postCount} />
+			</div>
 		</div>
 	</div>
 </div>
