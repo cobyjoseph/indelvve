@@ -70,7 +70,7 @@
 	<button on:click={prevCard}>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			class="h-[26px] w-[26px] justify-center stroke-white stroke-[3px]"
+			class="h-[26px] w-[26px] justify-center stroke-white stroke-[3px] hover:stroke-secondary "
 			fill="none"
 			viewBox="0 0 24 24"
 		>
@@ -93,7 +93,7 @@
 	<button on:click={nextCard}>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			class="h-[26px] w-[26px] justify-center stroke-white stroke-[3px]"
+			class="h-[26px] w-[26px] justify-center stroke-white stroke-[3px] hover:stroke-secondary"
 			fill="none"
 			viewBox="0 0 24 24"
 		>
@@ -213,7 +213,7 @@
 										<div>just now</div>
 									</div>
 								</div>
-								<div class="pb-1">
+								<div class="pb-2">
 									{submittedText}
 								</div>
 							</div>
